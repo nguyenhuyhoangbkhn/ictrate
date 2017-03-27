@@ -46,25 +46,25 @@
 <body>
 	
 
-	<jsp:include page="_menu.jsp" />
+	<jsp:include page="../_menu.jsp" />
 	<div>
-		<h1 class="text">LOCATION LIST</h1>
+		<h1 class="text">Type Criteria list</h1>
 		<table id="myDatatable">
 			<thead>
 				<tr>
-					<th>ID_LOCATION</th>
-					<th>NAME</th>
-					<th>TYPE_PLACE</th>
-					<th>EDIT</th>
-					<th>DELETE</th>
+					<th>id</th>
+					<th>name</th>
+					<th>note</th>
+					<th>edit</th>
+					<th>delete</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="location" items="${locationlist}">
+				<c:forEach var="criteria" items="${typeCriteriaList}">
 					<tr>
-						<td>${location.id}</td>
-						<td>${location.name}</td>
-						<td>${location.type}</td>
+						<td>${criteria.id}</td>
+						<td>${criteria.name}</td>
+						<td>${criteria.note}</td>
 						<td><a href="edit?staffid=${location.id}">Edit</a></td>
 						<td><a href="delete?staffid=${location.id}">Delete</a></td>
 					</tr>

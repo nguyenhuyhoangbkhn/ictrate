@@ -3,8 +3,10 @@ package hust.edu.vn.config;
 import javax.sql.DataSource;
 
 import hust.edu.vn.dao.LocationDao;
+import hust.edu.vn.dao.TypeCriteriaDao;
 import hust.edu.vn.dao.UserInfoDAO;
 import hust.edu.vn.dao.impl.LocationDaoImpl;
+import hust.edu.vn.dao.impl.TypeCriteriaDaoImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -80,4 +82,10 @@ public class ApplicationContextConfig {
 	public LocationDao locationDao() {
 		return new LocationDaoImpl();
 	}
+   
+   @Bean(name = "typeCriteriaDao")
+	public TypeCriteriaDao typeCriteriaDao() {
+		return new TypeCriteriaDaoImpl();
+	}
+   
 }

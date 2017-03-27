@@ -19,13 +19,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-		// Các User trong bộ nhớ (MEMORY).
-
-		// auth.inMemoryAuthentication().withUser("user1").password("12345").roles("USER");
-		// auth.inMemoryAuthentication().withUser("admin1").password("12345").roles("USER,
-		// ADMIN");
-
 		// Các User trong Database
 		auth.userDetailsService(myDBAauthenticationService);
 
@@ -37,17 +30,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
 		// Các trang không yêu cầu login
-		http.authorizeRequests().antMatchers("/", "/welcome", "/login", "/logout").permitAll();
+		http.authorizeRequests().antMatchers("/", "/welcome", "/login", "/logout", "/typecriteria").permitAll();
 
 		// Trang /userInfo yêu cầu phải login với vai trò USER hoặc ADMIN.
 		// Nếu chưa login, nó sẽ redirect tới trang /login.
-		
+
 		http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('roleAccess', 'ROLE_ADMIN')");
 		String text = "hasAnyRole('" + roleAccess[1] + "')";
 		// For ADMIN only.
 		// Trang chỉ dành cho ADMIN
 		http.authorizeRequests().antMatchers("/admin", "/location").access(text);
-//		http.authorizeRequests().antMatchers("/admin", "/location").access("hasRole('ROLE_ADMIN')");
+		// http.authorizeRequests().antMatchers("/admin",
+		// "/location").access("hasRole('ROLE_ADMIN')");
 
 		// Khi người dùng đã login, với vai trò XX.
 		// Nhưng truy cập vào trang yêu cầu vai trò YY,

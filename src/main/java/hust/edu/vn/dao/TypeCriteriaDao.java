@@ -9,4 +9,8 @@ public interface TypeCriteriaDao {
 	public TypeCriteria getTypeCriteriaById(int id);
 	
 	public void deleteTypeCriteria(int id);
+
+	public List<TypeCriteria> getListTypeCriteriaById(int id);
+	
+	public void AddTypeCriteria(TypeCriteria TypeCriteria);
 }

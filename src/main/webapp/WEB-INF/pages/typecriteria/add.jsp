@@ -8,8 +8,10 @@
 <title>Location List</title>
 
 <!--add css bootstrap-->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/styles.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 
 <!-- Below are the Style Sheets required for Data Tables. These can be customized as required -->
 <link rel="stylesheet" type="text/css"
@@ -44,42 +46,32 @@
 
 </head>
 <body>
-	
-
 	<jsp:include page="../_menu.jsp" />
-	
-	
-	<div>
-		<h1 class="text">Type Criteria list</h1>
-		<div class="button">
-			<a href="${pageContext.request.contextPath}/typecriteria/add">Add</a>
-		</div>
-		<table id="myDatatable">
-			<thead>
-				<tr>
-					<th>id</th>
-					<th>name</th>
-					<th>note</th>
-					<th>detail</th>
-					<th>edit</th>
-					<th>delete</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="criteria" items="${typeCriteriaList}">
-					<tr>
-						<td>${criteria.id}</td>
-						<td>${criteria.name}</td>
-						<td>${criteria.note}</td>
-						<td><a href="${pageContext.request.contextPath}/typecriteria/detail?tyecriteriaid=${criteria.id}">detail</a></td>
-						<td><a href="${pageContext.request.contextPath}/typecriteria/edit?tyecriteriaid=${criteria.id}">Edit</a></td>
-						<td><a href="${pageContext.request.contextPath}/typecriteria/delete?tyecriteriaid=${criteria.id}">Delete</a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
 
+	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+	<h1>Add New Staff</h1>
+	<form:form method="post" action="addTypeCriteria">
+		<table>
+			<tr>
+				<td>Name :</td>
+				<td><form:input path="name" /></td>
+			</tr>
+			<tr>
+				<td>Note :</td>
+				<td><form:input path="note" /></td>
+			</tr>
+			<tr>
+				<td>Id parent :</td>
+				<td><form:input path="id_parent" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Add" /></td>
+			</tr>
+		</table>
+	</form:form>
 
 </body>
 </html>

@@ -20,16 +20,9 @@ public class Test {
 		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
 		// Location alocation = new Location();
 		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getAllTypeCriteria();
-		for (TypeCriteria typeCriteria : typeCriteriaList) {
-			System.out.println("danh sach loai tieu chi" + typeCriteria);
-			if (typeCriteria.getId_parent() != 0) {
-				//can giai quyet no thanh kieu cau truc ????
-				
-			}
-		}
-		TypeCriteria typeCrieteria = new TypeCriteria();
-		typeCrieteria = typeCireriaDao.getTypeCriteriaById(3);
-		System.out.println("in ra tim kiem theo id"+typeCrieteria);
-		typeCireriaDao.deleteTypeCriteria(10);
+		
+		TypeCriteria typeCrieteria1 = new TypeCriteria(12,"hoang","test",2,1);
+		typeCireriaDao.AddTypeCriteria(typeCrieteria1);
+		System.out.println("da them xong");
 	}
 }

@@ -96,12 +96,10 @@ public class LocationDaoImpl implements LocationDao {
 		String sql = "UPDATE LOCATION SET FLAG_DELETE = 1 WHERE ID=?";
 		Connection conn = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
-			rs = ps.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

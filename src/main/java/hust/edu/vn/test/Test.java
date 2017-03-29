@@ -18,11 +18,16 @@ public class Test {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
+		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
 		// Location alocation = new Location();
+		
 		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getAllTypeCriteria();
+		
+		List<Location> locationlist = locationDao.getAllCountrysideLocation(1);
 		
 		TypeCriteria typeCrieteria1 = new TypeCriteria(12,"hoang","test",2,1);
 		typeCireriaDao.AddTypeCriteria(typeCrieteria1);
 		System.out.println("da them xong");
+		System.out.println(locationlist);
 	}
 }

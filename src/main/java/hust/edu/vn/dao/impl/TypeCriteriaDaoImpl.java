@@ -23,7 +23,7 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 	}
 
 	@Override
-	public List<TypeCriteria> getAllTypeCriteria() {
+	public List<TypeCriteria> getAllTypeCriteria() { //Lấy các tiêu chí lớn
 		// TODO Auto-generated method stub
 		String sql = "SELECT * FROM TYPE_CRITERIA WHERE ID_PARENT = 0 AND FLAG_DELETE = 0";
 		Connection conn = null;
@@ -59,7 +59,7 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 	}
 
 	@Override
-	public TypeCriteria getTypeCriteriaById(int id) {
+	public TypeCriteria getTypeCriteriaById(int id) { 
 		System.out.println("test");
 		String sql = "SELECT * FROM TYPE_CRITERIA WHERE FLAG_DELETE = 0 AND ID=?";
 		TypeCriteria typeCriteria = null;
@@ -101,7 +101,7 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 	}
 
 	@Override
-	public List<TypeCriteria> getListTypeCriteriaById(int id) {
+	public List<TypeCriteria> getListTypeCriteriaById(int id) { //Lấy tiêu chí con theo tiêu chí lớn
 		String sql = "SELECT * FROM TYPE_CRITERIA WHERE FLAG_DELETE = 0 AND ID_PARENT = ?";
 		Connection conn = null;
 		PreparedStatement ps = null;

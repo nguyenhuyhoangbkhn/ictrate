@@ -21,8 +21,8 @@ public class LocationDaoImpl implements LocationDao {
 	}
 
 	@Override
-	public List<Location> getAllLocation() {
-		String sql = "SELECT * FROM LOCATION";
+	public List<Location> getAllCityLocation() { // Lấy Thành Phố/Tỉnh
+		String sql = "SELECT * FROM LOCATION WHERE ID_PARENT = 0 AND FLAG_DELETE = 0";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -56,6 +56,58 @@ public class LocationDaoImpl implements LocationDao {
 	}
 	
 	@Override
+	public List<Location> getAllCountrysideLocation(int id) {
+		String sql = "SELECT * FROM LOCATION WHERE FLAG_DELETE = 0 AND ID_PARENT = ?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			List<Location> locationList = new ArrayList<Location>();
+			while (true) {
+				if (rs.next()) {
+					Location alocation = new Location(rs.getInt("id"), rs.getString("name"), rs.getString("type"),
+							rs.getInt("id_parent"), rs.getInt("flag_delete"));
+					locationList.add(alocation);
+				} else {
+					break;
+				}
+			}
+			rs.close();
+			ps.close();
+			return locationList;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void deleteLocation(int id) {
+		String sql = "UPDATE LOCATION SET FLAG_DELETE = 1 WHERE ID=?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
 	public void updateLocation (Location location) {
 		String sql = "UPDATE LOCATION SET NAME=?, TYPE=?, AGE=?, ID_PARENT=?, FLAG_DELETE=? WHERE ID=?";	// update staff infomation
 		Connection conn = null;
@@ -78,7 +130,7 @@ public class LocationDaoImpl implements LocationDao {
 
 	@Override
 	public Location getLocationById(int id) {
-		String sql = "SELECT * FROM LOCATION WHERE ID=?";
+		String sql = "SELECT * FROM LOCATION WHERE ID=? AND FLAG_DELETE = 0";
 		Location alocation = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -101,5 +153,7 @@ public class LocationDaoImpl implements LocationDao {
 		}
 		return alocation;
 	}
+
+
 
 }

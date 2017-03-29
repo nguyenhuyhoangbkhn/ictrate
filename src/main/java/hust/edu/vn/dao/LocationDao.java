@@ -6,7 +6,11 @@ import hust.edu.vn.model.Location;
 
 public interface LocationDao {
 	
-	public List<Location> getAllLocation();
+	public List<Location> getAllCityLocation();
+	
+	public List<Location> getAllCountrysideLocation(int id);
+	
+	public void deleteLocation(int id);
 	
 	public void updateLocation (Location location);
 	

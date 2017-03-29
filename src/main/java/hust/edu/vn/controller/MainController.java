@@ -17,22 +17,6 @@ import hust.edu.vn.model.Location;
 @Controller
 public class MainController {
 
-	@SuppressWarnings("unused")
-	@Autowired
-	private LocationDao locationDao;
-
-	@RequestMapping("/location")
-	public String homePage(Model model) {
-		@SuppressWarnings("resource")
-		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
-		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
-
-		List<Location> locationList = locationDao.getAllLocation();
-		System.out.println("list do la" + locationList);
-		model.addAttribute("locationlist", locationList);
-		return "home";
-	}
-
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String welcomePage(Model model) {
 		model.addAttribute("title", "Welcome");

@@ -41,7 +41,6 @@ public class AdminController {
 
 		// Location alocation = new Location();
 		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getListTypeCriteriaById(id);
-		System.out.println("danh sach loai tieu chi" + typeCriteriaList);
 		model.addAttribute("typeCriteriaList", typeCriteriaList);
 		return "typecriteria/index";
 	}
@@ -56,7 +55,15 @@ public class AdminController {
 	}
 
 	@RequestMapping("typecriteria/add")
-	public ModelAndView addTypeCriteria() {
+	public ModelAndView addTypeCriteria(Model model) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+
+		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
+
+		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getAllTypeCriteria();
+		System.out.println("danh sach loai tieu chi" + typeCriteriaList);
+		model.addAttribute("typeCriteriaList", typeCriteriaList);
 		return new ModelAndView("typecriteria/add", "command", new TypeCriteria());
 	}
 

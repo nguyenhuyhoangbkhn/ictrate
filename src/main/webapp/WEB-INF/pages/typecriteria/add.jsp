@@ -64,7 +64,11 @@
 			</tr>
 			<tr>
 				<td>Id parent :</td>
-				<td><form:input path="id_parent" /></td>
+				<td><form:select path="id_parent">
+						<c:forEach var="criteria" items="${typeCriteriaList}">
+							<form:option value="${criteria.id}" label="${criteria.name}" />
+						</c:forEach>
+					</form:select></td>
 			</tr>
 			<tr>
 				<td></td>

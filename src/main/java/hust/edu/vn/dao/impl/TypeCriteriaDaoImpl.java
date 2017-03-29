@@ -148,7 +148,7 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 			ps.setString(1, TypeCriteria.getName());	
 			ps.setString(2, TypeCriteria.getNote());
 			ps.setInt(3, TypeCriteria.getId_parent());
-			ps.setInt(4, TypeCriteria.getFlag_delede());
+			ps.setInt(4, 0);
 			ps.executeUpdate();
 
 		} catch (SQLException e) {

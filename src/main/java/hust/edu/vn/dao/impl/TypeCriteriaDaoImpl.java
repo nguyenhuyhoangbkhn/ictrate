@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.sun.glass.ui.CommonDialogs.Type;
+
 import hust.edu.vn.dao.TypeCriteriaDao;
 import hust.edu.vn.model.Location;
 import hust.edu.vn.model.TypeCriteria;
@@ -23,7 +25,7 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 	}
 
 	@Override
-	public List<TypeCriteria> getAllTypeCriteria() { //Lấy các tiêu chí lớn
+	public List<TypeCriteria> getAllTypeCriteria() { // Lấy các tiêu chí lớn
 		// TODO Auto-generated method stub
 		String sql = "SELECT * FROM TYPE_CRITERIA WHERE ID_PARENT = 0 AND FLAG_DELETE = 0";
 		Connection conn = null;
@@ -37,7 +39,7 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 			while (true) {
 				if (rs.next()) {
 					TypeCriteria typeCriteria = new TypeCriteria(rs.getInt("id"), rs.getString("name"),
-							rs.getString("note"), rs.getInt("id_parent"),rs.getInt("flag_delete"));
+							rs.getString("note"), rs.getInt("id_parent"), rs.getInt("flag_delete"));
 					typeCriteriaList.add(typeCriteria);
 				} else {
 					break;
@@ -59,7 +61,7 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 	}
 
 	@Override
-	public TypeCriteria getTypeCriteriaById(int id) { 
+	public TypeCriteria getTypeCriteriaById(int id) {
 		System.out.println("test");
 		String sql = "SELECT * FROM TYPE_CRITERIA WHERE FLAG_DELETE = 0 AND ID=?";
 		TypeCriteria typeCriteria = null;
@@ -101,7 +103,9 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 	}
 
 	@Override
-	public List<TypeCriteria> getListTypeCriteriaById(int id) { //Lấy tiêu chí con theo tiêu chí lớn
+	public List<TypeCriteria> getListTypeCriteriaById(int id) { // Lấy tiêu chí
+																// con theo tiêu
+																// chí lớn
 		String sql = "SELECT * FROM TYPE_CRITERIA WHERE FLAG_DELETE = 0 AND ID_PARENT = ?";
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -115,7 +119,7 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 			while (true) {
 				if (rs.next()) {
 					TypeCriteria typeCriteria = new TypeCriteria(rs.getInt("id"), rs.getString("name"),
-							rs.getString("note"), rs.getInt("id_parent"),rs.getInt("flag_delete"));
+							rs.getString("note"), rs.getInt("id_parent"), rs.getInt("flag_delete"));
 					typeCriteriaList.add(typeCriteria);
 				} else {
 					break;
@@ -145,7 +149,7 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 		try {
 			conn = dataSource.getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, TypeCriteria.getName());	
+			ps.setString(1, TypeCriteria.getName());
 			ps.setString(2, TypeCriteria.getNote());
 			ps.setInt(3, TypeCriteria.getId_parent());
 			ps.setInt(4, 0);
@@ -154,5 +158,26 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	// update with id
+	@Override
+	public void updateTypeCriteria(TypeCriteria TypeCriteria) {
+		String sql = "UPDATE TYPE_CRITERIA SET  NAME=?, NOTE=?, ID_PARENT=? WHERE ID=?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, TypeCriteria.getName());
+			ps.setString(2, TypeCriteria.getNote());
+			ps.setInt(3, TypeCriteria.getId_parent());
+			ps.setInt(4, TypeCriteria.getId());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

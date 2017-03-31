@@ -10,8 +10,12 @@
 <body>
 	<jsp:include page="../home/_menu.jsp" />
 	<h1>Add New Staff</h1>
-	<form:form method="post" action="updateTypeCriteria">
+	<form:form method="post" action="updateTypeCriteria" modelAttribute="typeCireriaDao">
 		<table>
+			<tr>
+				<td>id :</td>
+				<td><form:input path="id" /></td>
+			</tr>
 			<tr>
 				<td>Name :</td>
 				<td><form:input path="name" /></td>
@@ -25,8 +29,12 @@
 				<td><form:input path="id_parent" /></td>
 			</tr>
 			<tr>
+				<td>Flag delete :</td>
+				<td><form:input path="flag_delede" /></td>
+			</tr>
+			<tr>
 				<td></td>
-				<td><input type="submit" value="Add" /></td>
+				<td><input type="submit" value="update" /></td>
 			</tr>
 		</table>
 	</form:form>

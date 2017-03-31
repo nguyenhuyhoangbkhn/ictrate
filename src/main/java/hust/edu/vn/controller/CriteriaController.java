@@ -76,9 +76,19 @@ public class CriteriaController {
 		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
 				
 		System.out.println("1111"+typeCireriaDao.getTypeCriteriaById(id));
+		model.addAttribute("typeCireriaDao",typeCireriaDao.getTypeCriteriaById(id));
+		return "typecriteria/edit";
+	}
+	
+	@RequestMapping(value = "/typecriteria/updateTypeCriteria", method = RequestMethod.POST)
+	public String updateTypeCriteria(@ModelAttribute("TypeCriteria") TypeCriteria typeCriteria) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
+		typeCireriaDao.updateTypeCriteria(typeCriteria);
 		return "redirect:/typecriteria";
 	}
-		
+	
 	@RequestMapping(value = "/typecriteria/addTypeCriteria", method = RequestMethod.POST)
 	public String addTypeCriteria(@ModelAttribute("TypeCriteria") TypeCriteria typeCriteria) {
 		@SuppressWarnings("resource")

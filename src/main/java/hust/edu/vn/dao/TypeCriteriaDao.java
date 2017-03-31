@@ -13,4 +13,6 @@ public interface TypeCriteriaDao {
 	public List<TypeCriteria> getListTypeCriteriaById(int id);
 	
 	public void AddTypeCriteria(TypeCriteria TypeCriteria);
+	
+	 public void updateTypeCriteria(TypeCriteria TypeCriteria);
 }

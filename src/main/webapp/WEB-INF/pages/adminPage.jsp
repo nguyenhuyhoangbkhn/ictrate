@@ -4,9 +4,10 @@
 <html>
 <head>
 <title>${title}</title>
+<jsp:include page="home/lib.jsp"/>
 </head>
 <body>
-    <jsp:include page="_menu.jsp" />
+    <jsp:include page="home/_menu.jsp" />
  
     <h2>Admin Page</h2>
  

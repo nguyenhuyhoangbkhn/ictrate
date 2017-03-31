@@ -6,49 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Location List</title>
-
-<!--add css bootstrap-->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-
-<!-- Below are the Style Sheets required for Data Tables. These can be customized as required -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.13/css/dataTables.jqueryui.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js">
-<!-- Below is the jQuery file required for using any Jquery component. -->
+<jsp:include page="../home/lib.jsp" />
 <script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<!-- Below are the jQuery scripts required for Data Tables. -->
-<script type="text/javascript"
-	src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/common.js"></script>
-
-<!-- Initialization code of data table at the time of page load. -->
-<script>
-	$(document).ready(function() {
-		$('#myDatatable').DataTable({
-			"jQueryUI" : true,
-			"pagingType" : "full_numbers",
-			"lengthMenu" : [ [ 5, 10, 50, -1 ], [ 5, 10, 50, "All" ] ]
-		/* few more options are available to use */
-		});
-	});
-</script>
-
-
+	src="${pageContext.request.contextPath}/js/datatable.js"></script>
 </head>
 <body>
-	
-
-	<jsp:include page="../_menu.jsp" />
-	
-	
+	<jsp:include page="../home/_menu.jsp" />
 	<div>
 		<h1 class="text">Type Criteria list</h1>
 		<div class="button">
@@ -79,7 +42,5 @@
 			</tbody>
 		</table>
 	</div>
-
-
 </body>
 </html>

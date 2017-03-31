@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	//private String roleAccess[] = { "USER", "ADMIN" };
+	// private String roleAccess[] = { "USER", "ADMIN" };
 	@Autowired
 	MyDBAuthenticationService myDBAauthenticationService;
 
@@ -30,20 +30,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
 		// Các trang không yêu cầu login
-		http.authorizeRequests().antMatchers("/", "/welcome", "/login", "/logout", 
-				"/typecriteria","typecriteria/detail").permitAll();
+		http.authorizeRequests()
+				.antMatchers("/", "/welcome", "/login", "/logout", "/typecriteria", "typecriteria/detail").permitAll();
 
 		// Trang /userInfo yêu cầu phải login với vai trò USER hoặc ADMIN.
 		// Nếu chưa login, nó sẽ redirect tới trang /login.
 
 		http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('roleAccess', 'ROLE_ADMIN')");
-//		String text = "hasAnyRole('" + roleAccess[1] + "')";
-		// For ADMIN only.
+		// String text = "hasAnyRole('" + roleAccess[1] + "')";
+
 		// Trang chỉ dành cho ADMIN
-//		http.authorizeRequests().antMatchers("/admin", "/location",
-//				"typecriteria/delete").access(text);
-		 http.authorizeRequests().antMatchers("/admin","/location",
-				 "/typecriteria/delete","/typecriteria/add").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests()
+				.antMatchers("/admin", "/location", "/typecriteria/delete", "/typecriteria/add", "typecriteria/edit")
+				.access("hasRole('ROLE_ADMIN')");
 
 		// Khi người dùng đã login, với vai trò XX.
 		// Nhưng truy cập vào trang yêu cầu vai trò YY,

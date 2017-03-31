@@ -2,8 +2,9 @@
  
 <html>
 <head><title>Login</title></head>
+<jsp:include page="home/lib.jsp"/>
 <body>
-   <jsp:include page="_menu.jsp" />
+   <jsp:include page="home/_menu.jsp" />
     
     
    <h1>Login</h1>

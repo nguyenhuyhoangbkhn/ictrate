@@ -15,7 +15,7 @@ import hust.edu.vn.model.TypeCriteria;
 import java.util.List;
 
 @Controller
-public class AdminController {
+public class CriteriaController {
 
 	@RequestMapping("/typecriteria")
 	public String typeCriteriaIndex(Model model) {
@@ -66,7 +66,19 @@ public class AdminController {
 		model.addAttribute("typeCriteriaList", typeCriteriaList);
 		return new ModelAndView("typecriteria/add", "command", new TypeCriteria());
 	}
-
+	
+	
+	//update type criteria
+	@RequestMapping("typecriteria/edit")
+	public String updateTypeCriteriaById(Model model, @RequestParam("tyecriteriaid") int id) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
+				
+		System.out.println("1111"+typeCireriaDao.getTypeCriteriaById(id));
+		return "redirect:/typecriteria";
+	}
+		
 	@RequestMapping(value = "/typecriteria/addTypeCriteria", method = RequestMethod.POST)
 	public String addTypeCriteria(@ModelAttribute("TypeCriteria") TypeCriteria typeCriteria) {
 		@SuppressWarnings("resource")

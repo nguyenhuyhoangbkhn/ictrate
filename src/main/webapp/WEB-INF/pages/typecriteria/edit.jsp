@@ -3,22 +3,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Location List</title>
 <jsp:include page="../home/lib.jsp" />
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/validateform.js"></script>
 </head>
 <body>
 	<jsp:include page="../home/_menu.jsp" />
 	<h1>Add New Staff</h1>
-	<form:form method="post" action="updateTypeCriteria" modelAttribute="typeCireriaDao">
+	<form:form method="post" action="updateTypeCriteria"
+		modelAttribute="typeCireriaDao">
 		<table>
 			<tr>
-				<td>id :</td>
-				<td><form:input path="id" /></td>
+				<td><form:hidden path="id" /></td>
 			</tr>
+
 			<tr>
 				<td>Name :</td>
-				<td><form:input path="name" /></td>
+				<td><form:input path="name" id="validateName" /></td>
 			</tr>
 			<tr>
 				<td>Note :</td>
@@ -26,15 +28,16 @@
 			</tr>
 			<tr>
 				<td>Id parent :</td>
-				<td><form:input path="id_parent" /></td>
-			</tr>
-			<tr>
-				<td>Flag delete :</td>
-				<td><form:input path="flag_delede" /></td>
+				<td><form:select path="id_parent">
+						<form:option value= "0" label="Tieu chi lon" />
+						<c:forEach var="criteria" items="${typeCriteriaList}">
+							<form:option value="${criteria.id}" label="${criteria.name}" />
+						</c:forEach>
+					</form:select></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" value="update" /></td>
+				<td><input type="submit" value="update" class ="submitTypeCriteria" /></td>
 			</tr>
 		</table>
 	</form:form>

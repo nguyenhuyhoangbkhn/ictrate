@@ -18,5 +18,3 @@
 <script type="text/javascript"
 	src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/common.js"></script>

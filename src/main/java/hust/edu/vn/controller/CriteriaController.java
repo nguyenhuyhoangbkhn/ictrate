@@ -62,21 +62,21 @@ public class CriteriaController {
 		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
 
 		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getAllTypeCriteria();
-		System.out.println("danh sach loai tieu chi" + typeCriteriaList);
+	
 		model.addAttribute("typeCriteriaList", typeCriteriaList);
 		return new ModelAndView("typecriteria/add", "command", new TypeCriteria());
 	}
 	
 	
-	//update type criteria
+	//direct edit form
 	@RequestMapping("typecriteria/edit")
 	public String updateTypeCriteriaById(Model model, @RequestParam("tyecriteriaid") int id) {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
-				
-		System.out.println("1111"+typeCireriaDao.getTypeCriteriaById(id));
 		model.addAttribute("typeCireriaDao",typeCireriaDao.getTypeCriteriaById(id));
+		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getAllTypeCriteria();
+		model.addAttribute("typeCriteriaList", typeCriteriaList);
 		return "typecriteria/edit";
 	}
 	
@@ -85,6 +85,7 @@ public class CriteriaController {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
+		System.out.println("test"+typeCriteria);
 		typeCireriaDao.updateTypeCriteria(typeCriteria);
 		return "redirect:/typecriteria";
 	}

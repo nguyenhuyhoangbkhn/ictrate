@@ -7,15 +7,18 @@
 <head>
 <title>Location List</title>
 <jsp:include page="../home/lib.jsp" />
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/validateform.js"></script>
+
 </head>
 <body>
 	<jsp:include page="../home/_menu.jsp" />
-	<h1>Add New Staff</h1>
+	<h1>Tạo tiêu chí mới</h1>
 	<form:form method="post" action="addTypeCriteria">
 		<table>
 			<tr>
 				<td>Name :</td>
-				<td><form:input path="name" class="validate" /></td>
+				<td><form:input path="name" id="validateName" /></td>
 			</tr>
 			<tr>
 				<td>Note :</td>
@@ -24,6 +27,7 @@
 			<tr>
 				<td>Id parent :</td>
 				<td><form:select path="id_parent">
+						<form:option value= "0" label="Tieu chi lon" />
 						<c:forEach var="criteria" items="${typeCriteriaList}">
 							<form:option value="${criteria.id}" label="${criteria.name}" />
 						</c:forEach>
@@ -31,8 +35,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" value="Add"
-					onclick="return validateForm()" /></td>
+				<td><input type="submit" value="Add" class ="submitTypeCriteria"/></td>
 			</tr>
 		</table>
 	</form:form>

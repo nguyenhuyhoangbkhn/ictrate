@@ -15,6 +15,8 @@
 	<jsp:include page="../home/_menu.jsp" />
 	<div>
 		<h1 class="text">LOCATION LIST</h1>
+		
+		<a>Add location</a>
 		<table id="myDatatable">
 			<thead>
 				<tr>

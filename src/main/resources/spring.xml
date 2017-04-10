@@ -6,8 +6,12 @@
 	<bean id="locationDao" class="hust.edu.vn.dao.impl.LocationDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="typeCriteriaDao" class="hust.edu.vn.dao.impl.TypeCriteriaDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="stepScoreDao" class="hust.edu.vn.dao.impl.StepScoreDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 

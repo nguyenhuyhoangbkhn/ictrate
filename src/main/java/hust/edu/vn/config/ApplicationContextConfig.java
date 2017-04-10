@@ -3,9 +3,11 @@ package hust.edu.vn.config;
 import javax.sql.DataSource;
 
 import hust.edu.vn.dao.LocationDao;
+import hust.edu.vn.dao.StepScoreDao;
 import hust.edu.vn.dao.TypeCriteriaDao;
 import hust.edu.vn.dao.UserInfoDAO;
 import hust.edu.vn.dao.impl.LocationDaoImpl;
+import hust.edu.vn.dao.impl.StepScoreDaoImpl;
 import hust.edu.vn.dao.impl.TypeCriteriaDaoImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +89,10 @@ public class ApplicationContextConfig {
 	public TypeCriteriaDao typeCriteriaDao() {
 		return new TypeCriteriaDaoImpl();
 	}
+   
+   @Bean(name = "stepScoreDao")
+  	public StepScoreDao stepScoreDao() {
+  		return new StepScoreDaoImpl();
+  	}
    
 }

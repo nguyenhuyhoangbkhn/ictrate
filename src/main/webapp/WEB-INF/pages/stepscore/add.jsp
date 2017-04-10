@@ -10,42 +10,53 @@
 <jsp:include page="../home/lib.jsp" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/ajax/stepScore.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/stepScore.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/stepScore.css">
 </head>
 <body>
 	<jsp:include page="../home/_menu.jsp" />
-	<h1>Create step score</h1>
-	<form:form method="post">
-		<table>
-			<tr class="form-group">
-				<td>Name :</td>
-				<td><form:input path="name" class="form-control nameStepScore" /></td>
-			</tr>
-			<tr class="form-group">
-				<td>Note :</td>
-				<td><form:input path="note" class="form-control noteStepScore" /></td>
-			</tr>
-			<tr class="form-group">
-				<td>Detail Step Score:</td>
-				<td><form:input path="detailScore"
-						class="form-control detailStepScore" /></td>
-			</tr>
-			<tr class="form-group formAddStepScore">
-				<td></td>
-				<td><input class="form-control detailStepScore" /></td>
-			</tr>
-			<tr class="formButtonAddStepForm">
-				<td></td>
-				<td>
-					<button class="addStepForm">Add Step Score</button>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" value="Add" class="submitTypeCriteria" /></td>
-			</tr>
-		</table>
-	</form:form>
+	<div class="container-fluid">
+		<div class="row">
+			<jsp:include page="../home/_left.jsp" />
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<h1>Create step score</h1>
+				<form:form method="post">
+					<table>
+						<tr class="form-group">
+							<td>Name :</td>
+							<td><form:input path="name"
+									class="form-control nameStepScore" /></td>
+						</tr>
+						<tr class="form-group">
+							<td>Note :</td>
+							<td><form:input path="note"
+									class="form-control noteStepScore" /></td>
+						</tr>
+						<tr class="form-group">
+							<td>Detail Step Score:</td>
+							<td><form:input path="detailScore"
+									class="form-control detailStepScore" /></td>
+						</tr>
+						<tr class="form-group">
+							<td></td>
+							<td><input class="form-control detailStepScore" /></td>
+						</tr>
+						<tr class="formButtonAddStepForm">
+							<td></td>
+							<td>
+								<button class="addStepForm">Add Step Score</button>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Add"
+								class="submitTypeCriteria" /></td>
+						</tr>
+					</table>
+				</form:form>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

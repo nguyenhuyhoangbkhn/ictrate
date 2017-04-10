@@ -11,16 +11,23 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="${pageContext.request.contextPath}/welcome">Project name</a>
+			<a class="navbar-brand"
+				href="${pageContext.request.contextPath}/welcome">Project name</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="${pageContext.request.contextPath}/stepscore">Step Score</a></li>
-				<li><a href="${pageContext.request.contextPath}/userInfo">User Info</a></li>
-				<li><a href="${pageContext.request.contextPath}/location">Location</a></li>
-				<li><a href="${pageContext.request.contextPath}/typecriteria">TypeCriteria</a></li>
+				<li><a href="${pageContext.request.contextPath}/stepscore">Step
+						Score</a></li>
+				<li><a href="${pageContext.request.contextPath}/userInfo">User
+						Info</a></li>
 				<li><a href="#">Profile</a></li>
 				<li><a href="#">Help</a></li>
+				<c:if test="${pageContext.request.userPrincipal.name != null}">
+					<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+				</c:if>
+				<c:if test="${pageContext.request.userPrincipal.name == null}">
+					<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+				</c:if>
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">

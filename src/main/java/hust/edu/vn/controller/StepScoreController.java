@@ -52,7 +52,7 @@ public class StepScoreController {
 		
 		StepScoreDao stepScoreDao = ctx.getBean("stepScoreDao", StepScoreDao.class);
 		System.out.println("tét"+ stepScore.getDetailScore());
-		stepScoreDao.addStepScore(stepScore);
+//		stepScoreDao.addStepScore(stepScore);
 		return "redirect:/stepscore";
 	}
 	

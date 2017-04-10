@@ -21,6 +21,44 @@ public class LocationDaoImpl implements LocationDao {
 	}
 
 	@Override
+	public void AddCity(Location Location) {
+		String sql = "insert into LOCATION (ID,NAME,TYPE,ID_PARENT,FLAG_DELETE) values (LOCATIONID.nextval, ?, ?, ?, ?)";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, Location.getName());
+			ps.setString(2, Location.getType());
+			ps.setInt(3, 0);
+			ps.setInt(4, 0);
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void AddDistrict(Location Location) {
+		String sql = "insert into LOCATION (ID,NAME,TYPE,ID_PARENT,FLAG_DELETE) values (LOCATIONID.nextval, ?, ?, ?, ?)";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, Location.getName());
+			ps.setString(2, Location.getType());
+			ps.setInt(3, Location.getId_parent());
+			ps.setInt(4, 0);
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	public List<Location> getAllCityLocation() { // Lấy Thành Phố/Tỉnh
 		String sql = "SELECT * FROM LOCATION WHERE ID_PARENT = 0 AND FLAG_DELETE = 0";
 		Connection conn = null;
@@ -54,7 +92,7 @@ public class LocationDaoImpl implements LocationDao {
 			}
 		}
 	}
-	
+
 	@Override
 	public List<Location> getAllCountrysideLocation(int id) {
 		String sql = "SELECT * FROM LOCATION WHERE FLAG_DELETE = 0 AND ID_PARENT = ?";
@@ -90,31 +128,35 @@ public class LocationDaoImpl implements LocationDao {
 			}
 		}
 	}
-	
+
 	@Override
 	public void deleteLocation(int id) {
 		String sql = "UPDATE LOCATION SET FLAG_DELETE = 1 WHERE ID=?";
 		Connection conn = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
+			rs = ps.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	@Override
-	public void updateLocation (Location location) {
-		String sql = "UPDATE LOCATION SET NAME=?, TYPE=?, AGE=?, ID_PARENT=?, FLAG_DELETE=? WHERE ID=?";	// update staff infomation
+	public void updateLocation(Location location) {
+		String sql = "UPDATE LOCATION SET NAME=?, TYPE=?, AGE=?, ID_PARENT=?, FLAG_DELETE=? WHERE ID=?"; // update
+																											// staff
+																											// infomation
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
 			conn = dataSource.getConnection();
 			ps = conn.prepareStatement(sql);
 			// Parameters start with 1
-			ps.setString(1, location.getName());	//get data from database
+			ps.setString(1, location.getName()); // get data from database
 			ps.setString(2, location.getType());
 			ps.setInt(3, location.getId_parent());
 			ps.setInt(4, location.getFlag_delete());
@@ -151,7 +193,5 @@ public class LocationDaoImpl implements LocationDao {
 		}
 		return alocation;
 	}
-
-
 
 }

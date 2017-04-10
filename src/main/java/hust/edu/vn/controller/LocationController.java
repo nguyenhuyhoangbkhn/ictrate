@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import hust.edu.vn.dao.LocationDao;
 import hust.edu.vn.model.Location;
@@ -30,6 +32,39 @@ public class LocationController {
 		return "location/index";
 	}
 
+	@RequestMapping("location/add")
+	public ModelAndView showAddForm(Model model) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+
+		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
+
+		List<Location> locationList = locationDao.getAllCityLocation();
+	
+		model.addAttribute("locationList", locationList);
+		return new ModelAndView("location/add", "command", new Location());
+	}
+	
+	@RequestMapping("location/addProvince")
+	public String addProvince(@ModelAttribute("Location") Location location) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+
+		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
+		locationDao.AddCity(location);
+		return "redirect:/location";
+	}
+	
+	@RequestMapping("location/addDistrict")
+	public String addDistrict(@ModelAttribute("Location") Location location) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+
+		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
+		locationDao.AddDistrict(location);
+		return "redirect:/location";
+	}
+	
 	@RequestMapping("location/detail")
 	public String DetailListTypecriteriaDetail(Model model, @RequestParam("locationid") int id) {
 		@SuppressWarnings("resource")

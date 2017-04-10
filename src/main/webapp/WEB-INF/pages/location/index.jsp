@@ -16,7 +16,7 @@
 	<div>
 		<h1 class="text">LOCATION LIST</h1>
 		
-		<a>Add location</a>
+		<a href="${pageContext.request.contextPath}/location/add">Add location</a>
 		<table id="myDatatable">
 			<thead>
 				<tr>

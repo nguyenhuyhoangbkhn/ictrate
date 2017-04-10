@@ -15,5 +15,9 @@ public interface LocationDao {
 	public void updateLocation (Location location);
 	
 	public Location getLocationById(int id);
+	
+	public void AddCity(Location Location);
+	
+	public void AddDistrict(Location Location); 
 
 }

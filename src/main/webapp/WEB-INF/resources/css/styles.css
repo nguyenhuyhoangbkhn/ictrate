@@ -104,3 +104,8 @@ body {
 .errorForm{
 	border: 2px red solid;
 }
+
+#selectProvince, #selectDistrict, #selectWard{
+	margin-top: 20px;
+	display: none;
+}

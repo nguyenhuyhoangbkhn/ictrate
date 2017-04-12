@@ -71,7 +71,7 @@ public class StepScoreDaoImpl implements StepScoreDao {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void addStepScore(StepScore StepScore) {
 		String sql = "insert into STEP_SCORE (ID,NAME,NOTE,DETAIL_SCORE,FLAG_DELETE) values (STEPSCOREID.nextval, ?, ?, ?, ?)";
@@ -90,7 +90,7 @@ public class StepScoreDaoImpl implements StepScoreDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -101,10 +101,34 @@ public class StepScoreDaoImpl implements StepScoreDao {
 
 	@Override
 	public StepScore getStepScoreById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT * FROM STEP_SCORE WHERE ID = ?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		StepScore stepScore = new StepScore();
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				stepScore = new StepScore(rs.getInt("id"), rs.getString("name"), rs.getString("note"),
+						rs.getString("detail_score"), rs.getInt("flag_delete"));
+			}
+			rs.close();
+			ps.close();
+			System.out.println("edit" + stepScore);
+			return stepScore;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
 	}
-
-	
 
 }

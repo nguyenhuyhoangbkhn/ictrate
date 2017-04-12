@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// Trang chỉ dành cho ADMIN
 		http.authorizeRequests().antMatchers("/admin", "/location", "/typecriteria/delete", "/typecriteria/add",
-				"typecriteria/edit", "/stepscore/add").access("hasRole('ROLE_ADMIN')");
+				"typecriteria/edit", "/stepscore/add","/stepscore/edit","/stepscore/delete").access("hasRole('ROLE_ADMIN')");
 
 		// Khi người dùng đã login, với vai trò XX.
 		// Nhưng truy cập vào trang yêu cầu vai trò YY,

@@ -10,6 +10,8 @@
 <jsp:include page="../home/lib.jsp" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/ajax/stepScore.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/plugin/plugin.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/stepScore.css">
 </head>
@@ -35,12 +37,10 @@
 						<tr class="form-group">
 							<td>Detail Step Score:</td>
 							<td><form:input path="detailScore"
-									class="form-control detailStepScore" /></td>
+									class="form-control detailStepScore1" id="detailStepScore1" /></td>
+							<td><button class="btn deleteBtn">Delete</button></td>
 						</tr>
-						<tr class="form-group">
-							<td></td>
-							<td><input class="form-control detailStepScore" /></td>
-						</tr>
+
 						<tr class="formButtonAddStepForm">
 							<td></td>
 							<td>
@@ -55,8 +55,25 @@
 					</table>
 				</form:form>
 			</div>
+
+			<div id="myID">ga</div>
+
+			<script>
+				$('#myID').hello({
+
+					content : 'Xin chào lập trình viên',
+
+					color : 'red',
+
+					fontStyle : 'bold',
+
+					fontSize : 16
+
+				})
+			</script>
 		</div>
 	</div>
+
 
 </body>
 </html>

@@ -40,6 +40,17 @@ public class StepScoreController {
 		return "redirect:/stepscore";
 	}
 	
+	@RequestMapping("stepscore/edit")
+	public String editTypeCriteriaById(Model model, @RequestParam("id") int id) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		
+		StepScoreDao stepScoreDao = ctx.getBean("stepScoreDao", StepScoreDao.class);
+		
+		System.out.println("id" + stepScoreDao.getStepScoreById(id));
+		return "redirect:/stepscore";
+	}
+	
 	@RequestMapping("stepscore/add")
 	public ModelAndView addStepScore(Model model) {
 		return new ModelAndView("stepscore/add", "command", new StepScore());
@@ -52,7 +63,7 @@ public class StepScoreController {
 		
 		StepScoreDao stepScoreDao = ctx.getBean("stepScoreDao", StepScoreDao.class);
 		System.out.println("tét"+ stepScore.getDetailScore());
-//		stepScoreDao.addStepScore(stepScore);
+		stepScoreDao.addStepScore(stepScore);
 		return "redirect:/stepscore";
 	}
 	

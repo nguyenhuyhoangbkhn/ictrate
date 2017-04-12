@@ -43,7 +43,6 @@ public class LocationController {
 		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
 
 		List<Location> locationList = locationDao.getAllCityLocation();
-	
 		model.addAttribute("locationList", locationList);
 		return new ModelAndView("location/add", "command", new Location());
 	}
@@ -52,13 +51,10 @@ public class LocationController {
 	public @ResponseBody ModelAndView getProvince(Model model, @RequestParam("id") int id) {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
-
 		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
 
-		System.out.println(id);
 		List<Location> locationList1 = locationDao.getAllCountrysideLocation(id);
 		model.addAttribute("DistrictList", locationList1);
-		System.out.println(locationList1);
 		return new ModelAndView("location/selectWard", "command", new Location());
 	}
 	
@@ -86,8 +82,8 @@ public class LocationController {
 	public String addWard(@ModelAttribute("Location") Location location) {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
-
 		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
+		
 		locationDao.AddDistrictWard(location);
 		System.out.println(location);
 		return "redirect:/location";
@@ -109,6 +105,7 @@ public class LocationController {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
+		
 		locationDao.deleteLocation(id);
 		return "redirect:/location";
 	}
@@ -119,7 +116,8 @@ public class LocationController {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
-		model.addAttribute("typeCireriaDao", locationDao.getLocationById(id));
+		
+		model.addAttribute("locationDao", locationDao.getLocationById(id));
 		return "location/edit";
 	}
 }

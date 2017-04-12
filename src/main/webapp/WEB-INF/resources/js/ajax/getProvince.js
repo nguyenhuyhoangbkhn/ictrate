@@ -17,7 +17,12 @@ function searchAjax(params) {
 		//contentType : "application/json; charset=utf-8",
 		success : function(data) {
 			console.log("SUCCESS: ", data);
-			$("#district").html(data);
+			if(($('#provinceSelection').val()) == 0){
+				$("#district").html('ID PARENT : <select><option value="0" label="Select" /></form:select>');
+			}
+			else {
+				$("#district").html(data);
+			}
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);

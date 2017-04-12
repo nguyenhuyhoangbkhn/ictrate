@@ -39,7 +39,7 @@
 					<tr>
 						<td>TYPE :</td>
 						<td><form:select path="type">
-								<form:option value="" label="Chọn Kiểu" />
+								<form:option value="" label="Select" />
 								<form:option value="Thành Phố" label="Thành Phố" />
 								<form:option value="Tỉnh" label="Tỉnh" />
 							</form:select></td>
@@ -61,7 +61,7 @@
 					<tr>
 						<td>TYPE :</td>
 						<td><form:select path="type">
-								<form:option value="0" label="Chọn Kiểu" />
+								<form:option value="0" label="Select" />
 								<form:option value="Quận" label="Quận" />
 								<form:option value="Huyện" label="Huyện" />
 								<form:option value="Thị Xã" label="Thị Xã" />
@@ -70,7 +70,7 @@
 					<tr>
 						<td>ID PARENT :</td>
 						<td><form:select path="id_parent">
-								<form:option value="0" label="Chọn Kiểu" />
+								<form:option value="0" label="Select" />
 								<c:forEach var="location" items="${locationList}">
 									<form:option value="${location.id}" label="${location.name}" />
 								</c:forEach>
@@ -88,19 +88,19 @@
 				NAME: <form:input path="name" />
 				<br>
 				TYPE: <form:select path="type">
-					<form:option value="0" label="Chọn Kiểu" />
+					<form:option value="0" label="Select" />
 					<form:option value="Xã" label="Xã" />
 					<form:option value="Phường" label="Phường" />
 					<form:option value="Thị Trấn" label="Thị Trấn" />
 				</form:select><br>
 				SELECT PROVINCE :<form:select path="id" id="provinceSelection" onchange="searchAjax() ;">
-					<form:option value="0" label="Chọn Kiểu" />
+					<form:option value="0" label="Select" />
 						<c:forEach var="location" items="${locationList}">
 							<form:option value="${location.id}" label="${location.name}" />
 						</c:forEach>
 				</form:select>
-				 <div id="district">ID PARENT :<form:select path="id_parent" id="districtSelection">
-							<form:option value="0" label="Chọn Kiểu" />
+				 <div id="district">ID PARENT :<form:select path="id_parent">
+							<form:option value="0" label="Select" />
 								<c:forEach var="location" items="${DistrictList}">
 									<form:option value="${location.id}" label="${location.name}" />
 								</c:forEach>

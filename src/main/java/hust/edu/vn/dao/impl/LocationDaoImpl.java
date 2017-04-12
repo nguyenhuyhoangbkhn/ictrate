@@ -40,7 +40,7 @@ public class LocationDaoImpl implements LocationDao {
 	}
 
 	@Override
-	public void AddDistrict(Location Location) {
+	public void AddDistrictWard(Location Location) {
 		String sql = "insert into LOCATION (ID,NAME,TYPE,ID_PARENT,FLAG_DELETE) values (LOCATIONID.nextval, ?, ?, ?, ?)";
 		Connection conn = null;
 		PreparedStatement ps = null;

@@ -18,6 +18,6 @@ public interface LocationDao {
 	
 	public void AddCity(Location Location);
 	
-	public void AddDistrict(Location Location); 
+	public void AddDistrictWard(Location Location); 
 
 }

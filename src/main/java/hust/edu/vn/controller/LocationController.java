@@ -1,5 +1,6 @@
 package hust.edu.vn.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import hust.edu.vn.dao.LocationDao;
@@ -45,6 +49,20 @@ public class LocationController {
 		return new ModelAndView("location/add", "command", new Location());
 	}
 	
+	@RequestMapping(value="location/addById", method = RequestMethod.GET)
+	public @ResponseBody ModelAndView getProvince(Model model, @RequestParam("id") int id) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+
+		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
+
+		System.out.println(id);
+		List<Location> locationList1 = locationDao.getAllCountrysideLocation(id);
+		model.addAttribute("DistrictList", locationList1);
+		System.out.println(locationList1);
+		return new ModelAndView("location/selectWard", "command", new Location());
+	}
+	
 	@RequestMapping("location/addProvince")
 	public String addProvince(@ModelAttribute("Location") Location location) {
 		@SuppressWarnings("resource")
@@ -61,7 +79,18 @@ public class LocationController {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 
 		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
-		locationDao.AddDistrict(location);
+		locationDao.AddDistrictWard(location);
+		return "redirect:/location";
+	}
+	
+	@RequestMapping("location/addWard")
+	public String addWard(@ModelAttribute("Location") Location location) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+
+		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
+		locationDao.AddDistrictWard(location);
+		System.out.println(location);
 		return "redirect:/location";
 	}
 	

@@ -11,7 +11,7 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/ajax/stepScore.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/plugin/plugin.js"></script>
+	src="${pageContext.request.contextPath}/js/lib/ajax-jquery.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/stepScore.css">
 </head>
@@ -56,7 +56,7 @@
 				</form:form>
 			</div>
 
-
 		</div>
+	</div>
 </body>
 </html>

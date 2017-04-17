@@ -1,14 +1,17 @@
 var countRow = 1;
 $(document).ready(function() {
 	$(".submitTypeCriteria").click(function() {
-		var params = {name,note,detailScore};
+		console.log("test"+$(".nameStepScore").val());
+		var params = {};
 		params.name = $(".nameStepScore").val();
 		params.note = $(".noteStepScore").val();
+		
 		var text = "";
 		for (var i = 1; i<= countRow;i++){
 			text = text + "\t"+$(".detailStepScore"+i).val();
 		}
 		params.detailScore = text;
+		console.log("param" + param);
 		$.ajax({
 			url : '/ictrate/stepscore/addStepScore', // Ten action
 			type : 'POST', // GET or POST

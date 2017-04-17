@@ -90,7 +90,7 @@ public class LocationController {
 	}
 	
 	@RequestMapping("location/detail")
-	public String DetailListTypecriteriaDetail(Model model, @RequestParam("locationid") int id) {
+	public String DetailListLocationDetail(Model model, @RequestParam("locationid") int id) {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
@@ -101,7 +101,7 @@ public class LocationController {
 	}
 
 	@RequestMapping("location/delete")
-	public String deleteTypeCriteriaById(Model model, @RequestParam("locationid") int id) {
+	public String deleteLocationById(Model model, @RequestParam("locationid") int id) {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
@@ -110,14 +110,25 @@ public class LocationController {
 		return "redirect:/location";
 	}
 
-	// direct edit form
 	@RequestMapping("location/edit")
-	public String updateTypeCriteriaById(Model model, @RequestParam("location") int id) {
+	public String editLocationById(Model model, @RequestParam("locationid") int id) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
+	
+		model.addAttribute("locationDao", locationDao.getLocationById(id));
+
+		return "location/edit";	
+	}
+	
+	@RequestMapping("location/updateLocation")
+	public String updateLocation(@ModelAttribute("Location") Location location) {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
 		
-		model.addAttribute("locationDao", locationDao.getLocationById(id));
-		return "location/edit";
+		locationDao.updateLocation(location);
+		System.out.println(location);
+		return "redirect:/location";
 	}
 }

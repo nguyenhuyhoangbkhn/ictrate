@@ -148,9 +148,7 @@ public class LocationDaoImpl implements LocationDao {
 	
 	@Override
 	public void updateLocation(Location location) {
-		String sql = "UPDATE LOCATION SET NAME=?, TYPE=?, AGE=?, ID_PARENT=?, FLAG_DELETE=? WHERE ID=?"; // update
-																											// staff
-																											// infomation
+		String sql = "UPDATE LOCATION SET NAME=?, TYPE=?, ID_PARENT=?, FLAG_DELETE=? WHERE ID=?";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
@@ -161,6 +159,7 @@ public class LocationDaoImpl implements LocationDao {
 			ps.setString(2, location.getType());
 			ps.setInt(3, location.getId_parent());
 			ps.setInt(4, location.getFlag_delete());
+			ps.setInt(5, location.getId());
 			ps.executeUpdate();
 
 		} catch (SQLException e) {

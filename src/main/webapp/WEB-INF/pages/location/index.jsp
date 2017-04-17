@@ -13,34 +13,45 @@
 </head>
 <body>
 	<jsp:include page="../home/_menu.jsp" />
-	<div>
-		<h1 class="text">LOCATION LIST</h1>
-		
-		<a href="${pageContext.request.contextPath}/location/add">Add location</a>
-		<table id="myDatatable">
-			<thead>
-				<tr>
-					<th>ID_LOCATION</th>
-					<th>NAME</th>
-					<th>TYPE_PLACE</th>
-					<th>DETAIL</th>
-					<th>EDIT</th>
-					<th>DELETE</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="location" items="${locationlist}">
-					<tr>
-						<td>${location.id}</td>
-						<td>${location.name}</td>
-						<td>${location.type}</td>
-						<td><a href="${pageContext.request.contextPath}/location/detail?locationid=${location.id}">DETAIL</a></td>
-						<td><a href="${pageContext.request.contextPath}/location/edit?locationid=${location.id}">EDIT</a></td>
-						<td><a href="${pageContext.request.contextPath}/location/delete?locationid=${location.id}">DELETE</a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+	<div class="container-fluid">
+		<div class="row">
+			<jsp:include page="../home/_left.jsp" />
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div>
+					<h1 class="text">LOCATION LIST</h1>
+
+					<a href="${pageContext.request.contextPath}/location/add">Add
+						location</a>
+					<table id="myDatatable">
+						<thead>
+							<tr>
+								<th>ID_LOCATION</th>
+								<th>NAME</th>
+								<th>TYPE_PLACE</th>
+								<th>DETAIL</th>
+								<th>EDIT</th>
+								<th>DELETE</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="location" items="${locationlist}">
+								<tr>
+									<td>${location.id}</td>
+									<td>${location.name}</td>
+									<td>${location.type}</td>
+									<td><a
+										href="${pageContext.request.contextPath}/location/detail?locationid=${location.id}">DETAIL</a></td>
+									<td><a
+										href="${pageContext.request.contextPath}/location/edit?locationid=${location.id}">EDIT</a></td>
+									<td><a
+										href="${pageContext.request.contextPath}/location/delete?locationid=${location.id}">DELETE</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

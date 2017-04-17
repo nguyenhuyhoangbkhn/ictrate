@@ -33,4 +33,5 @@ $(document).ready(function() {
 	$( "form#command" ).on( "click", "a", function() {
 		$(this).parents('tr').remove();
 	});
+
 })

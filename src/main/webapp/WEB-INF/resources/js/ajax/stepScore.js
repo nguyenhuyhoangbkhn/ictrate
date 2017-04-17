@@ -29,8 +29,5 @@ $(document).ready(function() {
 		content.insertBefore($(".formButtonAddStepForm"));
 		return false;
 	});
-	$(".deleteBtn").click(function(){	
-		
-		return false;
-	});
+	
 })

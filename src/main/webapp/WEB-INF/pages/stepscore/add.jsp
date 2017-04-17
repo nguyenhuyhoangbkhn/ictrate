@@ -27,18 +27,17 @@
 						<tr class="form-group">
 							<td>Name :</td>
 							<td><form:input path="name"
-									class="form-control nameStepScore" /></td>
+									class="form-control nameStepScore" id = "nameStepScore"/></td>
 						</tr>
 						<tr class="form-group">
 							<td>Note :</td>
 							<td><form:input path="note"
-									class="form-control noteStepScore" /></td>
+									class="form-control noteStepScore" id = "noteStepScore"/></td>
 						</tr>
 						<tr class="form-group">
 							<td>Detail Step Score:</td>
-							<td><form:input path="detailScore"
-									class="form-control detailStepScore1" id="detailStepScore1" /></td>
-							<td><a class="btn deleteBtn">Delete</a></td>
+							<td><form:input path="detailScore" class="form-control detailStepScoreAdd"/></td>
+							<td></td>
 						</tr>
 
 						<tr class="formButtonAddStepForm">
@@ -49,7 +48,7 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td><input type="submit" value="Add"
+							<td><input type="button" value="Add"
 								class="submitTypeCriteria" /></td>
 						</tr>
 					</table>

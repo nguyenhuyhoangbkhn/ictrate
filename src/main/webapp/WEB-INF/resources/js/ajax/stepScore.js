@@ -25,12 +25,12 @@ $(document).ready(function() {
 	});
 	$(".addStepForm").click(function(){
 		countRow++;
-		content = $("<tr><td></td><td><input  name='detailScore"+countRow+"' class='form-control' id = 'detailStepScore"+ countRow+" 'type='text' value=''></td><td><button class='btn deleteBtn' id = 'deleteBtn"+ countRow+"'>Delete</button></td></tr>");		
+		content = $("<tr><td></td><td><input  name='detailScore"+countRow+"' class='form-control' id = 'detailStepScore"+ countRow+" 'type='text' value=''></td><td><a class='btn deleteBtn' id = 'deleteBtn"+ countRow+"'>Delete</a></td></tr>");		
 		content.insertBefore($(".formButtonAddStepForm"));
 		return false;
 	});
-	$(".deleteBtn").click(function(){	
-		
-		return false;
+	
+	$( "form#command" ).on( "click", "a", function() {
+		$(this).parents('tr').remove();
 	});
 })

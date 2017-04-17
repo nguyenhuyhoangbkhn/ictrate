@@ -38,7 +38,7 @@
 							<td>Detail Step Score:</td>
 							<td><form:input path="detailScore"
 									class="form-control detailStepScore1" id="detailStepScore1" /></td>
-							<td><button class="btn deleteBtn">Delete</button></td>
+							<td><a class="btn deleteBtn">Delete</a></td>
 						</tr>
 
 						<tr class="formButtonAddStepForm">

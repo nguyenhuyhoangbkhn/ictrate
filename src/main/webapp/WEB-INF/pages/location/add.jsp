@@ -85,26 +85,40 @@
 
 		<div id="selectWard">
 			<form:form method="post" action="addWard">
-				NAME: <form:input path="name" />
-				<br>
-				TYPE: <form:select path="type">
-					<form:option value="0" label="Select" />
-					<form:option value="Xã" label="Xã" />
-					<form:option value="Phường" label="Phường" />
-					<form:option value="Thị Trấn" label="Thị Trấn" />
-				</form:select><br>
-				SELECT PROVINCE :<form:select path="id" id="provinceSelection" onchange="searchAjax() ;">
-					<form:option value="0" label="Select" />
-						<c:forEach var="location" items="${locationList}">
-							<form:option value="${location.id}" label="${location.name}" />
-						</c:forEach>
-				</form:select>
-				 <div id="district">ID PARENT :<form:select path="id_parent">
-							<form:option value="0" label="Select" />
-								<c:forEach var="location" items="${DistrictList}">
+				<table>
+					<tr>
+						<td>NAME:</td>
+						<td><form:input path="name" /></td>
+					</tr>
+					<tr>
+						<td>TYPE:</td>
+						<td><form:select path="type">
+								<form:option value="0" label="Select" />
+								<form:option value="Xã" label="Xã" />
+								<form:option value="Phường" label="Phường" />
+								<form:option value="Thị Trấn" label="Thị Trấn" />
+							</form:select></td>
+					</tr>
+					<tr>
+						<td>SELECT PROVINCE :</td>
+						<td><form:select path="id" id="provinceSelection"
+								onchange="searchAjax() ;">
+								<form:option value="0" label="Select" />
+								<c:forEach var="location" items="${locationList}">
 									<form:option value="${location.id}" label="${location.name}" />
 								</c:forEach>
-							</form:select> </div>
+							</form:select></td>
+					</tr>
+				</table>
+				<div id="district">
+					ID PARENT :
+					<form:select path="id_parent">
+						<form:option value="0" label="Select" />
+						<c:forEach var="location" items="${DistrictList}">
+							<form:option value="${location.id}" label="${location.name}" />
+						</c:forEach>
+					</form:select>
+				</div>
 				<input type="submit" value="Add" />
 			</form:form>
 		</div>

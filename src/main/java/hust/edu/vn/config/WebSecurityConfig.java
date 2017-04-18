@@ -31,8 +31,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// Các trang không yêu cầu login
 		http.authorizeRequests()
-				.antMatchers("/", "/welcome", "/login", "/logout", "/typecriteria", "typecriteria/detail", "/stepscore")
-				.permitAll();
+				.antMatchers(
+						"/", "/welcome", "/login", "/logout", 
+						"/typecriteria", "typecriteria/detail", 
+						"/stepscore",
+						"/location",
+						"/criteria"
+				).permitAll();
 
 		// Trang /userInfo yêu cầu phải login với vai trò USER hoặc ADMIN.
 		// Nếu chưa login, nó sẽ redirect tới trang /login.
@@ -41,8 +46,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// String text = "hasAnyRole('" + roleAccess[1] + "')";
 
 		// Trang chỉ dành cho ADMIN
-		http.authorizeRequests().antMatchers("/admin", "/location", "/typecriteria/delete", "/typecriteria/add",
-				"typecriteria/edit", "/stepscore/add","/stepscore/edit","/stepscore/delete").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/admin", "/typecriteria/delete", "/typecriteria/add",
+				"typecriteria/edit", "/stepscore/add","/stepscore/edit","/stepscore/delete"
+				).access("hasRole('ROLE_ADMIN')");
 
 		// Khi người dùng đã login, với vai trò XX.
 		// Nhưng truy cập vào trang yêu cầu vai trò YY,

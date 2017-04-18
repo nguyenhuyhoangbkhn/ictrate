@@ -3,7 +3,7 @@
 		<li><a href="${pageContext.request.contextPath}/stepscore">Step Score</a></li>
 		<li><a href="${pageContext.request.contextPath}/location">Location</a></li>
 		<li><a href="${pageContext.request.contextPath}/typecriteria">TypeCriteria</a></li>
-		<li><a href="#">Criteria</a></li>
+		<li><a href="${pageContext.request.contextPath}/criteria">Criteria</a></li>
 		<li><a href="#">Expert</a></li>
 		<li><a href="#">Office</a></li>
 		<li><a href="#">Rate</a></li>

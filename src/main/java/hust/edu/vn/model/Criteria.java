@@ -7,8 +7,11 @@ public class Criteria {
 	private String type_criteria;
 	private String type_score;
 	private Integer flag_delete;
+	
 	public Criteria(){		
+		
 	}	
+
 	public Criteria(Integer id,String name,String note,String type_criteria, String type_score,Integer flag_delete){
 		this.id = id;
 		this.name = name;
@@ -17,6 +20,7 @@ public class Criteria {
 		this.type_score = type_score;
 		this.flag_delete = flag_delete;
 	}	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -35,24 +39,23 @@ public class Criteria {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	public String getTypeCriteria() {
+	public String getType_criteria() {
 		return type_criteria;
 	}
-	public void setTypeCriteria(String typeCriteria) {
-		this.type_criteria = typeCriteria;
+	public void setType_criteria(String type_criteria) {
+		this.type_criteria = type_criteria;
 	}
-	public String getTypeScore() {
+	public String getType_score() {
 		return type_score;
 	}
-	public void setTypeScore(String typeScore) {
-		this.type_score = typeScore;
+	public void setType_score(String type_score) {
+		this.type_score = type_score;
 	}
-	public Integer getFlagDelete() {
+	public Integer getFlag_delete() {
 		return flag_delete;
 	}
-
-	public void setFlagDelete(Integer flagDelete) {
-		this.flag_delete = flagDelete;
+	public void setFlag_delete(Integer flag_delete) {
+		this.flag_delete = flag_delete;
 	}
 	@Override
 	public String toString() {

@@ -4,11 +4,13 @@ import javax.sql.DataSource;
 
 import hust.edu.vn.dao.CriteriaDao;
 import hust.edu.vn.dao.LocationDao;
+import hust.edu.vn.dao.OfficeDao;
 import hust.edu.vn.dao.StepScoreDao;
 import hust.edu.vn.dao.TypeCriteriaDao;
 import hust.edu.vn.dao.UserInfoDAO;
 import hust.edu.vn.dao.impl.CriteriaDaoImpl;
 import hust.edu.vn.dao.impl.LocationDaoImpl;
+import hust.edu.vn.dao.impl.OfficeDaoImpl;
 import hust.edu.vn.dao.impl.StepScoreDaoImpl;
 import hust.edu.vn.dao.impl.TypeCriteriaDaoImpl;
 
@@ -85,6 +87,11 @@ public class ApplicationContextConfig {
    @Bean(name = "locationDao")
 	public LocationDao locationDao() {
 		return new LocationDaoImpl();
+	}
+   
+   @Bean(name = "officeDao")
+	public OfficeDao offciceDao() {
+		return new OfficeDaoImpl();
 	}
    
    @Bean(name = "typeCriteriaDao")

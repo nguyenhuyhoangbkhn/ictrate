@@ -49,7 +49,7 @@
 										</form:select></td>
 								</tr>
 								<tr>
-									<td><input type="submit" value="Add" /></td>
+									<td><input class="btn btn-primary" type="submit" value="Add" /></td>
 								</tr>
 							</table>
 						</form:form>
@@ -81,7 +81,7 @@
 										</form:select></td>
 								</tr>
 								<tr>
-									<td><input type="submit" value="Add" /></td>
+									<td><input class="btn btn-primary" type="submit" value="Add" /></td>
 								</tr>
 							</table>
 						</form:form>
@@ -123,7 +123,7 @@
 									</c:forEach>
 								</form:select>
 							</div>
-							<input type="submit" value="Add" />
+							<input class="btn btn-primary" type="submit" value="Add" />
 						</form:form>
 					</div>
 				</div>

@@ -29,6 +29,6 @@
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/ckeditor/adapters/jquery.js"></script>
-	
+
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/ckeditor.js"></script>

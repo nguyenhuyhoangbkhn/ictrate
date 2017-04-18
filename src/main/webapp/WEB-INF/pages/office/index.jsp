@@ -20,7 +20,7 @@
 				<div>
 					<h1 class="text">DANH SÁCH VĂN PHÒNG</h1>
 
-					<a href="${pageContext.request.contextPath}/office/add">Thêm
+					<a class="btn btn-primary" href="${pageContext.request.contextPath}/office/add">Thêm
 						Văn Phòng</a>
 					<table id="myDatatable">
 						<thead>

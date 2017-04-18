@@ -52,7 +52,7 @@
 							</tr>
 							<tr>
 								<td></td>
-								<td><input type="submit" value="Update" /></td>
+								<td><input class="btn btn-primary" type="submit" value="Update" /></td>
 							</tr>
 						</table>
 					</form:form>

@@ -20,7 +20,8 @@
 				<div>
 					<h1 class="text">LOCATION LIST</h1>
 
-					<a href="${pageContext.request.contextPath}/location/add">Add
+					<a class="btn btn-primary"
+						href="${pageContext.request.contextPath}/location/add">Add
 						location</a>
 					<table id="myDatatable">
 						<thead>
@@ -42,7 +43,10 @@
 									<td><a
 										href="${pageContext.request.contextPath}/location/detail?locationid=${location.id}">DETAIL</a></td>
 									<td><a
-										href="${pageContext.request.contextPath}/location/edit?locationid=${location.id}">EDIT</a></td>
+										href="${pageContext.request.contextPath}/location/edit?locationid=${location.id}"
+										class="btn btn-info btn-sm"> <span
+											class="glyphicon glyphicon-edit"></span> Edit
+									</a></td>
 									<td><a
 										href="${pageContext.request.contextPath}/location/delete?locationid=${location.id}">DELETE</a></td>
 								</tr>

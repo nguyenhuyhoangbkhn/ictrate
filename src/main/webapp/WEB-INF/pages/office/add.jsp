@@ -42,7 +42,7 @@
 							</tr>
 							<tr>
 								<td></td>
-								<td><input type="submit" value="Thêm" /></td>
+								<td><input class="btn btn-primary" type="submit" value="Thêm" /></td>
 							</tr>
 						</table>
 					</form:form>

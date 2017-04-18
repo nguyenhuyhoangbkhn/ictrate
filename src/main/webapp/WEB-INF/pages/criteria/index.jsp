@@ -38,8 +38,8 @@
 								<tr>
 									<td>${criteria.name}</td>
 									<td>${criteria.note}</td>
-									<td>${criteria.typeCriteria}</td>
-									<td>${criteria.typeScore}</td>
+									<td>${criteria.type_criteria}</td>
+									<td>${criteria.type_score}</td>
 									<td><a
 										href="${pageContext.request.contextPath}/criteria/edit?criteriaid=${criteria.id}">EDIT</a></td>
 									<td><a

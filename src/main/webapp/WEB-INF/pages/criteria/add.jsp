@@ -38,7 +38,7 @@
 							</tr>
 							<tr>
 								<td>Loại tiêu chí :</td>
-								<td><form:input path="note" /><form:select path="type_score">
+								<td><form:select path="type_score">
 										<form:option value="0" label="Tiêu chí lớn" />
 										<form:option value="1" label="Tiêu chí 1" />
 									</form:select></td>

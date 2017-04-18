@@ -9,13 +9,13 @@ public class Criteria {
 	private Integer flag_delete;
 	public Criteria(){		
 	}	
-	public Criteria(Integer id,String name,String note,String typeCriteria, String typeScore,Integer flagDelete){
+	public Criteria(Integer id,String name,String note,String type_criteria, String type_score,Integer flag_delete){
 		this.id = id;
 		this.name = name;
 		this.note = note;
-		this.type_criteria = typeCriteria;
-		this.type_score = typeScore;
-		this.flag_delete = flagDelete;
+		this.type_criteria = type_criteria;
+		this.type_score = type_score;
+		this.flag_delete = flag_delete;
 	}	
 	public Integer getId() {
 		return id;

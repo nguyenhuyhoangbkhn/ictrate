@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>Step Score List</title>
@@ -19,30 +19,36 @@
 					<h1 class="text">List Step Score</h1>
 
 					<div class="button">
-						<a href="${pageContext.request.contextPath}/stepscore/add">Add</a>
+						<a class="btn btn-primary"
+							href="${pageContext.request.contextPath}/stepscore/add">Add</a>
 					</div>
 					<table id="myDatatable">
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>NAME</th>
+								<th>TÊN</th>
 								<th>NOTE</th>
-								<th>DETAIL</th>
-								<th>EDIT</th>
-								<th>DELETE</th>
+								<th>CHI TIẾT</th>
+								<th>CHỈNH SỬA</th>
+								<th>XOÁ</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="score" items="${stepScoreList}">
-								<tr>
+								<tr class="tr_${score.id}">
 									<td>${score.id}</td>
 									<td>${score.name}</td>
 									<td>${score.note}</td>
 									<td>${score.detailScore}</td>
-									<td><a
-										href="${pageContext.request.contextPath}/stepscore/edit?id=${score.id}">EDIT</a></td>
-									<td><a
-										href="${pageContext.request.contextPath}/stepscore/delete?id=${score.id}">DELETE</a></td>
+									<td align="center"><a
+										href="${pageContext.request.contextPath}/stepscore/edit?id=${score.id}"
+										class="btn btn-warning btn-sm"> <span
+											class="glyphicon glyphicon-edit"></span>
+									</a></td>
+									<td align="center"><a class="btn btn-danger btn-sm"
+										onclick="showDialog('${score.id}');"> <span
+											class="glyphicon glyphicon-trash"></span>
+									</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -50,6 +56,31 @@
 				</div>
 			</div>
 		</div>
+
+		<div id="myModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- dialog body -->
+					<div class="modal-body">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						Bạn muốn xoá bản ghi này?
+					</div>
+					<!-- dialog buttons -->
+					<div class="modal-footer">
+						<button data-bb-handler="cancel" type="button"
+							class="btn btn-default btnCancel">
+							<i class="glyphicon glyphicon-remove"></i> Cancel
+						</button>
+						<button data-bb-handler="confirm" type="button"
+							class="btn btn-primary btnConfirm">
+							<i class="glyphicon glyphicon-ok"></i> Confirm
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript"
+			src="${pageContext.request.contextPath}/js/deleteDialog/dialog.js"></script>
 	</div>
 
 </body>

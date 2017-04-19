@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -23,17 +24,18 @@
 				<div>
 					<h1 class="text">Type Criteria list</h1>
 					<div class="button">
-						<a href="${pageContext.request.contextPath}/typecriteria/add">Add</a>
+						<a class="btn btn-primary"
+							href="${pageContext.request.contextPath}/typecriteria/add">Add</a>
 					</div>
 					<table id="myDatatable">
 						<thead>
 							<tr>
-								<th>id</th>
-								<th>name</th>
-								<th>note</th>
-								<th>detail</th>
-								<th>edit</th>
-								<th>delete</th>
+								<th>ID</th>
+								<th><center>TIÊU CHÍ ĐÁNH GIÁ</center></th>
+								<th><center>NOTE</center></th>
+								<th><center>CHI TIẾT</center></th>
+								<th><center>CHỈNH SỬA</center></th>
+								<th><center>XOÁ</center></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -41,13 +43,22 @@
 								<tr>
 									<td>${criteria.id}</td>
 									<td>${criteria.name}</td>
-									<td>${criteria.note}</td>
-									<td><a
-										href="${pageContext.request.contextPath}/typecriteria/detail?tyecriteriaid=${criteria.id}">detail</a></td>
-									<td><a
-										href="${pageContext.request.contextPath}/typecriteria/edit?tyecriteriaid=${criteria.id}">Edit</a></td>
-									<td><a
-										href="${pageContext.request.contextPath}/typecriteria/delete?tyecriteriaid=${criteria.id}">Delete</a></td>
+									<td align="center">${criteria.note}</td>
+									<td align="center"><a
+										href="${pageContext.request.contextPath}/typecriteria/detail?tyecriteriaid=${criteria.id}"
+										class="btn btn-info btn-sm"> <span
+											class="glyphicon glyphicon-th"></span>
+									</a></td>
+									<td align="center"><a
+										href="${pageContext.request.contextPath}/typecriteria/edit?tyecriteriaid=${criteria.id}"
+										class="btn btn-warning btn-sm"> <span
+											class="glyphicon glyphicon-edit"></span>
+									</a></td>
+									<td align="center"><a
+										href="${pageContext.request.contextPath}/typecriteria/delete?tyecriteriaid=${criteria.id}"
+										class="btn btn-danger btn-sm"> <span
+											class="glyphicon glyphicon-trash"></span>
+									</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

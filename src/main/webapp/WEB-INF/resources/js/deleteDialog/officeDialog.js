@@ -39,9 +39,9 @@ function showDialog(locationId) {
 
 function deleteLocation(locationId) {
 	var params = {};
-	params.locationid = locationId;
+	params.officeid = locationId;
 	$.ajax({
-		url : '/ictrate/location/delete', // Ten action
+		url : '/ictrate/office/delete', // Ten action
 		type : 'GET', // GET or POST
 		dateType : "json", // dữ liệu trả về dạng text
 		data : params, // Du lieu truyen sang action VD: id=123

@@ -50,8 +50,7 @@
 										class="btn btn-warning btn-sm"> <span
 											class="glyphicon glyphicon-edit"></span>
 									</a></td>
-									<td align="center"><a
-										class="btn btn-danger btn-sm"
+									<td align="center"><a class="btn btn-danger btn-sm"
 										onclick="showDialog('${location.id}');"><span
 											class="glyphicon glyphicon-trash"></span></a></td>
 
@@ -86,7 +85,7 @@
 				</div>
 			</div>
 			<script type="text/javascript"
-				src="${pageContext.request.contextPath}/js/deleteDialog/dialog.js"></script>
+				src="${pageContext.request.contextPath}/js/deleteDialog/locationDialog.js"></script>
 		</div>
 
 	</div>

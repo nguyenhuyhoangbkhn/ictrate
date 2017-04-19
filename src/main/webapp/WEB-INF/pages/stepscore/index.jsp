@@ -55,32 +55,34 @@
 					</table>
 				</div>
 			</div>
-		</div>
-
-		<div id="myModal" class="modal fade">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!-- dialog body -->
-					<div class="modal-body">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						Bạn muốn xoá bản ghi này?
-					</div>
-					<!-- dialog buttons -->
-					<div class="modal-footer">
-						<button data-bb-handler="cancel" type="button"
-							class="btn btn-default btnCancel">
-							<i class="glyphicon glyphicon-remove"></i> Cancel
-						</button>
-						<button data-bb-handler="confirm" type="button"
-							class="btn btn-primary btnConfirm">
-							<i class="glyphicon glyphicon-ok"></i> Confirm
-						</button>
+			
+			<!-- set up the modal to start hidden and fade in and out -->
+			<div id="myModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- dialog body -->
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							Bạn muốn xoá bản ghi này?
+						</div>
+						<!-- dialog buttons -->
+						<div class="modal-footer">
+							<button data-bb-handler="cancel" type="button"
+								class="btn btn-default btnCancel">
+								<i class="glyphicon glyphicon-remove"></i> Cancel
+							</button>
+							<button data-bb-handler="confirm" type="button"
+								class="btn btn-primary btnConfirm">
+								<i class="glyphicon glyphicon-ok"></i> Confirm
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
+			<script type="text/javascript"
+				src="${pageContext.request.contextPath}/js/deleteDialog/scoreDialog.js"></script>
+			
 		</div>
-		<script type="text/javascript"
-			src="${pageContext.request.contextPath}/js/deleteDialog/dialog.js"></script>
 	</div>
 
 </body>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,7 +18,7 @@
 			<jsp:include page="../home/_left.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div>
-					<h1 class="text">LOCATION LIST</h1>
+					<h1 class="text">DANH SÁCH TỈNH THÀNH</h1>
 
 					<a class="btn btn-primary"
 						href="${pageContext.request.contextPath}/location/add">Add
@@ -26,36 +26,69 @@
 					<table id="myDatatable">
 						<thead>
 							<tr>
-								<th>ID_LOCATION</th>
-								<th>NAME</th>
-								<th>TYPE_PLACE</th>
-								<th>DETAIL</th>
-								<th>EDIT</th>
-								<th>DELETE</th>
+								<th>ID</th>
+								<th>TÊN</th>
+								<th>KIỂU</th>
+								<th style="text-align: center;">CHI TIẾT</th>
+								<th style="text-align: center;">CHỈNH SỬA</th>
+								<th style="text-align: center;">XOÁ</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="location" items="${locationlist}">
-								<tr>
+								<tr class="tr_${location.id}">
 									<td>${location.id}</td>
 									<td>${location.name}</td>
 									<td>${location.type}</td>
-									<td><a
-										href="${pageContext.request.contextPath}/location/detail?locationid=${location.id}">DETAIL</a></td>
-									<td><a
-										href="${pageContext.request.contextPath}/location/edit?locationid=${location.id}"
+									<td align="center"><a
+										href="${pageContext.request.contextPath}/location/detail?locationid=${location.id}"
 										class="btn btn-info btn-sm"> <span
-											class="glyphicon glyphicon-edit"></span> Edit
+											class="glyphicon glyphicon-th"></span>
 									</a></td>
-									<td><a
-										href="${pageContext.request.contextPath}/location/delete?locationid=${location.id}">DELETE</a></td>
+									<td align="center"><a
+										href="${pageContext.request.contextPath}/location/edit?locationid=${location.id}"
+										class="btn btn-warning btn-sm"> <span
+											class="glyphicon glyphicon-edit"></span>
+									</a></td>
+									<td align="center"><a
+										class="btn btn-danger btn-sm"
+										onclick="showDialog('${location.id}');"><span
+											class="glyphicon glyphicon-trash"></span></a></td>
+
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 			</div>
+
+			<!-- set up the modal to start hidden and fade in and out -->
+			<div id="myModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- dialog body -->
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							Bạn muốn xoá bản ghi này?
+						</div>
+						<!-- dialog buttons -->
+						<div class="modal-footer">
+							<button data-bb-handler="cancel" type="button"
+								class="btn btn-default btnCancel">
+								<i class="glyphicon glyphicon-remove"></i> Cancel
+							</button>
+							<button data-bb-handler="confirm" type="button"
+								class="btn btn-primary btnConfirm">
+								<i class="glyphicon glyphicon-ok"></i> Confirm
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript"
+				src="${pageContext.request.contextPath}/js/deleteDialog/dialog.js"></script>
 		</div>
+
 	</div>
 </body>
 </html>

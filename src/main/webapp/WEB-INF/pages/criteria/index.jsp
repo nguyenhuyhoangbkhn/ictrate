@@ -18,19 +18,19 @@
 			<jsp:include page="../home/_left.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div>
-					<h1 class="text">Danh sách các tiêu chí</h1>
+					<h1 class="text">DANH SÁCH CÁC TIÊU CHÍ</h1>
 
 					<a href="${pageContext.request.contextPath}/criteria/add"
 						class="btn btn-primary">Thêm tiêu chí</a>
 					<table id="myDatatable">
 						<thead>
 							<tr>
-								<th>Tiêu chí</th>
-								<th>Ghi chú</th>
-								<th>Loại tiêu chí</th>
-								<th>Thang điểm</th>
-								<th>EDIT</th>
-								<th>DELETE</th>
+								<th><center>TIÊU CHÍ</center></th>
+								<th><center>GHI CHÚ</center></th>
+								<th><center>LOẠI TIÊU CHÍ</center></th>
+								<th><center>THANG ĐIỂM</center></th>
+								<th><center>CHỈNH SỬA</center></th>
+								<th><center>XOÁ</center></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -40,10 +40,16 @@
 									<td>${criteria.note}</td>
 									<td>${criteria.type_criteria}</td>
 									<td>${criteria.type_score}</td>
-									<td><a
-										href="${pageContext.request.contextPath}/criteria/edit?criteriaid=${criteria.id}">EDIT</a></td>
-									<td><a
-										href="${pageContext.request.contextPath}/criteria/delete?criteriaid=${criteria.id}">DELETE</a></td>
+									<td align="center"><a
+										href="${pageContext.request.contextPath}/criteria/edit?criteriaid=${criteria.id}"
+										class="btn btn-warning btn-sm"> <span
+											class="glyphicon glyphicon-edit"></span>
+									</a></td>
+									<td align="center"><a
+										href="${pageContext.request.contextPath}/criteria/delete?criteriaid=${criteria.id}"
+										class="btn btn-danger btn-sm"> <span
+											class="glyphicon glyphicon-trash"></span>
+									</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

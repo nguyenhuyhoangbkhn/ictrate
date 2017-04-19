@@ -20,19 +20,20 @@
 				<div>
 					<h1 class="text">DANH SÁCH VĂN PHÒNG</h1>
 
-					<a class="btn btn-primary" href="${pageContext.request.contextPath}/office/add">Thêm
-						Văn Phòng</a>
+					<a class="btn btn-primary"
+						href="${pageContext.request.contextPath}/office/add">Thêm Văn
+						Phòng</a>
 					<table id="myDatatable">
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>TÊN VĂN PHÒNG</th>
-								<th>ĐIỆN THOẠI LIÊN HỆ</th>
-								<th>ĐỊA CHỈ</th>
-								<th>KIỂU VĂN PHÒNG</th>
-								<th>THÔNG TIN</th>
-								<th>CHỈNH SỬA</th>
-								<th>XOÁ</th>
+								<th><center>TÊN VĂN PHÒNG</center></th>
+								<th><center>ĐIỆN THOẠI LIÊN HỆ</center></th>
+								<th><center>ĐỊA CHỈ</center></th>
+								<th><center>KIỂU VĂN PHÒNG</center></th>
+								<th><center>THÔNG TIN</center></th>
+								<th><center>CHỈNH SỬA</center></th>
+								<th><center>XOÁ</center></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -44,11 +45,16 @@
 									<td>${office.location}</td>
 									<td>${office.type_office}</td>
 									<td>${office.profile}</td>
-									<td><a
-										href="${pageContext.request.contextPath}/office/edit?officeid=${office.id}">CHỈNH
-											SỬA</a></td>
-									<td><a
-										href="${pageContext.request.contextPath}/office/delete?officeid=${office.id}">XOÁ</a></td>
+									<td align="center"><a
+										href="${pageContext.request.contextPath}/office/edit?officeid=${office.id}"
+										class="btn btn-warning btn-sm"> <span
+											class="glyphicon glyphicon-edit"></span>
+									</a></td>
+									<td align="center"><a
+										href="${pageContext.request.contextPath}/office/delete?officeid=${office.id}"
+										class="btn btn-danger btn-sm"> <span
+											class="glyphicon glyphicon-trash"></span>
+									</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

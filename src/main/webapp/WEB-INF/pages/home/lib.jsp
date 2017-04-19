@@ -32,3 +32,6 @@
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/lib/bootbox.js"></script>

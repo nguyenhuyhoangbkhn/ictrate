@@ -35,7 +35,7 @@ public class CriteriaDaoImpl implements CriteriaDao{
 					while (true) {
 						if (rs.next()) {
 							Criteria criteria = new Criteria(rs.getInt("id"), rs.getString("name"),	rs.getString("note"),
-									rs.getString("type_criteria"), rs.getString("type_score"),rs.getInt("flag_delete"));
+									rs.getString("type_criteria"), rs.getString("type_score"),rs.getInt("flag_delete"),rs.getFloat("among"));
 							CriteriaList.add(criteria);
 						} else {
 							break;
@@ -83,6 +83,26 @@ public class CriteriaDaoImpl implements CriteriaDao{
 	@Override
 	public void AddCriteria(Criteria Criteria) {
 		// TODO Auto-generated method stub
+		System.out.println("criteria" + Criteria);
+		String sql = "insert into CRITERIA (ID,NAME, NOTE, TYPE_CRITERIA,TYPE_SCORE,FLAG_DELETE, AMONG) "
+				+ "values (CRITERIAID.nextval, ?, ?, ?, ?, ?, ?)";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, Criteria.getName());
+			ps.setString(2, Criteria.getNote());
+			ps.setString(3, Criteria.getType_criteria());
+			ps.setString(4, Criteria.getType_score());
+			ps.setInt(5,0);
+			ps.setFloat(6, Criteria.getAmong());
+			
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

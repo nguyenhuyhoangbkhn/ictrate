@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
@@ -18,33 +18,34 @@
 				<div>
 					<h1>THÊM VĂN PHÒNG MỚI</h1>
 					<form:form method="post" action="addOffice">
-						<table>
-							<tr>
-								<td>TÊN VĂN PHÒNG :</td>
-								<td><form:input path="name" /></td>
-							</tr>
-							<tr>
-								<td>ĐIỆN THOẠI LIÊN HỆ :</td>
-								<td><form:input path="phone" type="number" /></td>
-							</tr>
-							<tr>
-								<td>THÔNG TIN :</td>
-								<td><form:textarea id="profile" path="profile" cols="60"
-										rows="10"></form:textarea></td>
-							</tr>
-							<tr>
-								<td>ĐỊA CHỈ :</td>
-								<td><form:input path="location" /></td>
-							</tr>
-							<tr>
-								<td>KIỂU VĂN PHÒNG :</td>
-								<td><form:input path="type_office" /></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td><input class="btn btn-primary" type="submit" value="Thêm" /></td>
-							</tr>
-						</table>
+						<div>
+							<div class="form-group">
+								<label for="name">TÊN VĂN PHÒNG :</label> <input name="name"
+									class="form-control" required="required" />
+							</div>
+							<div class="form-group">
+								<label for="phone">SĐT liên hệ</label> <input name="phone"
+									class="form-control" type="tel" required="required" />
+
+							</div>
+							<div class="form-group">
+								<label for="profile">Thông tin:</label>
+								<textarea name="profile" class="form-control" id="profile"
+									required="required" cols="60" rows="10"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="location">Địa chỉ</label> <input name="location"
+									class="form-control" required="required" />
+							</div>
+							<div class="form-group">
+								<label for="name">tên loại điểm:</label> <input
+									name="type_office" class="form-control" required="required" />
+							</div>
+							<div class="form-group">
+
+								<input class="btn btn-primary" type="submit" value="Thêm" />
+							</div>
+						</div>
 					</form:form>
 				</div>
 			</div>

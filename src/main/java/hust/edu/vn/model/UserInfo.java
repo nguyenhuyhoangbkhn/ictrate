@@ -4,8 +4,53 @@ public class UserInfo {
  
     private String userName;
     private String password;
+    private String enabled;
+    private String mail;
+    private String imgprofile;
+    private Integer role;
+    private String telephone;
      
-    public UserInfo()  {
+    public String getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getImgprofile() {
+		return imgprofile;
+	}
+
+	public void setImgprofile(String imgprofile) {
+		this.imgprofile = imgprofile;
+	}
+
+	public Integer getRole() {
+		return role;
+	}
+
+	public void setRole(Integer role) {
+		this.role = role;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public UserInfo()  {
          
     }
  

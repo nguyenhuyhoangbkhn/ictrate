@@ -24,10 +24,12 @@ public class MyDBAuthenticationService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserInfo userInfo = userInfoDAO.findUserInfo(username);
         System.out.println("UserInfo= " + userInfo);
- 
+       
+        
         if (userInfo == null) {
             throw new UsernameNotFoundException("User " + username + " was not found in the database");
         }
+        System.out.println("data" + userInfo.getImgprofile());
          
         // [USER,ADMIN,..]
         List<String> roles= userInfoDAO.getUserRoles(username);

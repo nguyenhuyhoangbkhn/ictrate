@@ -27,8 +27,9 @@
 				</c:if>
 				<c:if test="${pageContext.request.userPrincipal.name == null}">
 					<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/signUpPage">Sign Up</a></li>
 				</c:if>
-				<li><a href="${pageContext.request.contextPath}/user/signUpPage">Sign Up</a></li>
+				
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">

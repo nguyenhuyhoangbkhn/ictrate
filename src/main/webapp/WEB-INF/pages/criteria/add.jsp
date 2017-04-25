@@ -19,7 +19,7 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div>
 					<h1>Tạo tiêu chí mới</h1>
-					<form:form method="post" action="addTypeCriteria">
+					<form:form method="post" action="addCriteria">
 						<table>
 							<tr>
 								<td>Tên tiêu chí:</td>
@@ -32,20 +32,26 @@
 							<tr>
 								<td>Loại điểm:</td>
 								<td><form:select path="type_criteria">
-										<form:option value="0" label="Tiêu chí lớn" />
-										<form:option value="1" label="Tiêu chí 1" />
+										<c:forEach var="score" items="${stepScoreList}">
+											<form:option value="${score.id}" label="${score.name}" />
+										</c:forEach>
 									</form:select></td>
 							</tr>
 							<tr>
 								<td>Loại tiêu chí :</td>
 								<td><form:select path="type_score">
-										<form:option value="0" label="Tiêu chí lớn" />
-										<form:option value="1" label="Tiêu chí 1" />
+										<c:forEach var="typeCriteria" items="${typeCriteriaList}">
+											<form:option value="${typeCriteria.id}" label="${typeCriteria.name}" />
+										</c:forEach>
 									</form:select></td>
 							</tr>
 							<tr>
+								<td>Trọng số :</td>
+								<td><form:input path="among" /></td>
+							</tr>
+							<tr>
 								<td></td>
-								<td><input type="button" value="Add"
+								<td><input type="submit" value="Add"
 									class="submitTypeCriteria" /></td>
 							</tr>
 						</table>

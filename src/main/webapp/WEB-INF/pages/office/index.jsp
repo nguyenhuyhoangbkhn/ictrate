@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,18 +27,18 @@
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th><center>TÊN VĂN PHÒNG</center></th>
-								<th><center>ĐIỆN THOẠI LIÊN HỆ</center></th>
-								<th><center>ĐỊA CHỈ</center></th>
-								<th><center>KIỂU VĂN PHÒNG</center></th>
-								<th><center>THÔNG TIN</center></th>
-								<th><center>CHỈNH SỬA</center></th>
-								<th><center>XOÁ</center></th>
+								<th>TÊN VĂN PHÒNG</th>
+								<th>ĐIỆN THOẠI LIÊN HỆ</th>
+								<th>ĐỊA CHỈ</th>
+								<th>KIỂU VĂN PHÒNG</th>
+								<th>THÔNG TIN</th>
+								<th>CHỈNH SỬA</th>
+								<th>XOÁ</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="office" items="${officeList}">
-								<tr>
+								<tr class="tr_${office.id}">
 									<td>${office.id}</td>
 									<td>${office.name}</td>
 									<td>${office.phone}</td>
@@ -50,9 +50,8 @@
 										class="btn btn-warning btn-sm"> <span
 											class="glyphicon glyphicon-edit"></span>
 									</a></td>
-									<td align="center"><a
-										href="${pageContext.request.contextPath}/office/delete?officeid=${office.id}"
-										class="btn btn-danger btn-sm"> <span
+									<td align="center"><a class="btn btn-danger btn-sm"
+										onclick="showDialog('${office.id}');"> <span
 											class="glyphicon glyphicon-trash"></span>
 									</a></td>
 								</tr>
@@ -61,6 +60,33 @@
 					</table>
 				</div>
 			</div>
+
+			<!-- set up the modal to start hidden and fade in and out -->
+			<div id="myModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- dialog body -->
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							Bạn muốn xoá bản ghi này?
+						</div>
+						<!-- dialog buttons -->
+						<div class="modal-footer">
+							<button data-bb-handler="cancel" type="button"
+								class="btn btn-default btnCancel">
+								<i class="glyphicon glyphicon-remove"></i> Cancel
+							</button>
+							<button data-bb-handler="confirm" type="button"
+								class="btn btn-primary btnConfirm">
+								<i class="glyphicon glyphicon-ok"></i> Confirm
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript"
+				src="${pageContext.request.contextPath}/js/deleteDialog/officeDialog.js"></script>
+
 		</div>
 	</div>
 </body>

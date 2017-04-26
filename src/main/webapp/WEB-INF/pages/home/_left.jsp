@@ -7,5 +7,6 @@
 		<li><a href="#">Expert</a></li>
 		<li><a href="${pageContext.request.contextPath}/office">Office</a></li>
 		<li><a href="#">Rate</a></li>
+		<li><a href="${pageContext.request.contextPath}/scoreOffice">Danh gia co quan</a></li>
 	</ul>
 </div>

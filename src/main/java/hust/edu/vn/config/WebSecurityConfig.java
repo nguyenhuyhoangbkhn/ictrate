@@ -42,14 +42,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Trang /userInfo yêu cầu phải login với vai trò USER hoặc ADMIN.
 		// Nếu chưa login, nó sẽ redirect tới trang /login.
 
-		http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('roleAccess', 'ROLE_ADMIN')");
-		// String text = "hasAnyRole('" + roleAccess[1] + "')";
+		//http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('roleAccess', 'ROLE_ADMIN')");
+		
+		// trang chi danh cho admin
+		http.authorizeRequests().antMatchers(
+				"/userInfo",
+				"/admin", "/typecriteria/delete", "/typecriteria/add",
+				"typecriteria/edit", "/stepscore/add","/stepscore/edit","/stepscore/delete",
+				"criteria/add","criteria/delete","criteria/addCriteria" //"criteria/edit",
+				).access("hasAnyRole('roleAccess', 'ROLE_ADMIN')");
+		
+		http.authorizeRequests().antMatchers("/scoreOffice").access("hasAnyRole('roleAccess', 'ROLE_EXPERT')");
+		
+//		// Trang chỉ dành cho ADMIN
+//		http.authorizeRequests().antMatchers("/admin", "/typecriteria/delete", "/typecriteria/add",
+//				"typecriteria/edit", "/stepscore/add","/stepscore/edit","/stepscore/delete",
+//				"criteria/add","criteria/delete","criteria/addCriteria" //"criteria/edit",
+//				).access("hasRole('ROLE_ADMIN')");
 
-		// Trang chỉ dành cho ADMIN
-		http.authorizeRequests().antMatchers("/admin", "/typecriteria/delete", "/typecriteria/add",
-				"typecriteria/edit", "/stepscore/add","/stepscore/edit","/stepscore/delete"
-				).access("hasRole('ROLE_ADMIN')");
-
+		
+		
 		// Khi người dùng đã login, với vai trò XX.
 		// Nhưng truy cập vào trang yêu cầu vai trò YY,
 		// Ngoại lệ AccessDeniedException sẽ ném ra.

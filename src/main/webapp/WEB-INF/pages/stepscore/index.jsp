@@ -79,6 +79,26 @@
 					</div>
 				</div>
 			</div>
+			
+			<div id="mySuccessModal" class="modal fade">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body">
+							<div class="bootbox-body">
+								<h4>
+									<span class="glyphicon glyphicon-ok-sign text-success"></span>
+									Đã xoá thành công bản ghi!
+								</h4>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button data-bb-handler="ok" type="button"
+								class="btn btn-success btnOK">OK</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<script type="text/javascript"
 				src="${pageContext.request.contextPath}/js/deleteDialog/scoreDialog.js"></script>
 			

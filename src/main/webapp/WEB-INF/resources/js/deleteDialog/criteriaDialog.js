@@ -3,8 +3,14 @@ function showDialog(locationId) {
 
 	$(".btnConfirm").click(function() {
 		$("#myModal").modal("hide");
-		
-	})
+		 setTimeout(function(){
+		       $('#mySuccessModal').modal('show');
+		   }, 500);
+		 
+		 $(".btnOK").click(function(){
+				$("#mySuccessModal").modal("hide");
+			})
+		})	
 
 	$(".btnCancel").click(function() {
 		$("#myModal").modal("hide");

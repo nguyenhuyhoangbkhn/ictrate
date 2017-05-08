@@ -34,7 +34,7 @@ public class StepScoreDaoImpl implements StepScoreDao {
 			while (true) {
 				if (rs.next()) {
 					StepScore stepScore1 = new StepScore(rs.getInt("id"), rs.getString("name"), rs.getString("note"),
-							rs.getString("detail_score"), rs.getInt("flag_delete"));
+							rs.getString("detail_score"), rs.getInt("flag_delete"), rs.getString("type_score"));
 					stepScore.add(stepScore1);
 				} else {
 					break;
@@ -74,7 +74,7 @@ public class StepScoreDaoImpl implements StepScoreDao {
 
 	@Override
 	public void addStepScore(StepScore StepScore) {
-		String sql = "insert into STEP_SCORE (ID,NAME,NOTE,DETAIL_SCORE,FLAG_DELETE) values (STEPSCOREID.nextval, ?, ?, ?, ?)";
+		String sql = "insert into STEP_SCORE (ID,NAME,NOTE,DETAIL_SCORE,FLAG_DELETE,TYPE_SCORE) values (STEPSCOREID.nextval, ?, ?, ?, ?,?)";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		System.out.println("torng " + StepScore);
@@ -85,6 +85,7 @@ public class StepScoreDaoImpl implements StepScoreDao {
 			ps.setString(2, StepScore.getNote());
 			ps.setString(3, StepScore.getDetailScore());
 			ps.setInt(4, 0);
+			ps.setString(5, StepScore.getTypeScore());
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -113,7 +114,7 @@ public class StepScoreDaoImpl implements StepScoreDao {
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				stepScore = new StepScore(rs.getInt("id"), rs.getString("name"), rs.getString("note"),
-						rs.getString("detail_score"), rs.getInt("flag_delete"));
+						rs.getString("detail_score"), rs.getInt("flag_delete"),rs.getString("type_score"));
 			}
 			rs.close();
 			ps.close();

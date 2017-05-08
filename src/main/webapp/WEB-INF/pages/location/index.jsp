@@ -23,10 +23,10 @@
 					<a class="btn btn-primary"
 						href="${pageContext.request.contextPath}/location/add">Add
 						location</a>
-					<table id="myDatatable">
+					<table id="myDatatable" class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
 						<thead>
 							<tr>
-								<th>ID</th>
 								<th>TÊN</th>
 								<th>KIỂU</th>
 								<th style="text-align: center;">CHI TIẾT</th>
@@ -37,7 +37,6 @@
 						<tbody>
 							<c:forEach var="location" items="${locationlist}">
 								<tr class="tr_${location.id}">
-									<td>${location.id}</td>
 									<td>${location.name}</td>
 									<td>${location.type}</td>
 									<td align="center"><a

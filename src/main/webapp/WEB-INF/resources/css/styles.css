@@ -64,8 +64,26 @@ body {
 	background-color: #428bca;
 }
 
-.green {
-	background-color: #3b5998 !important;
+.set-menu {
+	background-color: #f8f8f8 !important;
+	border-color: #e7e7e7 !important;
+	border-bottom: 1px solid #e7e7e7 !important;
+}
+
+.nav-sidebar li {
+	border-bottom: 1px solid #e7e7e7 !important;
+}
+
+.sidebar{
+	background-color: #f8f8f8 !important;
+    border-color: #e7e7e7 !important;
+}
+.project-name {
+	color: #777;
+}
+
+.project-name:hover {
+	color: #777 !important;
 }
 
 /*
@@ -116,8 +134,20 @@ body {
 	display: none;
 }
 
-form#command a{
+form#command a {
 	background-color: #e7e7e7;
 	border-radius: 5px;
 	margin-left: 5px;
+}
+
+.form-input-default{
+	width:18% !important;
+}
+.flex{
+	display:flex;
+	flex-direction:row;
+}
+
+.menu-tool li a:hover{
+	color: #777 !important;
 }

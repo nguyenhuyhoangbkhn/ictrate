@@ -111,5 +111,47 @@ public class CriteriaDaoImpl implements CriteriaDao{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public List<Criteria> criteriaQualitative() {
+		String sql = "SELECT CRITERIA.ID,CRITERIA.NAME,CRITERIA.NOTE,STEP_SCORE.DETAIL_SCORE,CRITERIA.TYPE_SCORE,CRITERIA.FLAG_DELETE,CRITERIA.AMONG FROM CRITERIA  INNER JOIN STEP_SCORE ON CRITERIA.TYPE_SCORE = STEP_SCORE.ID";
+		//System.out.println(sql1);
+		
+		
+		//String sql = "SELECT * FROM CRITERIA WHERE FLAG_DELETE = 0";
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			//ps1 = conn.prepareStatement(sql1);
+			rs = ps.executeQuery();
+			List<Criteria> CriteriaList = new ArrayList<Criteria>();
+			while (true) {
+				if (rs.next()) {
+					Criteria criteria = new Criteria(rs.getInt("id"), rs.getString("name"), rs.getString("note"),
+							rs.getString("detail_score"), rs.getString("type_score"), rs.getInt("flag_delete"),
+							rs.getFloat("among"));
+					CriteriaList.add(criteria);
+				} else {
+					break;
+				}
+			}
+			rs.close();
+			ps.close();
+			return CriteriaList;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
 
 }

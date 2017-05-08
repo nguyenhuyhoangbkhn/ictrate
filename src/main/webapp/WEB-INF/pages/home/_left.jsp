@@ -1,6 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <div class="col-sm-3 col-md-2 sidebar">
 	<ul class="nav nav-sidebar">
-		<li><a href="${pageContext.request.contextPath}/stepscore">Step Score</a></li>
+		<li><a href="${pageContext.request.contextPath}/stepscore">Thang điểm</a></li>
 		<li><a href="${pageContext.request.contextPath}/location">Location</a></li>
 		<li><a href="${pageContext.request.contextPath}/typecriteria">TypeCriteria</a></li>
 		<li><a href="${pageContext.request.contextPath}/criteria">Criteria</a></li>

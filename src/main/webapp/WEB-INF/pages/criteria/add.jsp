@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>Step Score List</title>
@@ -20,41 +20,41 @@
 				<div>
 					<h1>Tạo tiêu chí mới</h1>
 					<form:form method="post" action="addCriteria">
-						<table>
-							<tr>
-								<td>Tên tiêu chí:</td>
-								<td><form:input path="name" id="validateName" /></td>
-							</tr>
-							<tr>
-								<td>Note :</td>
-								<td><form:input path="note" /></td>
-							</tr>
-							<tr>
-								<td>Loại điểm:</td>
-								<td><form:select path="type_criteria">
-										<c:forEach var="score" items="${stepScoreList}">
-											<form:option value="${score.id}" label="${score.name}" />
-										</c:forEach>
-									</form:select></td>
-							</tr>
-							<tr>
-								<td>Loại tiêu chí :</td>
-								<td><form:select path="type_score">
-										<c:forEach var="typeCriteria" items="${typeCriteriaList}">
-											<form:option value="${typeCriteria.id}" label="${typeCriteria.name}" />
-										</c:forEach>
-									</form:select></td>
-							</tr>
-							<tr>
-								<td>Trọng số :</td>
-								<td><form:input path="among" /></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td><input type="submit" value="Add"
-									class="submitTypeCriteria" /></td>
-							</tr>
-						</table>
+						<div class="form-group">
+							<label for="name">Tên tiêu chí:</label> <input name="name"
+								class="form-control" id="validateName" required="required" />
+						</div>
+						<div class="form-group">
+							<label for="note">Ghi chú:</label> <input name="note"
+								class="form-control" />
+						</div>
+						<div class="form-group">
+							<label for="type_criteria">Loại điểm:</label> <select
+								name="type_criteria" class="form-control" required="required">
+								<c:forEach var="typeCriteria" items="${typeCriteriaList}">
+									<option value="${typeCriteria.id}">${typeCriteria.name}</option>
+								</c:forEach>
+
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="type_score">Loại tiêu chí:</label> <select
+								name="type_score" class="form-control" required="required">
+								<c:forEach var="score" items="${stepScoreList}">
+									<option value="${score.id}">${score.name}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="among">Trọng số:</label> <input name="among"
+								class="form-control" required="required" />
+						</div>
+
+						<div>
+							<input type="submit" class="btn btn-submit submitTypeCriteria"
+								value="Add" />
+						</div>
 					</form:form>
 				</div>
 			</div>

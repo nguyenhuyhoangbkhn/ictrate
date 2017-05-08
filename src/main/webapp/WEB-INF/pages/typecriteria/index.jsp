@@ -27,10 +27,11 @@
 						<a class="btn btn-primary"
 							href="${pageContext.request.contextPath}/typecriteria/add">Add</a>
 					</div>
-					<table id="myDatatable">
+					<table id="myDatatable"
+						class="table table-striped table-bordered table-hover"
+						id="dataTables-example">
 						<thead>
 							<tr>
-								<th>ID</th>
 								<th>TIÊU CHÍ ĐÁNH GIÁ</th>
 								<th>NOTE</th>
 								<th>CHI TIẾT</th>
@@ -41,7 +42,6 @@
 						<tbody>
 							<c:forEach var="criteria" items="${typeCriteriaList}">
 								<tr class="tr_${criteria.id}">
-									<td>${criteria.id}</td>
 									<td>${criteria.name}</td>
 									<td align="center">${criteria.note}</td>
 									<td align="center"><a
@@ -88,7 +88,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div id="mySuccessModal" class="modal fade">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
@@ -107,7 +107,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<script type="text/javascript"
 				src="${pageContext.request.contextPath}/js/deleteDialog/typecriteriaDialog.js"></script>
 

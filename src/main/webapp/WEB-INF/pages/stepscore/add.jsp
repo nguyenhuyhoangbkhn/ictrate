@@ -24,27 +24,38 @@
 				<h1>Create step score</h1>
 				<form method="post" id="xxx">
 					<div class="form-group">
-						<label for="name">tên loại điểm:</label>
-						<input name="name" class="form-control nameStepScore"
+						<label for="name">tên loại điểm:</label> <input name="name"
+							class="form-control nameStepScore form-input-default"
 							id="nameStepScore" required="required" />
 					</div>
 					<div class="form-group">
-						<label for="note">Thứ tự điểm:</label>
-						<input name="note" class="form-control noteStepScore"
-							id="noteStepScore"  required="required" />
+						<label for=typeScore>Loại điểm: </label> 
+						<select name="typeScore"
+							class="form-control typeStepScore form-input-default" required="required">
+							<option>Định tính</option>
+							<option>Điểm lượng</option>
+						</select>
 					</div>
 					<div class="form-group">
-						<label for="detailScore">Chi tiết các bước điểm:</label>
-
-						<input name="detailScore"  required="required"  class="form-control detailStepScoreAdd" />
+						<label for="sel1">Loại điểm: </label> 
+						<select name="note"
+							class="form-control noteStepScore form-input-default"
+							id="noteStepScore" required="required">
+							<option>Điểm tăng dần</option>
+							<option>Điểm giảm dần</option>
+						</select>
 					</div>
-
-					<div class="formButtonAddStepForm">
-						<div>
+					<div class="form-group formButtonAddStepForm">
+						<label for="detailScore">Chi tiết các bước điểm:</label>
+						<div class="flex">
+							<input name="detailScore" required="required"
+								class="form-control detailStepScoreAdd form-input-default" />
 							<button class="addStepForm btn btn-private">Add Step
 								Score</button>
 						</div>
 					</div>
+
+					
 					<div>
 						<input type="submit" class="btn btn-submit" value="Add" />
 					</div>

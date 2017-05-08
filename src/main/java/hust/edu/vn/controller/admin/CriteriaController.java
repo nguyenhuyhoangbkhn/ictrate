@@ -1,4 +1,4 @@
-package hust.edu.vn.controller;
+package hust.edu.vn.controller.admin;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;

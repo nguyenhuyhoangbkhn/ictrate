@@ -17,8 +17,40 @@
 		<div class="row">
 			<jsp:include page="../home/_left.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			
-			</div>			
+
+				<div class="panel panel-default">
+					<div class="panel-heading">Danh sách các văn phòng mà bạn cần đánh giá</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<table class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th>TÊN VĂN PHÒNG</th>
+									<th>ĐIỆN THOẠI LIÊN HỆ</th>
+									<th>ĐỊA CHỈ</th>
+									<th>KIỂU VĂN PHÒNG</th>
+									<th>Thao tác</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="office" items="${officeList}">
+
+									<tr>
+										<td>${office.name}</td>
+										<td>${office.phone}</td>
+										<td>${office.location}</td>
+										<td>${office.type_office}</td>
+										<td><a href="${pageContext.request.contextPath}/scoreOffice/rate?office=${office.id}">Đánh giá </a>|<a>Chi tiết</a></td>
+									</tr>
+
+
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

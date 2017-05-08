@@ -1,7 +1,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<nav class="navbar navbar-inverse navbar-fixed-top green">
+<nav class="navbar navbar-inverse navbar-fixed-top set-menu">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -11,11 +11,11 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand"
-				href="${pageContext.request.contextPath}/welcome">Project name</a>
+			<a class="navbar-brand project-name"
+				href="${pageContext.request.contextPath}/welcome">RateICT</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right menu-tool">
 				<li><a href="${pageContext.request.contextPath}/stepscore">Step
 						Score</a></li>
 				<li><a href="${pageContext.request.contextPath}/userInfo">User

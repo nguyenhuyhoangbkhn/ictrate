@@ -4,11 +4,11 @@ $(document).ready(function() {
 		var params = {};
 		params.name = $(".nameStepScore").val();
 		params.note = $(".noteStepScore").val();
-		
+		params.typeScore = $(".typeStepScore").val();
 		var text = "";
 		$(".detailStepScoreAdd").each(function(){
 			
-			text = text + "\t"+$(this).val();
+			text = text + "*/"+$(this).val();
 		});
 		params.detailScore = text;
 		$.ajax({
@@ -54,7 +54,7 @@ $(document).ready(function() {
 	$(".addStepForm").click(function(){
 		countRow++;
 		content = $("<tr><td></td><td><input  name='detailScore' class='form-control detailStepScore detailStepScoreAdd'  'type='text'></td><td><a class='btn deleteBtn' id = 'deleteBtn"+ countRow+"'>Delete</a></td></tr>");		
-		content.insertBefore($(".formButtonAddStepForm"));
+		content.insertAfter($(".formButtonAddStepForm"));
 		return false;
 	});
 	

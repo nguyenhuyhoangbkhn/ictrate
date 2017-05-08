@@ -23,10 +23,11 @@
 					<a class="btn btn-primary"
 						href="${pageContext.request.contextPath}/office/add">Thêm Văn
 						Phòng</a>
-					<table id="myDatatable">
+					<table id="myDatatable"
+						class="table table-striped table-bordered table-hover"
+						id="dataTables-example">
 						<thead>
 							<tr>
-								<th>ID</th>
 								<th>TÊN VĂN PHÒNG</th>
 								<th>ĐIỆN THOẠI LIÊN HỆ</th>
 								<th>ĐỊA CHỈ</th>
@@ -39,7 +40,6 @@
 						<tbody>
 							<c:forEach var="office" items="${officeList}">
 								<tr class="tr_${office.id}">
-									<td>${office.id}</td>
 									<td>${office.name}</td>
 									<td>${office.phone}</td>
 									<td>${office.location}</td>
@@ -84,7 +84,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div id="mySuccessModal" class="modal fade">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
@@ -103,7 +103,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<script type="text/javascript"
 				src="${pageContext.request.contextPath}/js/deleteDialog/officeDialog.js"></script>
 

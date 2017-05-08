@@ -14,4 +14,6 @@ public interface CriteriaDao {
 	public void AddCriteria(Criteria Criteria);
 
 	public void updateCriteria(Criteria Criteria);
+	
+	public List<Criteria> criteriaQualitative();
 }

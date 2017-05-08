@@ -28,6 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.csrf().disable();
+		System.out.println("test" + http.authorizeRequests());
 
 		// Các trang không yêu cầu login
 		http.authorizeRequests()

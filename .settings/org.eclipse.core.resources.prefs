@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//src/main/java/hust/edu/vn/config/ApplicationContextConfig.java=UTF-8
 encoding//src/main/java/hust/edu/vn/config/WebMvcConfig.java=UTF-8
 encoding//src/main/java/hust/edu/vn/config/WebSecurityConfig.java=UTF-8
+encoding//src/main/java/hust/edu/vn/controller/admin/MainController.java=UTF-8
 encoding//src/main/java/hust/edu/vn/dao/impl/LocationDaoImpl.java=UTF-8
 encoding//src/main/java/hust/edu/vn/dao/impl/TypeCriteriaDaoImpl.java=UTF-8
 encoding//src/main/webapp/WEB-INF/pages/home/_left.jsp=UTF-8

@@ -151,3 +151,8 @@ form#command a {
 .menu-tool li a:hover{
 	color: #777 !important;
 }
+
+.proImgIcon{
+	width: 24px;
+	height: 24px;
+}

@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				"/admin", "/typecriteria/delete", "/typecriteria/add",
 				"typecriteria/edit", "/stepscore/add","/stepscore/edit","/stepscore/delete",
 				"criteria/add","criteria/delete","criteria/addCriteria" //"criteria/edit",
-				).access("hasAnyRole('roleAccess', 'ROLE_ADMIN')");
+				).access("hasAnyRole('roleAccess', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_EXPERT')");
 		
 		http.authorizeRequests().antMatchers("/scoreOffice").access("hasAnyRole('roleAccess', 'ROLE_EXPERT')");
 		

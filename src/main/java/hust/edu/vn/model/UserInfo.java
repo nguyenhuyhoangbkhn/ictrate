@@ -1,16 +1,52 @@
 package hust.edu.vn.model;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class UserInfo {
  
     private String userName;
     private String password;
     private String enabled;
     private String mail;
-    private String imgprofile;
+    private byte[] imgprofile;
     private Integer role;
     private String telephone;
      
-    public String getEnabled() {
+ // Upload file.
+    private CommonsMultipartFile fileData;
+    
+    public UserInfo(String userName, String mail, String telephone) {
+		this.userName = userName;
+		this.mail = mail;
+		this.telephone = telephone;
+	}
+    
+	public UserInfo()  {
+         
+    }
+ 
+    public UserInfo(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+ 
+    public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEnabled() {
 		return enabled;
 	}
 
@@ -26,11 +62,11 @@ public class UserInfo {
 		this.mail = mail;
 	}
 
-	public String getImgprofile() {
+	public byte[] getImgprofile() {
 		return imgprofile;
 	}
 
-	public void setImgprofile(String imgprofile) {
+	public void setImgprofile(byte[] imgprofile) {
 		this.imgprofile = imgprofile;
 	}
 
@@ -50,29 +86,16 @@ public class UserInfo {
 		this.telephone = telephone;
 	}
 
-	public UserInfo()  {
-         
-    }
- 
-    public UserInfo(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
- 
-    public String getUserName() {
-        return userName;
-    }
- 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
- 
-    public String getPassword() {
-        return password;
-    }
- 
-    public void setPassword(String password) {
-        this.password = password;
-    }
- 
+	public CommonsMultipartFile getFileData() {
+		return fileData;
+	}
+
+	public void setFileData(CommonsMultipartFile fileData) {
+		this.fileData = fileData;
+	}
+
+	@Override
+	public String toString() {
+		return "NAME=" + userName + ",TYPE=" + mail + ",ID_PARENT=" + telephone;
+	}
 }

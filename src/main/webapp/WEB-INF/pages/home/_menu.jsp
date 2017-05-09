@@ -18,9 +18,12 @@
 			<ul class="nav navbar-nav navbar-right menu-tool">
 				<li><a href="${pageContext.request.contextPath}/stepscore">Step
 						Score</a></li>
-				<li><a href="${pageContext.request.contextPath}/userInfo">User
-						Info</a></li>
-				<li><a href="#">Profile</a></li>
+				<li><a href="${pageContext.request.contextPath}/userInfo">User Info</a></li>
+				<c:forEach var="users" items="${userList}">
+				<c:if test="${pageContext.request.userPrincipal.name == users.userName}">
+				<li><a href="#"><img class="proImgIcon" src="${pageContext.request.contextPath}/img/${users.telephone}"> ${pageContext.request.userPrincipal.name}</a></li>
+				</c:if>
+				</c:forEach>
 				<li><a href="#">Help</a></li>
 				<c:if test="${pageContext.request.userPrincipal.name != null}">
 					<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>

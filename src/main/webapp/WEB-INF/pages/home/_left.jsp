@@ -6,7 +6,7 @@
 		<li><a href="${pageContext.request.contextPath}/location">Địa chỉ</a></li>
 		<li><a href="${pageContext.request.contextPath}/typecriteria">Loại tiêu chí</a></li>
 		<li><a href="${pageContext.request.contextPath}/criteria">Tiêu chí</a></li>
-		<li><a href="#">Giao quyền</a></li>
+		<li><a href="${pageContext.request.contextPath}/accessOffice">Giao quyền</a></li>
 		<li><a href="${pageContext.request.contextPath}/office">Office</a></li>
 		<li><a href="#">Rate</a></li>
 		<li><a href="${pageContext.request.contextPath}/scoreOffice">Danh gia co quan</a></li>

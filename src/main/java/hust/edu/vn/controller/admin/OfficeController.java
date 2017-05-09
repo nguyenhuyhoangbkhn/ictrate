@@ -78,4 +78,17 @@ public class OfficeController {
 		officeDao.deleteOffice(id);
 		return "redirect:/office";
 	}
+	
+	
+	
+	@RequestMapping("/accessOffice")
+	public String accessOffice(Model model) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
+
+		List<Office> officeList = officeDao.getAllOffice();
+		model.addAttribute("officeList", officeList);
+		return "office/index";
+	}
 }

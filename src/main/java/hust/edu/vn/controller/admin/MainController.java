@@ -1,16 +1,40 @@
 package hust.edu.vn.controller.admin;
 
 import java.security.Principal;
+import java.util.List;
 
-
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
+import hust.edu.vn.dao.UserDao;
+import hust.edu.vn.model.UserInfo;
 
 @Controller
 public class MainController {
+	
+	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+	UserDao userDao = ctx.getBean("userDao", UserDao.class);
+	
+	@InitBinder
+	public void myInitBinder(WebDataBinder dataBinder) {
+		Object target = dataBinder.getTarget();
+		if (target == null) {
+			return;
+		}
+		System.out.println("Target=" + target);
+
+		if (target.getClass() == UserInfo.class) {
+			// For upload Image.
+			// Sử dụng cho upload Image.
+			dataBinder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+		}
+	}
 
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String welcomePage(Model model) {
@@ -29,7 +53,7 @@ public class MainController {
 
 		return "loginPage";
 	}
-	
+
 	@RequestMapping(value = "user/signUpPage", method = RequestMethod.GET)
 	public String signUpPage(Model model) {
 
@@ -38,13 +62,18 @@ public class MainController {
 
 	@RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
 	public String logoutSuccessfulPage(Model model) {
+		List <UserInfo> userList = userDao.getUser();
+		
+		model.addAttribute("userList",userList);
 		model.addAttribute("title", "Logout");
 		return "logoutSuccessfulPage";
 	}
 
 	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
 	public String userInfo(Model model, Principal principal) {
-
+		List <UserInfo> userList = userDao.getUser();
+		
+		model.addAttribute("userList",userList);
 		// Sau khi user login thanh cong se co principal
 		String userName = principal.getName();
 
@@ -55,6 +84,9 @@ public class MainController {
 
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String accessDenied(Model model, Principal principal) {
+		List<UserInfo> userList = userDao.getUser();
+
+		model.addAttribute("userList", userList);
 
 		if (principal != null) {
 			model.addAttribute("message",

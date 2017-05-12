@@ -6,7 +6,7 @@
 	<bean id="locationDao" class="hust.edu.vn.dao.impl.LocationDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="officeDao" class="hust.edu.vn.dao.impl.OfficeDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
@@ -14,22 +14,35 @@
 	<bean id="typeCriteriaDao" class="hust.edu.vn.dao.impl.TypeCriteriaDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="criteriaDao" class="hust.edu.vn.dao.impl.CriteriaDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="stepScoreDao" class="hust.edu.vn.dao.impl.StepScoreDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<bean id="userDao" class="hust.edu.vn.dao.impl.UserDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- max upload size in bytes -->
+		<property name="maxUploadSize" value="20971520" /> <!-- 20MB -->
+
+		<!-- max size of file in memory (in bytes) -->
+		<property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+
+	</bean>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:ICT" />
-		<property name="username" value="RateICT" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:db11g" />
+		<property name="username" value="RATEICT" />
 		<property name="password" value="0000" />
 	</bean>
 

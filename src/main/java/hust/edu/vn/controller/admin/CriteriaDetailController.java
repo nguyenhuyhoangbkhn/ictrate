@@ -13,10 +13,12 @@ import hust.edu.vn.dao.CriteriaDao;
 import hust.edu.vn.dao.OfficeDao;
 import hust.edu.vn.dao.StepScoreDao;
 import hust.edu.vn.dao.TypeCriteriaDao;
+import hust.edu.vn.dao.UserDao;
 import hust.edu.vn.model.Criteria;
 import hust.edu.vn.model.Office;
 import hust.edu.vn.model.StepScore;
 import hust.edu.vn.model.TypeCriteria;
+import hust.edu.vn.model.UserInfo;
 
 import java.util.List;
 
@@ -26,9 +28,13 @@ public class CriteriaDetailController {
 
 	private ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 	private CriteriaDao cireriaDao = ctx.getBean("criteriaDao", CriteriaDao.class);
+	UserDao userDao = ctx.getBean("userDao", UserDao.class);
 
 	@RequestMapping("/criteria")
 	public String typeCriteriaIndex(Model model) {
+		List<UserInfo> userList = userDao.getUser();
+
+		model.addAttribute("userList", userList);
 		List<Criteria> criterialist = cireriaDao.getAllCriteria();
 		model.addAttribute("criterialist", criterialist);
 		return "criteria/index";
@@ -42,6 +48,9 @@ public class CriteriaDetailController {
 
 	@RequestMapping("criteria/add")
 	public ModelAndView addCriteria(Model model) {
+		List<UserInfo> userList = userDao.getUser();
+
+		model.addAttribute("userList", userList);
 		//add type score in view
 		StepScoreDao stepScoreDao = ctx.getBean("stepScoreDao", StepScoreDao.class);
 		List <StepScore> stepScoreList = stepScoreDao.listStepScore();

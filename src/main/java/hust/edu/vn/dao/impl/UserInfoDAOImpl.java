@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserInfoDAOImpl extends JdbcDaoSupport implements UserInfoDAO {
- 
+		
     @Autowired
     public UserInfoDAOImpl(DataSource dataSource) {
         this.setDataSource(dataSource);
@@ -51,8 +51,12 @@ public class UserInfoDAOImpl extends JdbcDaoSupport implements UserInfoDAO {
          
         return roles;
     }
+<<<<<<< HEAD
 
 
 
      
+=======
+       
+>>>>>>> c5c46675f6ff8215c0d57d520e4301c00c453089
 }

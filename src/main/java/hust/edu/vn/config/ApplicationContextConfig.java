@@ -7,12 +7,15 @@ import hust.edu.vn.dao.LocationDao;
 import hust.edu.vn.dao.OfficeDao;
 import hust.edu.vn.dao.StepScoreDao;
 import hust.edu.vn.dao.TypeCriteriaDao;
+import hust.edu.vn.dao.UserDao;
 import hust.edu.vn.dao.UserInfoDAO;
 import hust.edu.vn.dao.impl.CriteriaDaoImpl;
 import hust.edu.vn.dao.impl.LocationDaoImpl;
 import hust.edu.vn.dao.impl.OfficeDaoImpl;
 import hust.edu.vn.dao.impl.StepScoreDaoImpl;
 import hust.edu.vn.dao.impl.TypeCriteriaDaoImpl;
+import hust.edu.vn.dao.impl.UserDaoImpl;
+import hust.edu.vn.dao.impl.UserInfoDAOImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +28,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
  
 @SuppressWarnings("unused")
@@ -58,6 +62,17 @@ public class ApplicationContextConfig {
        viewResolver.setPrefix("/WEB-INF/pages/");
        viewResolver.setSuffix(".jsp");
        return viewResolver;
+   }
+   
+// Cấu hình để Upload.
+   @Bean(name = "multipartResolver")
+   public CommonsMultipartResolver multipartResolver() {
+       CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+        
+       // Set Max Size...
+       // commonsMultipartResolver.setMaxUploadSize(...);
+        
+       return commonsMultipartResolver;
    }
  
    @Bean(name = "dataSource")
@@ -108,5 +123,9 @@ public class ApplicationContextConfig {
  	public CriteriaDao criteriaDao() {
  		return new CriteriaDaoImpl();
  	}
-   
+ 
+   @Bean(name = "userDao")
+	public UserDao userDao() {
+		return new UserDaoImpl();
+	}
 }

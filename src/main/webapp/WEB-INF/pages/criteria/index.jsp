@@ -22,7 +22,8 @@
 
 					<a href="${pageContext.request.contextPath}/criteria/add"
 						class="btn btn-primary">Thêm tiêu chí</a>
-					<table id="myDatatable">
+					<table id="myDatatable" class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
 						<thead>
 							<tr>
 								<th>TIÊU CHÍ</th>

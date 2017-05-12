@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/stepscore",
 						"/location",
 						"/criteria"
+						
 				).permitAll();
 
 		// Trang /userInfo yêu cầu phải login với vai trò USER hoặc ADMIN.

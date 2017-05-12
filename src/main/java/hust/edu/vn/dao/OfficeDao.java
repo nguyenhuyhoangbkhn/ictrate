@@ -2,6 +2,7 @@ package hust.edu.vn.dao;
 
 import java.util.List;
 
+import hust.edu.vn.model.User;
 import hust.edu.vn.model.Office;
 
 public interface OfficeDao {
@@ -16,4 +17,5 @@ public interface OfficeDao {
 	
 	public Office getOfficeById(int id);
 	
+	public List<User> getAllExpecter();
 }

@@ -1,18 +1,11 @@
 package hust.edu.vn.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
  
 import hust.edu.vn.dao.UserInfoDAO;
 import hust.edu.vn.mapper.UserInfoMapper;
-import hust.edu.vn.model.Criteria;
-import hust.edu.vn.model.User;
 import hust.edu.vn.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -60,13 +53,6 @@ public class UserInfoDAOImpl extends JdbcDaoSupport implements UserInfoDAO {
     }
 
 
-    @Override
-	public List<User> getAllExpecter() {
-		String sql = "SELECT * CRITERIA  INNER JOIN STEP_SCORE ON CRITERIA.TYPE_SCORE = STEP_SCORE.ID";
-		
-		System.out.println(sql);
-		
-		return null;
-	}
+
      
 }

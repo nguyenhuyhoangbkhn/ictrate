@@ -2,7 +2,6 @@ package hust.edu.vn.dao;
 
 import java.util.List;
 
-import hust.edu.vn.model.User;
 import hust.edu.vn.model.UserInfo;
  
 public interface UserInfoDAO {
@@ -12,5 +11,5 @@ public interface UserInfoDAO {
     // [USER,AMIN,..]
     public List<String> getUserRoles(String userName);
      
-    public List<User> getAllExpecter();
+//    public List<User> getAllExpecter();
 }

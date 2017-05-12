@@ -89,6 +89,9 @@ public class OfficeController {
 
 		List<Office> officeList = officeDao.getAllOffice();
 		model.addAttribute("officeList", officeList);
-		return "office/index";
+		
+		List<hust.edu.vn.model.User> userList = officeDao.getAllExpecter();
+		model.addAttribute("userList",userList);
+		return "office/accessOffice";
 	}
 }

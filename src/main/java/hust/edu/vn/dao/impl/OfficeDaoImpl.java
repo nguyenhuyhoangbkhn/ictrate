@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 import hust.edu.vn.dao.OfficeDao;
 import hust.edu.vn.model.Office;
+import hust.edu.vn.model.User;
 
 public class OfficeDaoImpl implements OfficeDao {
 	
@@ -143,6 +144,42 @@ public class OfficeDaoImpl implements OfficeDao {
 			e.printStackTrace();
 		}
 		return anoffice;
+	}
+	
+	public List<User> getAllExpecter() {
+		String sql = "SELECT * FROM USER_ROLES WHERE USER_ROLE =  'EXPERT'";
+		
+		System.out.println(sql);
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			List<User> UserList = new ArrayList<User>();
+			while (true) {
+				if (rs.next()) {
+					User user = new User(rs.getString("username"), rs.getString("user_role"));
+					UserList.add(user);
+				} else {
+					break;
+				}
+			}
+			rs.close();
+			ps.close();
+			return UserList;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
 	}
 
 }

@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sun.xml.internal.bind.v2.model.core.ID;
 
+import hust.edu.vn.dao.AccessOfficeDao;
 import hust.edu.vn.dao.CriteriaDao;
 import hust.edu.vn.dao.OfficeDao;
+import hust.edu.vn.dao.RateDao;
 import hust.edu.vn.dao.UserDao;
+import hust.edu.vn.model.AccessOffice;
 import hust.edu.vn.model.Criteria;
 import hust.edu.vn.model.Office;
+import hust.edu.vn.model.Rate;
 import hust.edu.vn.model.StepScore;
 import hust.edu.vn.model.UserInfo;
 
@@ -35,7 +39,7 @@ public class experterControlller {
 	public String scoreOffice(Model model) {
 		// UserInfo expert = new UserInfo();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("tesstasdasdasd" + auth.getName());
+		
 		List<UserInfo> userList = userDao.getUser();
 
 		model.addAttribute("userList", userList);
@@ -70,8 +74,32 @@ public class experterControlller {
 
 	@RequestMapping(value = "/scoreOffice/expectRate", method = RequestMethod.POST)
 	public String addTypeCriteria(@ModelAttribute("StepScore") StepScore stepScore) {
-		System.out.println("id office" + this.idOffice);
 		return "redirect:/scoreOffice";
+	}
+	
+	
+	@RequestMapping("scoreOffice/expectRate")
+	public String expectRate(Model model,String[] criteria,String noteOffice) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		AccessOfficeDao accessOffice = ctx.getBean("accessOfficeDao", AccessOfficeDao.class);
+		RateDao rateDao = ctx.getBean("rateDao",RateDao.class);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Integer a = accessOffice.getIdByNameAndOffice(auth.getName(), String.valueOf(this.idOffice));
+		
+		accessOffice.updateNote(noteOffice, a);
+//		xac dinh tieu chi dinh luong
+		List<Criteria> criteriaList = criteriaDao.criteriaQualitative();
+		
+		Integer i = 0;
+//		luu danh gia vao trong ket qua
+		for (Criteria criteria1 : criteriaList){
+			Rate rate = new Rate(0,String.valueOf(a),String.valueOf(criteria1.getId()),criteria[i]);
+			i++;
+			rateDao.addRate(rate);
+		}
+		return "redirect:/scoreOffice";
+		
 	}
 
 }

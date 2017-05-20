@@ -29,7 +29,7 @@
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<label for="type_criteria">Loại điểm:</label> <select
+							<label for="type_criteria">Loại tiêu chí:</label> <select
 								name="type_criteria" class="form-control" required="required">
 								<c:forEach var="typeCriteria" items="${typeCriteriaList}">
 									<option value="${typeCriteria.id}">${typeCriteria.name}</option>
@@ -39,15 +39,15 @@
 						</div>
 
 						<div class="form-group">
-							<label for="type_score">Loại tiêu chí:</label> <select
+							<label for="type_score">Loại điểm:</label> <select
 								name="type_score" class="form-control" required="required">
 								<c:forEach var="score" items="${stepScoreList}">
-									<option value="${score.id}">${score.name}</option>
+									<option value="${score.id}">${score.name} (${score.typeScore})</option>
 								</c:forEach>
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="among">Trọng số:</label> <input name="among"
+							<label for="among">Điểm số thang điểm:</label> <input name="among"
 								class="form-control" required="required" />
 						</div>
 

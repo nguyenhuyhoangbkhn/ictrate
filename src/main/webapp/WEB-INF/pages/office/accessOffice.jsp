@@ -44,7 +44,9 @@
 								 -->
 
 								<div>
-									<a href="${pageContext.request.contextPath}/criteria/edit?=${criteria.id}" class="btn btn-submit" value="Giao quyền" /></a>
+									<a
+										href="${pageContext.request.contextPath}/office/rate?officeID=${office.id}"
+										class="btn btn-primary">Giao quyền</a>
 								</div>
 							</form:form>
 						</div>

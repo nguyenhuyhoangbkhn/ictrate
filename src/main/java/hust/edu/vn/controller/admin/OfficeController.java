@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import hust.edu.vn.dao.AccessOfficeDao;
 import hust.edu.vn.dao.OfficeDao;
 import hust.edu.vn.dao.UserDao;
+import hust.edu.vn.model.AccessOffice;
 import hust.edu.vn.model.Office;
 import hust.edu.vn.model.UserInfo;
 
@@ -21,7 +23,8 @@ public class OfficeController {
 	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 	OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
 	UserDao userDao = ctx.getBean("userDao", UserDao.class);
-
+	private Integer idOffice;
+	
 	@RequestMapping("/office")
 	public String homePage(Model model) {
 		List<UserInfo> userList = userDao.getUser();
@@ -84,5 +87,26 @@ public class OfficeController {
 		List<hust.edu.vn.model.User> userList = officeDao.getAllExpecter();
 		model.addAttribute("userList",userList);
 		return "office/accessOffice";
+	}
+	@RequestMapping("office/rate")
+	public String rateOffice(Model model, @RequestParam("officeID") int officeID) {
+		List<hust.edu.vn.model.User> userList = officeDao.getAllExpecter();
+		model.addAttribute("userList",userList);
+		return "office/acceessoffice";
+	}
+	@RequestMapping("office/access")
+	public String officeAcces(Model model,String[] user) {
+		@SuppressWarnings("resource")
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		AccessOfficeDao accessOffice = ctx.getBean("accessOfficeDao", AccessOfficeDao.class);
+		
+//		OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
+		for (String user1 : user) {
+			AccessOffice accessOffice1 = new AccessOffice(user1,String.valueOf(this.idOffice),"");
+			accessOffice.addAccessOffice(accessOffice1);
+		}
+		List<hust.edu.vn.model.User> userList = officeDao.getAllExpecter();
+		model.addAttribute("userList",userList);
+		return "office/acceessoffice";
 	}
 }

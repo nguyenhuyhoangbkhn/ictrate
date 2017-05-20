@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				).access("hasAnyRole('roleAccess', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_EXPERT')");
 
 		
-		http.authorizeRequests().antMatchers("/scoreOffice").access("hasAnyRole('roleAccess', 'ROLE_EXPERT')");
+		http.authorizeRequests().antMatchers("/scoreOffice","scoreOffice/expectRate").access("hasAnyRole('roleAccess', 'ROLE_EXPERT')");
 		
 //		// Trang chỉ dành cho ADMIN
 //		http.authorizeRequests().antMatchers("/admin", "/typecriteria/delete", "/typecriteria/add",

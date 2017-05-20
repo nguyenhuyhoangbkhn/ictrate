@@ -91,7 +91,7 @@ public class CriteriaController {
 
 		typeCriteria.setId(13);
 		typeCriteria.setFlag_delede(1);
-		System.out.println("typecriteria" + typeCriteria);
+
 		typeCireriaDao.AddTypeCriteria(typeCriteria);
 		return "redirect:/typecriteria";
 	}

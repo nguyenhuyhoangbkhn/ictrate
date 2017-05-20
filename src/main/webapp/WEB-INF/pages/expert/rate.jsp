@@ -24,17 +24,17 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div>${office.name}</div>
 				<div>
-					<form:form method="post" action="expectRate">
+					<form:form method="get" action="expectRate">
 						<c:forEach var="criteria" items="${criteriaList}">
 							<div class="form-group rateCriteria">
 								Tiêu chí ${criteria.name}:
 								<div class="form-group">
-									<select class="form-control">
-										<option>Chọn điểm</option>
+									<select class="form-control" name="criteria" required>
+										<option value = "">Chọn điểm</option>
 										<c:forEach var="splt"
 											items="${fn:split(criteria.type_criteria,'*/')}">
 											<c:if test="${not empty fn:trim(splt)}">
-												<option>${splt}</option>
+												<option value = "${splt}">${splt}</option>
 											</c:if>
 										</c:forEach>
 									</select>
@@ -43,11 +43,12 @@
 						</c:forEach>
 						<div class="form-group">
 							<label>Ghi chú về cơ quan</label>
-							<textarea class="form-control" rows="3"></textarea>
+							<textarea name = "noteOffice"class="form-control" rows="3"></textarea>
 						</div>
 						<button type="submit" class="btn btn-default">Đánh giá</button>
 					</form:form>
 				</div>
+				
 			</div>
 		</div>
 	</div>

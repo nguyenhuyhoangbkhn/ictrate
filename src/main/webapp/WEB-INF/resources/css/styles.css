@@ -156,3 +156,11 @@ form#command a {
 	width: 24px;
 	height: 24px;
 }
+
+.proImg{
+	width: 200px;
+	height: 160px;
+}
+#tbInfo td {
+    padding: 5px;
+}

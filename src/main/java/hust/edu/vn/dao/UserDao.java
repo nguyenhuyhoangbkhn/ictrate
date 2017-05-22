@@ -7,6 +7,7 @@ import hust.edu.vn.model.UserInfo;
 public interface UserDao {
 	
 	public List<UserInfo> getUser();
-
+	
+	public void updateUser(UserInfo userInfo);
 
 }

@@ -1,6 +1,8 @@
 package hust.edu.vn.model;
 
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class UserInfo {
  
@@ -8,17 +10,17 @@ public class UserInfo {
     private String password;
     private String enabled;
     private String mail;
-    private byte[] imgprofile;
+    private String imgprofile;
     private Integer role;
     private String telephone;
-     
- // Upload file.
-    private CommonsMultipartFile fileData;
     
-    public UserInfo(String userName, String mail, String telephone) {
+    private List<MultipartFile> images;
+
+    
+    public UserInfo(String userName, String mail, String imgprofile) {
 		this.userName = userName;
 		this.mail = mail;
-		this.telephone = telephone;
+		this.imgprofile = imgprofile;
 	}
     
 	public UserInfo()  {
@@ -62,11 +64,11 @@ public class UserInfo {
 		this.mail = mail;
 	}
 
-	public byte[] getImgprofile() {
+	public String getImgprofile() {
 		return imgprofile;
 	}
 
-	public void setImgprofile(byte[] imgprofile) {
+	public void setImgprofile(String imgprofile) {
 		this.imgprofile = imgprofile;
 	}
 
@@ -85,13 +87,13 @@ public class UserInfo {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-
-	public CommonsMultipartFile getFileData() {
-		return fileData;
+	
+	public List<MultipartFile> getImages() {
+		return images;
 	}
 
-	public void setFileData(CommonsMultipartFile fileData) {
-		this.fileData = fileData;
+	public void setImages(List<MultipartFile> images) {
+		this.images = images;
 	}
 
 	@Override

@@ -25,9 +25,15 @@ public class Test {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		
 		UserDao userDao = ctx.getBean("userDao", UserDao.class);
-		List <UserInfo> officeList = userDao.getUser();
 		
-		System.out.println("test"+ officeList);
+		UserInfo userinfo = new UserInfo();
+		userinfo.setUserName("dbadmin1");
+		userinfo.setTelephone("aaa");
+		
+		userDao.updateUser(userinfo);
+		//List <UserInfo> officeList = userDao.getUser();
+		
+		//System.out.println("test"+ officeList);
 //		StepScoreDao stepScoreDao = ctx.getBean("stepScoreDao", StepScoreDao.class);
 //		OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
 //		List <Office> officeList = officeDao.getAllOffice();

@@ -88,7 +88,7 @@ public class LocationController {
 	}
 
 	@RequestMapping("location/delete")
-	public String deleteLocationById(Model model, @RequestParam("locationid") int id) {
+	public String deleteLocationById(Model model, @RequestParam("telephone") int id) {
 		List<UserInfo> userList = userDao.getUser();
 
 		model.addAttribute("userList", userList);

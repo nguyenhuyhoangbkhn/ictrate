@@ -1,17 +1,18 @@
 package hust.edu.vn.controller.admin;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
-
+import org.springframework.web.multipart.MultipartFile;
 import hust.edu.vn.dao.UserDao;
 import hust.edu.vn.model.UserInfo;
 
@@ -20,21 +21,6 @@ public class MainController {
 	
 	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 	UserDao userDao = ctx.getBean("userDao", UserDao.class);
-	
-	@InitBinder
-	public void myInitBinder(WebDataBinder dataBinder) {
-		Object target = dataBinder.getTarget();
-		if (target == null) {
-			return;
-		}
-		System.out.println("Target=" + target);
-
-		if (target.getClass() == UserInfo.class) {
-			// For upload Image.
-			// Sử dụng cho upload Image.
-			dataBinder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
-		}
-	}
 
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String welcomePage(Model model) {
@@ -81,7 +67,37 @@ public class MainController {
 
 		return "userInfoPage";
 	}
+	
+	@RequestMapping(value = "/savefiles")
+	public String uploadResources(UserInfo userInfo, Model model, Principal principal)
+			throws IllegalStateException, IOException {
 
+		String saveDirectory = "C:/Users/Hoang/workspace/ictrate/src/main/webapp/WEB-INF/resources/img/";
+
+		List<MultipartFile> files = userInfo.getImages();
+
+		List<String> fileNames = new ArrayList<String>();
+		
+		if (null != files && files.size() > 0) {
+			for (MultipartFile multipartFile : files) {
+
+				String fileName = multipartFile.getOriginalFilename();
+				if (!"".equalsIgnoreCase(fileName)) {
+					// Handle file content - multipartFile.getInputStream()
+					multipartFile.transferTo(new File(saveDirectory + fileName));
+					fileNames.add(fileName);
+					
+					userInfo.setUserName(principal.getName());
+					userInfo.setImgprofile(fileName);
+					userDao.updateUser(userInfo);
+					System.out.println(fileNames);
+
+				}
+			}
+		}
+		return "redirect:/userInfo";
+	}
+	
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String accessDenied(Model model, Principal principal) {
 		List<UserInfo> userList = userDao.getUser();

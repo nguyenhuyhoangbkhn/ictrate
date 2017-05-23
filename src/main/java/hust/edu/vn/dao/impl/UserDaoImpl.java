@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
 			List<UserInfo> userList = new ArrayList<UserInfo>();
 			while (true) {
 				if (rs.next()) {
-					UserInfo alocation = new UserInfo(rs.getString("userName"), rs.getString("mail"), rs.getString("telephone"));
+					UserInfo alocation = new UserInfo(rs.getString("userName"), rs.getString("mail"), rs.getString("imgprofile"));
 					userList.add(alocation);
 				} else {
 					break;
@@ -52,6 +52,25 @@ public class UserDaoImpl implements UserDao {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void updateUser(UserInfo userInfo) {
+		String sql = "UPDATE USERS SET IMGPROFILE=? WHERE USERNAME=?";	
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			// Parameters start with 1
+			ps.setString(1, userInfo.getImgprofile());	//get data from database
+			ps.setString(2, userInfo.getUserName());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

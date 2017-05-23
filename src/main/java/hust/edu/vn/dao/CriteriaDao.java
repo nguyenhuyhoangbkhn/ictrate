@@ -15,5 +15,9 @@ public interface CriteriaDao {
 
 	public void updateCriteria(Criteria Criteria);
 	
+	//list dinh tinh
 	public List<Criteria> criteriaQualitative();
+	
+	// list dinh luong
+	public List<Criteria> criteriaQuantitative();
 }

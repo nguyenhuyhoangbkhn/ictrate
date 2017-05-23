@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				"criteria/add","criteria/delete","criteria/addCriteria" //"criteria/edit",
 				).access("hasAnyRole('roleAccess', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_EXPERT')");
 
-		
+		// Trang danh cho chuyen gia
 		http.authorizeRequests().antMatchers("/scoreOffice","scoreOffice/expectRate").access("hasAnyRole('roleAccess', 'ROLE_EXPERT')");
 		
 //		// Trang chỉ dành cho ADMIN

@@ -1,6 +1,8 @@
 package hust.edu.vn.controller.admin;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,24 +25,24 @@ public class CriteriaController {
 
 	TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
 	UserDao userDao = ctx.getBean("userDao", UserDao.class);
-
+	
+	
 	@RequestMapping("/typecriteria")
 	public String typeCriteriaIndex(Model model) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
-
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
 		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getAllTypeCriteria();
-		System.out.println("danh sach loai tieu chi" + typeCriteriaList);
 		model.addAttribute("typeCriteriaList", typeCriteriaList);
 		return "typecriteria/index";
 	}
 
 	@RequestMapping("typecriteria/detail")
 	public String DetailListTypecriteriaDetail(Model model, @RequestParam("tyecriteriaid") int id) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 
 		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getListTypeCriteriaById(id);
 		model.addAttribute("typeCriteriaList", typeCriteriaList);
@@ -56,9 +58,9 @@ public class CriteriaController {
 
 	@RequestMapping("typecriteria/add")
 	public ModelAndView addTypeCriteria(Model model) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 
 		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getAllTypeCriteria();
 
@@ -69,9 +71,10 @@ public class CriteriaController {
 	// direct edit form
 	@RequestMapping("typecriteria/edit")
 	public String updateTypeCriteriaById(Model model, @RequestParam("tyecriteriaid") int id) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
 		model.addAttribute("typeCireriaDao", typeCireriaDao.getTypeCriteriaById(id));
 		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getAllTypeCriteria();
 		model.addAttribute("typeCriteriaList", typeCriteriaList);
@@ -80,8 +83,6 @@ public class CriteriaController {
 
 	@RequestMapping(value = "/typecriteria/updateTypeCriteria", method = RequestMethod.POST)
 	public String updateTypeCriteria(@ModelAttribute("TypeCriteria") TypeCriteria typeCriteria) {
-
-		System.out.println("test" + typeCriteria);
 		typeCireriaDao.updateTypeCriteria(typeCriteria);
 		return "redirect:/typecriteria";
 	}

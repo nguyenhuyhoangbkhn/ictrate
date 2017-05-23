@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
 			List<UserInfo> userList = new ArrayList<UserInfo>();
 			while (true) {
 				if (rs.next()) {
-					UserInfo alocation = new UserInfo(rs.getString("userName"), rs.getString("mail"), rs.getString("imgprofile"));
+					UserInfo alocation = new UserInfo(rs.getString("userName"), rs.getString("mail"),rs.getString("imgprofile"));
 					userList.add(alocation);
 				} else {
 					break;
@@ -71,6 +71,39 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public UserInfo getUserByName(String userName) {
+		String sql = "SELECT * FROM USERS WHERE USERNAME = ?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		UserInfo userInfo = new UserInfo();
+		
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,userName);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				userInfo = new UserInfo(rs.getString("userName"), rs.getString("mail"),
+						rs.getString("imgprofile"),rs.getString("role"));
+			}
+			rs.close();
+			ps.close();
+			
+			return userInfo;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
 	}
 
 }

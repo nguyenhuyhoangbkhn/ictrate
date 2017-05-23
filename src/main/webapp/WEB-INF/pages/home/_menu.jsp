@@ -18,21 +18,35 @@
 			<ul class="nav navbar-nav navbar-right menu-tool">
 				<li><a href="${pageContext.request.contextPath}/stepscore">Step
 						Score</a></li>
-				<li><a href="${pageContext.request.contextPath}/userInfo">User Info</a></li>
+				<li><a href="${pageContext.request.contextPath}/userInfo">User
+						Info</a></li>
+				<!-- 
 				<c:forEach var="users" items="${userList}">
-				<c:if test="${pageContext.request.userPrincipal.name == users.userName}">
-				<li><a href="${pageContext.request.contextPath}/userInfo"><img class="proImgIcon" src="${pageContext.request.contextPath}/img/${users.imgprofile}"> ${pageContext.request.userPrincipal.name}</a></li>
-				</c:if>
+					<c:if
+						test="${pageContext.request.userPrincipal.name == users.userName}">
+						<li><a href="${pageContext.request.contextPath}/userInfo"><img
+								class="proImgIcon"
+								src="${pageContext.request.contextPath}/img/${users.imgprofile}">
+								${pageContext.request.userPrincipal.name}</a></li>
+					</c:if>
 				</c:forEach>
+				 -->
+				<li><a href="${pageContext.request.contextPath}/userInfo"><img
+						class="proImgIcon"
+						src="${pageContext.request.contextPath}/img/${userInfo.imgprofile}">
+						${pageContext.request.userPrincipal.name}</a></li>
+
 				<li><a href="#">Help</a></li>
 				<c:if test="${pageContext.request.userPrincipal.name != null}">
 					<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 				</c:if>
 				<c:if test="${pageContext.request.userPrincipal.name == null}">
 					<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-					<li><a href="${pageContext.request.contextPath}/user/signUpPage">Sign Up</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/user/signUpPage">Sign
+							Up</a></li>
 				</c:if>
-				
+
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">

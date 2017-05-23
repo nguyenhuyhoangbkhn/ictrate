@@ -8,6 +8,8 @@ public interface UserDao {
 	
 	public List<UserInfo> getUser();
 	
+	public UserInfo getUserByName(String userName);
+	
 	public void updateUser(UserInfo userInfo);
 
 }

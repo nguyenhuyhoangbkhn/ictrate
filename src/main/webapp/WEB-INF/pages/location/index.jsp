@@ -19,10 +19,11 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div>
 					<h1 class="text">DANH SÁCH TỈNH THÀNH</h1>
-
+					<c:if test="${userInfo.role.equals('ADMIN')}">
 					<a class="btn btn-primary"
-						href="${pageContext.request.contextPath}/location/add">Add
+						href="${pageContext.request.contextPath}/location/add">Thêm mới 
 						location</a>
+						</c:if>
 					<table id="myDatatable" class="table table-striped table-bordered table-hover"
 							id="dataTables-example">
 						<thead>

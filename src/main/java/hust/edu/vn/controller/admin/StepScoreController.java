@@ -3,6 +3,8 @@ package hust.edu.vn.controller.admin;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,39 +26,39 @@ public class StepScoreController {
 
 	@RequestMapping("/stepscore")
 	public String homePage(Model model) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
 		List<StepScore> stepScoreList = stepScoreDao.listStepScore();
-
 		model.addAttribute("stepScoreList", stepScoreList);
 		return "stepscore/index";
 	}
 
 	@RequestMapping("stepscore/delete")
 	public String deleteTypeCriteriaById(Model model, @RequestParam("id") int id) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
 		stepScoreDao.deleteStepScore(id);
 		return "redirect:/stepscore";
 	}
 
 	@RequestMapping("stepscore/edit")
 	public String editTypeCriteriaById(Model model, @RequestParam("id") int id) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		System.out.println("id" + stepScoreDao.getStepScoreById(id));
 		return "redirect:/stepscore";
 	}
 
 	@RequestMapping("stepscore/add")
 	public ModelAndView addStepScore(Model model) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
-
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		return new ModelAndView("stepscore/add", "command", new StepScore());
 	}
 

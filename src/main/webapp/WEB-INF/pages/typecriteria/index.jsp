@@ -23,10 +23,12 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div>
 					<h1 class="text">Type Criteria list</h1>
-					<div class="button">
-						<a class="btn btn-primary"
-							href="${pageContext.request.contextPath}/typecriteria/add">Add</a>
-					</div>
+					<c:if test="${userInfo.role.equals('ADMIN')}">
+						<div class="button">
+							<a class="btn btn-primary"
+								href="${pageContext.request.contextPath}/typecriteria/add">Thêm mới</a>
+						</div>
+					</c:if>
 					<table id="myDatatable"
 						class="table table-striped table-bordered table-hover"
 						id="dataTables-example">

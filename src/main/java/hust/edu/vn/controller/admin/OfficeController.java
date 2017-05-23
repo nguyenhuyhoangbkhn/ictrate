@@ -56,6 +56,7 @@ public class OfficeController {
 
 		model.addAttribute("userList", userList);
 		model.addAttribute("officeDao", officeDao.getOfficeById(id));
+		
 		return "office/edit";
 	}
 
@@ -92,6 +93,9 @@ public class OfficeController {
 	public String rateOffice(Model model, @RequestParam("officeID") int officeID) {
 		List<hust.edu.vn.model.User> userList = officeDao.getAllExpecter();
 		model.addAttribute("userList",userList);
+		
+		this.idOffice = officeID;
+		System.out.println("office id" + this.idOffice);
 		return "office/acceessoffice";
 	}
 	@RequestMapping("office/access")
@@ -105,8 +109,13 @@ public class OfficeController {
 			AccessOffice accessOffice1 = new AccessOffice(user1,String.valueOf(this.idOffice),"");
 			accessOffice.addAccessOffice(accessOffice1);
 		}
+		
+		List<Office> officeList = officeDao.getAllOffice();
+		model.addAttribute("officeList", officeList);
+		
 		List<hust.edu.vn.model.User> userList = officeDao.getAllExpecter();
 		model.addAttribute("userList",userList);
-		return "office/acceessoffice";
+		
+		return "office/accessOffice";
 	}
 }

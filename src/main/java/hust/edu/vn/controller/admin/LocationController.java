@@ -3,6 +3,8 @@ package hust.edu.vn.controller.admin;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,9 +29,9 @@ public class LocationController {
 
 	@RequestMapping("/location")
 	public String homePage(Model model) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		List<Location> locationList = locationDao.getAllCityLocation();
 		model.addAttribute("locationlist", locationList);
 		return "location/index";
@@ -37,9 +39,9 @@ public class LocationController {
 
 	@RequestMapping("location/add")
 	public ModelAndView showAddForm(Model model) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		List<Location> locationList = locationDao.getAllCityLocation();
 		model.addAttribute("locationList", locationList);
 		return new ModelAndView("location/add", "command", new Location());
@@ -77,9 +79,9 @@ public class LocationController {
 
 	@RequestMapping("location/detail")
 	public String DetailListLocationDetail(Model model, @RequestParam("locationid") int id) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		LocationDao locationDao = ctx.getBean("locationDao", LocationDao.class);
 
 		List<Location> locationList = locationDao.getAllCountrysideLocation(id);
@@ -89,29 +91,25 @@ public class LocationController {
 
 	@RequestMapping("location/delete")
 	public String deleteLocationById(Model model, @RequestParam("telephone") int id) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
-
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		locationDao.deleteLocation(id);
 		return "redirect:/location";
 	}
 
 	@RequestMapping("location/edit")
 	public String editLocationById(Model model, @RequestParam("locationid") int id) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		model.addAttribute("locationDao", locationDao.getLocationById(id));
-
 		return "location/edit";
 	}
 
 	@RequestMapping("location/updateLocation")
 	public String updateLocation(@ModelAttribute("Location") Location location) {
-
 		locationDao.updateLocation(location);
-		System.out.println(location);
 		return "redirect:/location";
 	}
 }

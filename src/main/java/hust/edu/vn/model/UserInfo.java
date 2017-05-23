@@ -11,7 +11,7 @@ public class UserInfo {
     private String enabled;
     private String mail;
     private String imgprofile;
-    private Integer role;
+    private String role;
     private String telephone;
     
     private List<MultipartFile> images;
@@ -22,6 +22,14 @@ public class UserInfo {
 		this.mail = mail;
 		this.imgprofile = imgprofile;
 	}
+    
+    public UserInfo(String userName, String mail, String imgprofile, String role) {
+		this.userName = userName;
+		this.mail = mail;
+		this.imgprofile = imgprofile;
+		this.role = role;
+	}
+    
     
 	public UserInfo()  {
          
@@ -72,11 +80,11 @@ public class UserInfo {
 		this.imgprofile = imgprofile;
 	}
 
-	public Integer getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Integer role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

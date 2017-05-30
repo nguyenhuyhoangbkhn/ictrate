@@ -242,3 +242,9 @@ form#command a {
 .eyeOpen{
 	cursor: pointer;
 }
+.form-center-default{
+	padding:0 15px;
+}
+.panel-heading{
+	font-size:24px;
+}

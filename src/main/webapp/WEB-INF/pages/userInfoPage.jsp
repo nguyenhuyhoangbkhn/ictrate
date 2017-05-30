@@ -50,7 +50,6 @@
 											<td>Ngày sinh:</td>
 											<td>${userInfo1.dob}</td>
 										</tr>
-
 										<tr>
 										<tr>
 											<td>Giới tính:</td>

@@ -17,47 +17,53 @@
 		<div class="row">
 			<jsp:include page="../home/_left.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<div>
-					<h1 class="text">DANH SÁCH CÁC TIÊU CHÍ</h1>
-
-					<a href="${pageContext.request.contextPath}/criteria/add"
-						class="btn btn-primary">Thêm tiêu chí</a>
-					<table id="myDatatable" class="table table-striped table-bordered table-hover"
+				<div class="panel panel-default">
+					<div class="panel-heading">Danh sách các tiêu chí</div>
+					<div class="panel-body form-center-default">
+						<c:if test="${userInfo.role.equals('ADMIN')}">
+							<a href="${pageContext.request.contextPath}/criteria/add"
+								class="btn btn-primary">Thêm tiêu chí</a>
+						</c:if>
+						<table id="myDatatable"
+							class="table table-striped table-bordered table-hover"
 							id="dataTables-example">
-						<thead>
-							<tr>
-								<th>TIÊU CHÍ</th>
-								<th>GHI CHÚ</th>
-								<th>LOẠI TIÊU CHÍ</th>
-								<th>THANG ĐIỂM</th>
-								<th>CHỈNH SỬA</th>
-								<th>XOÁ</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="criteria" items="${criterialist}">
-								<tr class="tr_${criteria.id}">
-									<td>${criteria.name}</td>
-									<td>${criteria.note}</td>
-									<td>${criteria.type_criteria}</td>
-									<td>${criteria.type_score}</td>
-									<td align="center"><a
-										href="${pageContext.request.contextPath}/criteria/edit?criteriaid=${criteria.id}"
-										class="btn btn-warning btn-sm"> <span
-											class="glyphicon glyphicon-edit"></span>
-									</a></td>
-									<td align="center"><a class="btn btn-danger btn-sm"
-										onclick="showDialog('${criteria.id}');"> <span
-											class="glyphicon glyphicon-trash"></span>
-									</a></td>
+							<thead>
+								<tr>
+									<th>TIÊU CHÍ</th>
+									<th>GHI CHÚ</th>
+									<th>LOẠI TIÊU CHÍ</th>
+									<th>THANG ĐIỂM</th>
+									<c:if test="${userInfo.role.equals('ADMIN')}">
+										<th>Thao tác</th>
+									</c:if>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								<c:forEach var="criteria" items="${criterialist}">
+									<tr class="tr_${criteria.id}">
+										<td>${criteria.name}</td>
+										<td>${criteria.note}</td>
+										<td>${criteria.type_criteria}</td>
+										<td>${criteria.type_score}</td>
+										<c:if test="${userInfo.role.equals('ADMIN')}">
+											<td align="center"><a
+												href="${pageContext.request.contextPath}/criteria/edit?criteriaid=${criteria.id}"
+												class="btn btn-warning btn-sm"> <span
+													class="glyphicon glyphicon-edit"></span>
+											</a> | <a class="btn btn-danger btn-sm"
+												onclick="showDialog('${criteria.id}');"> <span
+													class="glyphicon glyphicon-trash"></span>
+											</a></td>
+										</c:if>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-			
-				<!-- set up the modal to start hidden and fade in and out -->
+
+			<!-- set up the modal to start hidden and fade in and out -->
 			<div id="myModal" class="modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -80,7 +86,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div id="mySuccessModal" class="modal fade">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
@@ -99,10 +105,10 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<script type="text/javascript"
 				src="${pageContext.request.contextPath}/js/deleteDialog/criteriaDialog.js"></script>
-						
+
 		</div>
 	</div>
 </body>

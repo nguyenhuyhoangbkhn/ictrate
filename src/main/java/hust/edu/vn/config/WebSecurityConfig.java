@@ -30,54 +30,38 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		System.out.println("test" + http.authorizeRequests());
 
-		// Các trang không yêu cầu login
+		// Các trang không yêu cầu login trang danh cho tat ca moi nguoi
 		http.authorizeRequests()
-				.antMatchers(
-						"/", "/welcome", "/login", "/logout", 
-						"/typecriteria", "typecriteria/detail", 
-						"/stepscore",
-						"/location",
-						"/criteria"
-						
-				).permitAll();
+				.antMatchers("/stepscore", "/location", "location/detail", "/typecriteria", "typecriteria/detail",
+						"/office",
+						"/", "/welcome", "/login", "/logout", "/criteria", "/userInfo")
+				.permitAll();
 
-		// Trang /userInfo yêu cầu phải login với vai trò USER hoặc ADMIN.
-		// Nếu chưa login, nó sẽ redirect tới trang /login.
-
-		//http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('roleAccess', 'ROLE_ADMIN')");
-		
 		// trang chi danh cho admin
-		http.authorizeRequests().antMatchers(
-				"/userInfo",
-				"/admin", "/typecriteria/delete", "/typecriteria/add",
-				"typecriteria/edit", "/stepscore/add","/stepscore/edit","/stepscore/delete",
-				
-//				"criteria/add","criteria/delete","criteria/addCriteria", //"criteria/edit",
-//				"/accessOffice" //giao quyen danh gia cho chuyen gia
-//				).access("hasAnyRole('roleAccess', 'ROLE_ADMIN')");
-
-				"criteria/add","criteria/delete","criteria/addCriteria" //"criteria/edit",
-				).access("hasAnyRole('roleAccess', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_EXPERT')");
+		http.authorizeRequests()
+				.antMatchers("stepscore/add", "/stepscore/delete", "/stepscore/edit", 
+						"location/addWard","location/delete", "location/addDistrict", 
+						"location/addProvince", "location/delete","location/add", 
+						"typecriteria/add", "typecriteria/delete", "typecriteria/edit",
+						"/typecriteria/updateTypeCriteria", 
+						"/accessOffice", 
+						"office/rate", "criteria/add",
+						"criteria/delete", "criteria/addCriteria", "/admin",
+						"criteria/edit","criteria/updateCriteria")
+				.access("hasAnyRole('roleAccess', 'ROLE_ADMIN')");
 
 		// Trang danh cho chuyen gia
-		http.authorizeRequests().antMatchers("/scoreOffice","scoreOffice/expectRate").access("hasAnyRole('roleAccess', 'ROLE_EXPERT')");
-		
-//		// Trang chỉ dành cho ADMIN
-//		http.authorizeRequests().antMatchers("/admin", "/typecriteria/delete", "/typecriteria/add",
-//				"typecriteria/edit", "/stepscore/add","/stepscore/edit","/stepscore/delete",
-//				"criteria/add","criteria/delete","criteria/addCriteria" //"criteria/edit",
-//				).access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/scoreOffice", "scoreOffice/expectRate")
+				.access("hasAnyRole('roleAccess', 'ROLE_EXPERT')");
 
-		
-		
-		// Khi người dùng đã login, với vai trò XX.
-		// Nhưng truy cập vào trang yêu cầu vai trò YY,
+		// Trang chi danh cho office
+		http.authorizeRequests().antMatchers("officeuserrate").access("hasAnyRole('roleAccess', 'ROLE_OFFICE')");
+
 		// Ngoại lệ AccessDeniedException sẽ ném ra.
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
 		// Cấu hình cho Login Form.
-		http.authorizeRequests().and().formLogin()//
-
+		http.authorizeRequests().and().formLogin()
 				// Submit URL của trang login
 				.loginProcessingUrl("/j_spring_security_check") // Submit URL
 				.loginPage("/login")//
@@ -88,6 +72,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				// Cấu hình cho Logout Page.
 				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
-
 	}
 }

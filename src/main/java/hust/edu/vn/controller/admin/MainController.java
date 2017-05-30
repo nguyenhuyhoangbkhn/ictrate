@@ -42,9 +42,14 @@ public class MainController {
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
 		
-		model.addAttribute("title", "Welcome");
-		model.addAttribute("message", "This is welcome page!");
-		return "welcomePage";
+		OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
+		List<Office> officeList1 = officeDao.getListOfficeByMark();
+		System.out.println("list"+ officeList1);
+		model.addAttribute("officeList", officeList1);
+		
+		List<UserInfo> expectList = userDao.getUserExpect();
+		model.addAttribute("expectList", expectList);
+		return "office/rank";
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -124,7 +129,7 @@ public class MainController {
 	public String uploadResources(UserInfo userInfo, Model model, Principal principal)
 			throws IllegalStateException, IOException {
 
-		String saveDirectory = "C:/Users/Hoang/workspace/ictrate/src/main/webapp/WEB-INF/resources/img/";
+		String saveDirectory = "C:/Users/Hung/Documents/ictrate/src/main/webapp/WEB-INF/resources/img/";
 
 
 		List<MultipartFile> files = userInfo.getImages();

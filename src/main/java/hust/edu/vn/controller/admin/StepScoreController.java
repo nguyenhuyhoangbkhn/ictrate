@@ -45,11 +45,13 @@ public class StepScoreController {
 		return "redirect:/stepscore";
 	}
 
+	
 	@RequestMapping("stepscore/edit")
 	public String editTypeCriteriaById(Model model, @RequestParam("id") int id) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
+		
 		System.out.println("id" + stepScoreDao.getStepScoreById(id));
 		return "redirect:/stepscore";
 	}

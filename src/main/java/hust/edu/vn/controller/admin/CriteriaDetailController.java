@@ -83,7 +83,7 @@ public class CriteriaDetailController {
 		model.addAttribute("stepScoreList", stepScoreList);
 		// add type criteria in view
 		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
-		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getAllTypeCriteria();
+		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getFullTypeCriteria();
 		model.addAttribute("typeCriteriaList", typeCriteriaList);
 
 		System.out.println(cireriaDao.getCriteriaById(id));

@@ -180,4 +180,40 @@ public class TypeCriteriaDaoImpl implements TypeCriteriaDao {
 		}
 
 	}
+
+	@Override
+	public List<TypeCriteria> getFullTypeCriteria() {
+		// TODO Auto-generated method stub
+				String sql = "SELECT * FROM TYPE_CRITERIA WHERE FLAG_DELETE = 0";
+				Connection conn = null;
+				PreparedStatement ps = null;
+				ResultSet rs = null;
+				try {
+					conn = dataSource.getConnection();
+					ps = conn.prepareStatement(sql);
+					rs = ps.executeQuery();
+					List<TypeCriteria> typeCriteriaList = new ArrayList<TypeCriteria>();
+					while (true) {
+						if (rs.next()) {
+							TypeCriteria typeCriteria = new TypeCriteria(rs.getInt("id"), rs.getString("name"),
+									rs.getString("note"), rs.getInt("id_parent"), rs.getInt("flag_delete"));
+							typeCriteriaList.add(typeCriteria);
+						} else {
+							break;
+						}
+					}
+					rs.close();
+					ps.close();
+					return typeCriteriaList;
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+						}
+					}
+				}
+			}
 }

@@ -5,7 +5,10 @@ import java.util.List;
 import hust.edu.vn.model.TypeCriteria;
 
 public interface TypeCriteriaDao {
+	
 	public List<TypeCriteria> getAllTypeCriteria();
+	
+	public List<TypeCriteria> getFullTypeCriteria();
 
 	public TypeCriteria getTypeCriteriaById(int id);
 

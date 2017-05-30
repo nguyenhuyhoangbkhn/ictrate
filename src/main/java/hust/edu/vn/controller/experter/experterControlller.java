@@ -39,10 +39,8 @@ public class experterControlller {
 	public String scoreOffice(Model model) {
 		// UserInfo expert = new UserInfo();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		List<Office> officeList = officeDao.getAllOffice();
 		model.addAttribute("officeList", officeList);
 		System.out.println("test" + officeList);
@@ -53,9 +51,9 @@ public class experterControlller {
 	@RequestMapping(value = "scoreOffice/rate", method = RequestMethod.GET)
 	public String rateCriteriaQualitative(Model model, @RequestParam("office") int officeID) {
 		// load information office
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		Office office = new Office();
 		office = officeDao.getOfficeById(officeID);
 

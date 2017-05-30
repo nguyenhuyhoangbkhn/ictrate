@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
@@ -18,43 +18,46 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div>
 					<h1>UPDATE VĂN PHÒNG</h1>
-					<form:form method="post" action="updateOffice" modelAttribute="officeDao">
-						<table>
-							<tr>
-								<td></td>
-								<td><form:hidden path="id" /></td>
-							</tr>
+					<form:form method="post" action="updateOffice"
+						modelAttribute="officeDao">
+						<div>
+							<div class="form-group">
+								<form:hidden path="id" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label for="name">Tên văn phòng :</label>
+								<form:input path="name" class="form-control" required="required" />
+							</div>
+							<div class="form-group">
+								<label for="phone">SĐT liên hệ</label>
+								<form:input path="phone" class="form-control" type="tel"
+									required="required" />
 
-							<tr>
-								<td>TÊN VĂN PHÒNG :</td>
-								<td><form:input path="name" /></td>
-							</tr>
-							<tr>
-								<td>ĐIỆN THOẠI LIÊN HỆ :</td>
-								<td><form:input path="phone" /></td>
-							</tr>
-							<tr>
-								<td>THÔNG TIN :</td>
-								<td><form:textarea id="profile" path="profile" cols="60"
-										rows="10"></form:textarea></td>
-							</tr>
-							<tr>
-								<td>ĐỊA CHỈ :</td>
-								<td><form:input path="location" /></td>
-							</tr>
-							<tr>
-								<td>KIỂU VĂN PHÒNG :</td>
-								<td><form:input path="type_office" /></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td><form:hidden path="flag_delete" /></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td><input class="btn btn-primary" type="submit" value="Update" /></td>
-							</tr>
-						</table>
+							</div>
+							<div class="form-group">
+								<label for="profile">Thông tin:</label>
+								<form:textarea name="profile" class="form-control"
+									path="profile" id="profile" required="required" cols="60"
+									rows="10"></form:textarea>
+							</div>
+							<div class="form-group">
+								<label for="location">Địa chỉ</label>
+								<form:input path="location" class="form-control"
+									required="required" />
+							</div>
+							<div class="form-group">
+								<label for="name">Kiểu văn phòng:</label>
+								<form:input path="type_office" class="form-control"
+									required="required" />
+							</div>
+							<div class="form-group">
+								<form:hidden path="flag_delete" class="form-control" />
+							</div>
+
+							<div class="form-group">
+								<input class="btn btn-primary" type="submit" value="Update" />
+							</div>
+						</div>
 					</form:form>
 				</div>
 			</div>

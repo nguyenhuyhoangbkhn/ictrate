@@ -31,6 +31,7 @@ public class LocationController {
 	public String homePage(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		System.out.println(userInfo);
 		model.addAttribute("userInfo",userInfo);
 		List<Location> locationList = locationDao.getAllCityLocation();
 		model.addAttribute("locationlist", locationList);

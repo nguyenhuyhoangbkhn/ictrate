@@ -27,10 +27,24 @@ public class Test {
 		UserDao userDao = ctx.getBean("userDao", UserDao.class);
 		
 		UserInfo userinfo = new UserInfo();
-		userinfo.setUserName("dbadmin1");
-		userinfo.setTelephone("aaa");
+		userinfo.setUserName("hung");
+		userinfo.setPassword("aaa");
 		
-		userDao.updateUser(userinfo);
+	
+		String aa = userDao.checkExist(userinfo);
+		System.out.println(aa);
+		if(aa == "true"){
+			System.out.println("ĐÃ TỒN TẠI");
+		}else{
+			userDao.signUpUser(userinfo);
+		}
+		
+//		if(aa == "CÓ"){
+//			userDao.sigUpUser(userinfo);
+//		}else{
+//			System.out.println("Exist");
+//		}
+	
 		//List <UserInfo> officeList = userDao.getUser();
 		
 		//System.out.println("test"+ officeList);

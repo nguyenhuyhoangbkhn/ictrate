@@ -32,7 +32,7 @@ public class OfficeController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
-		
+
 		List<Office> officeList = officeDao.getAllOffice();
 		model.addAttribute("officeList", officeList);
 		return "office/index";
@@ -43,7 +43,6 @@ public class OfficeController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
-		
 		return new ModelAndView("office/add", "command", new Office());
 	}
 
@@ -59,7 +58,6 @@ public class OfficeController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
-		
 		model.addAttribute("officeDao", officeDao.getOfficeById(id));
 		
 		return "office/edit";
@@ -67,7 +65,7 @@ public class OfficeController {
 
 	@RequestMapping("office/updateOffice")
 	public String updateOffice(@ModelAttribute("Office") Office office) {
-
+		
 		officeDao.updateOffice(office);
 		return "redirect:/office";
 	}
@@ -86,14 +84,12 @@ public class OfficeController {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
-
-		List<Office> officeList = officeDao.getAllOffice();
-		model.addAttribute("officeList", officeList);
-		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
-		
+
+		List<Office> officeList = officeDao.getAllOffice();
+		model.addAttribute("officeList", officeList);
 		return "office/accessOffice";
 	}
 	@RequestMapping("office/rate")
@@ -101,7 +97,9 @@ public class OfficeController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
-		
+
+		List<hust.edu.vn.model.User> userList = officeDao.getAllExpecter();
+		model.addAttribute("userList1",userList);		
 		this.idOffice = officeID;
 		System.out.println("office id" + this.idOffice);
 		return "office/acceessoffice";
@@ -111,6 +109,9 @@ public class OfficeController {
 		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		AccessOfficeDao accessOffice = ctx.getBean("accessOfficeDao", AccessOfficeDao.class);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		
 //		OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
 		for (String user1 : user) {
@@ -121,9 +122,9 @@ public class OfficeController {
 		List<Office> officeList = officeDao.getAllOffice();
 		model.addAttribute("officeList", officeList);
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserInfo userInfo = userDao.getUserByName(auth.getName());
-		model.addAttribute("userInfo",userInfo);
+
+		List<hust.edu.vn.model.User> userList = officeDao.getAllExpecter();
+		model.addAttribute("userList1",userList);
 		
 		return "office/accessOffice";
 	}

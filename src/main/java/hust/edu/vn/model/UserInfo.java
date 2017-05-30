@@ -23,6 +23,16 @@ public class UserInfo {
 		this.imgprofile = imgprofile;
 	}
     
+    public UserInfo(String userName, String password, String enabled, String mail, String imgprofile, String role, String telephone) {
+		this.userName = userName;
+		this.password = password;
+		this.enabled = enabled;
+		this.mail = mail;
+		this.imgprofile = imgprofile;
+		this.role = role;
+		this.telephone = telephone;
+	}
+    
     public UserInfo(String userName, String mail, String imgprofile, String role) {
 		this.userName = userName;
 		this.mail = mail;
@@ -106,6 +116,6 @@ public class UserInfo {
 
 	@Override
 	public String toString() {
-		return "NAME=" + userName + ",TYPE=" + mail + ",ID_PARENT=" + telephone;
+		return "NAME=" + userName + ",TYPE=" + mail + ",ID_PARENT=" + role;
 	}
 }

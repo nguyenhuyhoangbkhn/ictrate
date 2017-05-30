@@ -10,7 +10,13 @@ public interface UserDao {
 	
 	public UserInfo getUserByName(String userName);
 	
-	public void updateUser(UserInfo userInfo);
+	public void updateImgaeProfile(UserInfo userInfo);
+	
+	public String checkExist(UserInfo userInfo);
+	
+	public void signUpUser(UserInfo userInfo);
+
+	public void signUpRole(UserInfo userInfo);
 
 	public List<UserInfo> getUserExpect();
 }

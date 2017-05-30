@@ -37,7 +37,6 @@ public class CriteriaDetailController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
-		
 		List<Criteria> criterialist = cireriaDao.getAllCriteria();
 		model.addAttribute("criterialist", criterialist);
 		return "criteria/index";
@@ -51,9 +50,9 @@ public class CriteriaDetailController {
 
 	@RequestMapping("criteria/add")
 	public ModelAndView addCriteria(Model model) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		//add type score in view
 		StepScoreDao stepScoreDao = ctx.getBean("stepScoreDao", StepScoreDao.class);
 		List <StepScore> stepScoreList = stepScoreDao.listStepScore();

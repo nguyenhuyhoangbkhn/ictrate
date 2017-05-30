@@ -16,12 +16,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-
 import hust.edu.vn.dao.AccessOfficeDao;
 import hust.edu.vn.dao.CriteriaDao;
 import hust.edu.vn.dao.OfficeDao;
 import hust.edu.vn.dao.RateDao;
 import hust.edu.vn.dao.ResultDao;
+import org.springframework.web.servlet.ModelAndView;
 import hust.edu.vn.dao.UserDao;
 import hust.edu.vn.model.AccessOffice;
 import hust.edu.vn.model.Criteria;
@@ -63,22 +63,43 @@ public class MainController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
-		
 		return "loginPage";
 	}
 
 	@RequestMapping(value = "user/signUpPage", method = RequestMethod.GET)
-	public String signUpPage(Model model) {
+	// public String signUpPage(Model model) {
 		
-		return "user/signUpPage";
+	// 	return "user/signUpPage";
+	// }
+	public ModelAndView signUpPage(Model model) {
+
+		return new ModelAndView("user/signUpPage","command", new UserInfo());
+	}
+	
+	@RequestMapping(value = "user/signUp", method = RequestMethod.POST)
+	public ModelAndView signUpSuccess(Model model, UserInfo userInfo){
+		
+		String check = userDao.checkExist(userInfo);
+		if(check == "true"){
+			System.out.println("ĐÃ TỒN TẠI");
+			return new ModelAndView("user/validateSignUp","command", new UserInfo());
+		}
+		if(check == "false"){
+		userDao.signUpUser(userInfo);
+		userDao.signUpRole(userInfo);
+		return new ModelAndView("user/signUpSucces", "command", new UserInfo(userInfo.getUserName(), userInfo.getPassword()));
+		}
+		return null;
 	}
 
 	@RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
 	public String logoutSuccessfulPage(Model model) {
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
 		
+
 		model.addAttribute("title", "Logout");
 		return "logoutSuccessfulPage";
 	}
@@ -88,7 +109,7 @@ public class MainController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
-		
+	
 		// Sau khi user login thanh cong se co principal
 		String userName = principal.getName();
 
@@ -100,10 +121,9 @@ public class MainController {
 	@RequestMapping(value = "/savefiles")
 	public String uploadResources(UserInfo userInfo, Model model, Principal principal)
 			throws IllegalStateException, IOException {
-		
-		
-		
+
 		String saveDirectory = "C:/Users/Hoang/workspace/ictrate/src/main/webapp/WEB-INF/resources/img/";
+
 
 		List<MultipartFile> files = userInfo.getImages();
 
@@ -118,7 +138,11 @@ public class MainController {
 					fileNames.add(fileName);
 					userInfo.setUserName(principal.getName());
 					userInfo.setImgprofile(fileName);
-					userDao.updateUser(userInfo);
+
+
+					userDao.updateImgaeProfile(userInfo);
+					System.out.println(fileNames);
+
 				}
 			}
 		}

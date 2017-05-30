@@ -26,18 +26,18 @@ public class Test {
 		
 		UserDao userDao = ctx.getBean("userDao", UserDao.class);
 		
-		UserInfo userinfo = new UserInfo();
-		userinfo.setUserName("hung");
-		userinfo.setPassword("aaa");
+		//UserInfo userinfo = new UserInfo();
+		//String aa = userinfo.setUserName("dbadmin1");
+//		userinfo.setPassword("aaa");
 		
 	
-		String aa = userDao.checkExist(userinfo);
-		System.out.println(aa);
-		if(aa == "true"){
-			System.out.println("ĐÃ TỒN TẠI");
-		}else{
-			userDao.signUpUser(userinfo);
-		}
+		System.out.println(userDao.getUserInfoByName("dbadmin1"));
+
+//		if(aa == "true"){
+//			System.out.println("ĐÃ TỒN TẠI");
+//		}else{
+//			userDao.signUpUser(userinfo);
+//		}
 		
 //		if(aa == "CÓ"){
 //			userDao.sigUpUser(userinfo);

@@ -108,11 +108,13 @@ public class MainController {
 	public String userInfo(Model model, Principal principal) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		UserInfo userInfo1 = userDao.getUserInfoByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
+		model.addAttribute("userInfo1",userInfo1);
 	
 		// Sau khi user login thanh cong se co principal
 		String userName = principal.getName();
-
+		
 		System.out.println("test Name: " + userName);
 
 		return "userInfoPage";

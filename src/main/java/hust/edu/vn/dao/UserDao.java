@@ -10,6 +10,8 @@ public interface UserDao {
 	
 	public UserInfo getUserByName(String userName);
 	
+	public UserInfo getUserInfoByName(String userName);
+	
 	public void updateImgaeProfile(UserInfo userInfo);
 	
 	public String checkExist(UserInfo userInfo);

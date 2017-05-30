@@ -40,33 +40,33 @@
 									<tbody>
 										<tr>
 											<td>Tên tài khoản:</td>
-											<td>${userInfo.userName}</td>
+											<td>${userInfo1.userName}</td>
 										</tr>
 										<tr>
 											<td>Chức vụ:</td>
-											<td>Admin & Deverloper</td>
+											<td>${userInfo1.role}</td>
 										</tr>
 										<tr>
 											<td>Ngày sinh:</td>
-											<td>01/24/1988</td>
+											<td>${userInfo1.dob}</td>
 										</tr>
 
 										<tr>
 										<tr>
 											<td>Giới tính:</td>
-											<td>Nam</td>
+											<td>${userInfo1.gender}</td>
 										</tr>
 										<tr>
 											<td>Địa chỉ:</td>
-											<td>Kathmandu,Nepal</td>
+											<td>${userInfo1.address}</td>
 										</tr>
 										<tr>
 											<td>Email</td>
-											<td><a href="mailto:info@support.com">info@support.com</a></td>
+											<td><a href="${userInfo1.mail}">${userInfo1.mail}</a></td>
 										</tr>
 										<tr>
 											<td>Điện thoại liên hệ</td>
-											<td>1555-4567-890(Mobile)</td>
+											<td>${userInfo1.telephone}</td>
 										</tr>
 									</tbody>
 								</table>

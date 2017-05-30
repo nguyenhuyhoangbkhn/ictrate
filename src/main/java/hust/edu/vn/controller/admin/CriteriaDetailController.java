@@ -36,7 +36,7 @@ public class CriteriaDetailController {
 	public String typeCriteriaIndex(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
-		model.addAttribute("userInfo",userInfo);
+		model.addAttribute("userInfo", userInfo);
 		List<Criteria> criterialist = cireriaDao.getAllCriteria();
 		model.addAttribute("criterialist", criterialist);
 		return "criteria/index";
@@ -52,21 +52,49 @@ public class CriteriaDetailController {
 	public ModelAndView addCriteria(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
-		model.addAttribute("userInfo",userInfo);
-		//add type score in view
+		model.addAttribute("userInfo", userInfo);
+		// add type score in view
 		StepScoreDao stepScoreDao = ctx.getBean("stepScoreDao", StepScoreDao.class);
-		List <StepScore> stepScoreList = stepScoreDao.listStepScore();
-		model.addAttribute("stepScoreList",stepScoreList);
-		//add type criteria in view
+		List<StepScore> stepScoreList = stepScoreDao.listStepScore();
+		model.addAttribute("stepScoreList", stepScoreList);
+		// add type criteria in view
 		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
 		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getAllTypeCriteria();
-		model.addAttribute("typeCriteriaList",typeCriteriaList);
+		model.addAttribute("typeCriteriaList", typeCriteriaList);
 		return new ModelAndView("criteria/add", "command", new Criteria());
 	}
 
 	@RequestMapping("criteria/addCriteria")
 	public String addOffice(@ModelAttribute("Criteria") Criteria criteria) {
 		cireriaDao.AddCriteria(criteria);
+		return "redirect:/criteria";
+	}
+
+	@RequestMapping("criteria/edit")
+	public String editOfficeById(Model model, @RequestParam("criteriaid") int id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo", userInfo);
+		model.addAttribute("criteriaDao", cireriaDao.getCriteriaById(id));
+		
+		// add type score in view
+		StepScoreDao stepScoreDao = ctx.getBean("stepScoreDao", StepScoreDao.class);
+		List<StepScore> stepScoreList = stepScoreDao.listStepScore();
+		model.addAttribute("stepScoreList", stepScoreList);
+		// add type criteria in view
+		TypeCriteriaDao typeCireriaDao = ctx.getBean("typeCriteriaDao", TypeCriteriaDao.class);
+		List<TypeCriteria> typeCriteriaList = typeCireriaDao.getAllTypeCriteria();
+		model.addAttribute("typeCriteriaList", typeCriteriaList);
+
+		System.out.println(cireriaDao.getCriteriaById(id));
+
+		return "criteria/edit";
+	}
+
+	@RequestMapping("criteria/updateCriteria")
+	public String updateOffice(@ModelAttribute("Criteria") Criteria criteria) {
+
+		cireriaDao.updateCriteria(criteria);
 		return "redirect:/criteria";
 	}
 }

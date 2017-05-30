@@ -203,4 +203,38 @@ public class UserDaoImpl implements UserDao {
 			}
 		}
 	}
+
+	@Override
+	public UserInfo getUserInfoByName(String userName) {
+		String sql = "SELECT * FROM USERS WHERE USERNAME = ?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		UserInfo userInfo = new UserInfo();
+
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userName);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				userInfo = new UserInfo(rs.getString("userName"), rs.getString("password"), rs.getString("mail"),
+						rs.getString("imgprofile"), rs.getString("role"), rs.getString("telephone"),
+						rs.getString("dob"), rs.getString("gender"), rs.getString("address"));
+			}
+			rs.close();
+			ps.close();
+
+			return userInfo;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
 }

@@ -24,7 +24,7 @@
 
 						<div class="form-group">
 							<label for="name">tên tiêu chí:</label> <input name="name"
-								class="form-control form-input-default" required="required" />
+								class="form-control" required="required" />
 						</div>
 						<div class="form-group">
 							<label for="note">tên loại điểm:</label> <input name="note"

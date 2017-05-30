@@ -60,8 +60,30 @@ public class CriteriaDaoImpl implements CriteriaDao {
 
 	@Override
 	public Criteria getCriteriaById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT * FROM CRITERIA WHERE ID=? AND FLAG_DELETE = 0";
+		Criteria criteria = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				criteria = new Criteria();
+				criteria.setId(id);
+				criteria.setName(rs.getString(2));
+				criteria.setNote(rs.getString(3));
+				criteria.setType_criteria(rs.getString(4));
+				criteria.setType_score(rs.getString(5));
+				criteria.setFlag_delete(rs.getInt(6));
+				criteria.setAmong(rs.getFloat(7));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return criteria;
 	}
 
 	@Override
@@ -109,7 +131,25 @@ public class CriteriaDaoImpl implements CriteriaDao {
 
 	@Override
 	public void updateCriteria(Criteria Criteria) {
-		// TODO Auto-generated method stub
+		String sql = "UPDATE CRITERIA SET NAME=?, NOTE=?, TYPE_CRITERIA=?, TYPE_SCORE=?, FLAG_DELETE=?, AMONG=? WHERE ID=?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			// Parameters start with 1
+			ps.setString(1, Criteria.getName());
+			ps.setString(2, Criteria.getNote());
+			ps.setString(3, Criteria.getType_criteria());
+			ps.setString(4, Criteria.getType_score());
+			ps.setInt(5, Criteria.getFlag_delete());
+			ps.setFloat(6, Criteria.getAmong());
+			ps.setInt(7, Criteria.getId());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 

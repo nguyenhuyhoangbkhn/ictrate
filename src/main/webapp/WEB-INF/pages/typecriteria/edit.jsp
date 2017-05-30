@@ -29,7 +29,7 @@
 							<div class="form-group">
 								<label for="name">Tên tiêu chí:</label>
 								<form:input path="name" id="validateName"
-									class="form-control form-input-default" required="required" />
+									class="form-control" required="required" />
 							</div>
 							<div class="form-group">
 								<label for="note">Tên loại điểm:</label>

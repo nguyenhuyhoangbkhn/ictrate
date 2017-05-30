@@ -72,7 +72,6 @@ public class UserDaoImpl implements UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -201,6 +200,63 @@ public class UserDaoImpl implements UserDao {
 				} catch (SQLException e) {
 				}
 			}
+		}
+	}
+
+	@Override
+	public UserInfo getUserInfoByName(String userName) {
+		String sql = "SELECT * FROM USERS WHERE USERNAME = ?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		UserInfo userInfo = new UserInfo();
+
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userName);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				userInfo = new UserInfo(rs.getString("userName"), rs.getString("password"), rs.getString("mail"),
+						rs.getString("role"), rs.getString("telephone"), rs.getString("dob"), rs.getString("gender"),
+						rs.getString("address"));
+			}
+			rs.close();
+			ps.close();
+
+			return userInfo;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+
+	@Override
+	public void updateProfileInfo(UserInfo userInfo) {
+		String sql = "UPDATE USERS SET MAIL=?, TELEPHONE=?, DOB=?, GENDER=?, ADDRESS=?, PASSWORD=? WHERE USERNAME=?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			// Parameters start with 1
+			ps.setString(1, userInfo.getMail()); // get data from database
+			ps.setString(2, userInfo.getTelephone());
+			ps.setString(3, userInfo.getDob());
+			ps.setString(4, userInfo.getGender());
+			ps.setString(5, userInfo.getAddress());
+			ps.setString(6, userInfo.getPassword());
+			ps.setString(7, userInfo.getUserName());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }

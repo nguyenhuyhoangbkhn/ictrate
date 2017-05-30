@@ -12,9 +12,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import hust.edu.vn.dao.AccessOfficeDao;
 import hust.edu.vn.dao.CriteriaDao;
@@ -113,21 +114,41 @@ public class MainController {
 	public String userInfo(Model model, Principal principal) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		UserInfo userInfo1 = userDao.getUserInfoByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
+		model.addAttribute("userInfo1",userInfo1);
 	
 		// Sau khi user login thanh cong se co principal
 		String userName = principal.getName();
-
+		
 		System.out.println("test Name: " + userName);
 
 		return "userInfoPage";
+	}
+	
+	@RequestMapping("/user/edit")
+	public String editUserInfo(Model model, @RequestParam("userInfoName") String userName){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		UserInfo userInfo1 = userDao.getUserInfoByName(userName);
+		model.addAttribute("userInfo",userInfo);
+		model.addAttribute("userInfo1",userInfo1);
+		return "/user/edit";
+	}
+	
+	@RequestMapping("user/updateUserInfo")
+	public String updateUserInfo(@ModelAttribute("UserInfo") UserInfo userInfo){
+		
+		userDao.updateProfileInfo(userInfo);
+		return "redirect:/userInfo";
+		
 	}
 
 	@RequestMapping(value = "/savefiles")
 	public String uploadResources(UserInfo userInfo, Model model, Principal principal)
 			throws IllegalStateException, IOException {
 
-		String saveDirectory = "C:/Users/Hoang/workspace/ictrate/src/main/webapp/WEB-INF/resources/img/";
+		String saveDirectory = "C:/Users/Hung/Documents/ictrate/src/main/webapp/WEB-INF/resources/img/";
 
 
 		List<MultipartFile> files = userInfo.getImages();

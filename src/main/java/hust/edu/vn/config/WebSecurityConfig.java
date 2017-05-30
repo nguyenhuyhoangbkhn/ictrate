@@ -46,7 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/typecriteria/updateTypeCriteria", 
 						"/accessOffice", 
 						"office/rate", "criteria/add",
-						"criteria/delete", "criteria/addCriteria", "/admin")
+						"criteria/delete", "criteria/addCriteria", "/admin",
+						"criteria/edit","criteria/updateCriteria")
 				.access("hasAnyRole('roleAccess', 'ROLE_ADMIN')");
 
 		// Trang danh cho chuyen gia

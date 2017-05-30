@@ -42,9 +42,14 @@ public class MainController {
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
 		
-		model.addAttribute("title", "Welcome");
-		model.addAttribute("message", "This is welcome page!");
-		return "welcomePage";
+		OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
+		List<Office> officeList1 = officeDao.getListOfficeByMark();
+		System.out.println("list"+ officeList1);
+		model.addAttribute("officeList", officeList1);
+		
+		List<UserInfo> expectList = userDao.getUserExpect();
+		model.addAttribute("expectList", expectList);
+		return "office/rank";
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)

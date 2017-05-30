@@ -19,21 +19,20 @@
 		<div class="row">
 			<jsp:include page="../home/_left.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<div>
-					<h1 class="text">DANH SÁCH VĂN PHÒNG</h1>
-
-
-					<c:forEach var="office" items="${officeList}">
-						<div class="tr_${office.id} col-sm-4 col-md-3">
-							<form:form method="post" id="addAccessOffice${office.id}">
-								<div></div>
-								<div>
-									<span class="glyphicon glyphicon-erase"></span>${office.name}</div>
-								<div>
-									<span class="glyphicon glyphicon-phone"></span>${office.phone}</div>
-								<div>
-									<span class="glyphicon glyphicon-globe"></span>${office.location}</div>
-								<!-- 
+				<div class="panel panel-default">
+					<div class="panel-heading">DANH SÁCH VĂN PHÒNG</div>
+					<div class="panel-body">
+						<c:forEach var="office" items="${officeList}">
+							<div class="tr_${office.id} col-sm-4 col-md-3">
+								<form:form method="post" id="addAccessOffice${office.id}">
+									<div></div>
+									<div>
+										<span class="glyphicon glyphicon-erase"></span>${office.name}</div>
+									<div>
+										<span class="glyphicon glyphicon-phone"></span>${office.phone}</div>
+									<div>
+										<span class="glyphicon glyphicon-globe"></span>${office.location}</div>
+									<!-- 
 								<div>
 									<select name="test" class="form-control" required="required">
 										<c:forEach var="user" items="${userList}">
@@ -43,15 +42,15 @@
 								</div>
 								 -->
 
-								<div>
-									<a
-										href="${pageContext.request.contextPath}/office/rate?officeID=${office.id}"
-										class="btn btn-primary">Giao quyền</a>
-								</div>
-							</form:form>
-						</div>
-					</c:forEach>
-
+									<div>
+										<a
+											href="${pageContext.request.contextPath}/office/rate?officeID=${office.id}"
+											class="btn btn-primary">Giao quyền</a>
+									</div>
+								</form:form>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>

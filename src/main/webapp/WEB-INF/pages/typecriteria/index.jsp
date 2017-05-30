@@ -21,49 +21,51 @@
 		<div class="row">
 			<jsp:include page="../home/_left.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<div>
-					<h1 class="text">Type Criteria list</h1>
-					<c:if test="${userInfo.role.equals('ADMIN')}">
-						<div class="button">
-							<a class="btn btn-primary"
-								href="${pageContext.request.contextPath}/typecriteria/add">Thêm mới</a>
-						</div>
-					</c:if>
-					<table id="myDatatable"
-						class="table table-striped table-bordered table-hover"
-						id="dataTables-example">
-						<thead>
-							<tr>
-								<th>TIÊU CHÍ ĐÁNH GIÁ</th>
-								<th>NOTE</th>
-								<th>CHI TIẾT</th>
-								<th>CHỈNH SỬA</th>
-								<th>XOÁ</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="criteria" items="${typeCriteriaList}">
-								<tr class="tr_${criteria.id}">
-									<td>${criteria.name}</td>
-									<td align="center">${criteria.note}</td>
-									<td align="center"><a
-										href="${pageContext.request.contextPath}/typecriteria/detail?tyecriteriaid=${criteria.id}"
-										class="btn btn-info btn-sm"> <span
-											class="glyphicon glyphicon-th"></span>
-									</a></td>
-									<td align="center"><a
-										href="${pageContext.request.contextPath}/typecriteria/edit?tyecriteriaid=${criteria.id}"
-										class="btn btn-warning btn-sm"> <span
-											class="glyphicon glyphicon-edit"></span>
-									</a></td>
-									<td align="center"><a class="btn btn-danger btn-sm"
-										onclick="showDialog('${criteria.id}');"> <span
-											class="glyphicon glyphicon-trash"></span>
-									</a></td>
+				<div class="panel panel-default">
+					<div class="panel-heading">Danh sách các loại tiêu chí</div>
+					<div class="panel-body">
+						<c:if test="${userInfo.role.equals('ADMIN')}">
+							<div class="button">
+								<a class="btn btn-primary"
+									href="${pageContext.request.contextPath}/typecriteria/add">Thêm
+									mới</a>
+							</div>
+						</c:if>
+						<table id="myDatatable"
+							class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th>Tiêu chí đánh giá</th>
+									<th>Ghi chú</th>
+									<th>Thao tác</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								<c:forEach var="criteria" items="${typeCriteriaList}">
+									<tr class="tr_${criteria.id}">
+										<td>${criteria.name}</td>
+										<td>${criteria.note}</td>
+										<td><a
+											href="${pageContext.request.contextPath}/typecriteria/detail?tyecriteriaid=${criteria.id}"
+											class="btn btn-info btn-sm"> <span
+												class="glyphicon glyphicon-th"></span>
+										</a> <c:if test="${userInfo.role.equals('ADMIN')}">
+									 | <a
+													href="${pageContext.request.contextPath}/typecriteria/edit?tyecriteriaid=${criteria.id}"
+													class="btn btn-warning btn-sm"> <span
+													class="glyphicon glyphicon-edit"></span>
+												</a> |
+									<a class="btn btn-danger btn-sm"
+													onclick="showDialog('${criteria.id}');"> <span
+													class="glyphicon glyphicon-trash"></span>
+												</a>
+											</c:if></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 

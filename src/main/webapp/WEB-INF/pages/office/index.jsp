@@ -17,47 +17,52 @@
 		<div class="row">
 			<jsp:include page="../home/_left.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<div>
-					<h1 class="text">DANH SÁCH VĂN PHÒNG</h1>
-
-					<a class="btn btn-primary"
-						href="${pageContext.request.contextPath}/office/add">Thêm Văn
-						Phòng</a>
-					<table id="myDatatable"
-						class="table table-striped table-bordered table-hover"
-						id="dataTables-example">
-						<thead>
-							<tr>
-								<th>TÊN VĂN PHÒNG</th>
-								<th>ĐIỆN THOẠI LIÊN HỆ</th>
-								<th>ĐỊA CHỈ</th>
-								<th>KIỂU VĂN PHÒNG</th>
-								<th>THÔNG TIN</th>
-								<th>CHỈNH SỬA</th>
-								<th>XOÁ</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="office" items="${officeList}">
-								<tr class="tr_${office.id}">
-									<td>${office.name}</td>
-									<td>${office.phone}</td>
-									<td>${office.location}</td>
-									<td>${office.type_office}</td>
-									<td>${office.profile}</td>
-									<td align="center"><a
-										href="${pageContext.request.contextPath}/office/edit?officeid=${office.id}"
-										class="btn btn-warning btn-sm"> <span
-											class="glyphicon glyphicon-edit"></span>
-									</a></td>
-									<td align="center"><a class="btn btn-danger btn-sm"
-										onclick="showDialog('${office.id}');"> <span
-											class="glyphicon glyphicon-trash"></span>
-									</a></td>
+				<div class="panel panel-default">
+					<div class="panel-heading">Danh sách văn phòng</div>
+					<div class="panel-body">
+						<c:if test="${userInfo.role.equals('ADMIN')}">
+							<a class="btn btn-primary"
+								href="${pageContext.request.contextPath}/office/add">Thêm
+								Văn Phòng</a>
+						</c:if>
+						<table id="myDatatable"
+							class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th>Tên văn phòng</th>
+									<th>Điện thoại liên hệ</th>
+									<th>Địa chỉ</th>
+									<th>Kiểu văn phòng</th>
+									<th>Thông tin</th>
+									<c:if test="${userInfo.role.equals('ADMIN')}">
+										<th>Thao tác</th>
+									</c:if>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								<c:forEach var="office" items="${officeList}">
+									<tr class="tr_${office.id}">
+										<td>${office.name}</td>
+										<td>${office.phone}</td>
+										<td>${office.location}</td>
+										<td>${office.type_office}</td>
+										<td>${office.profile}</td>
+										<c:if test="${userInfo.role.equals('ADMIN')}">
+											<td align="center"><a
+												href="${pageContext.request.contextPath}/office/edit?officeid=${office.id}"
+												class="btn btn-warning btn-sm"> <span
+													class="glyphicon glyphicon-edit"></span>
+											</a> | <a class="btn btn-danger btn-sm"
+												onclick="showDialog('${office.id}');"> <span
+													class="glyphicon glyphicon-trash"></span>
+											</a></td>
+										</c:if>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 

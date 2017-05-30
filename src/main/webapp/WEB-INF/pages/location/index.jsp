@@ -17,47 +17,48 @@
 		<div class="row">
 			<jsp:include page="../home/_left.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<div>
-					<h1 class="text">DANH SÁCH TỈNH THÀNH</h1>
-					<c:if test="${userInfo.role.equals('ADMIN')}">
-					<a class="btn btn-primary"
-						href="${pageContext.request.contextPath}/location/add">Thêm mới 
-						location</a>
+				<div class="panel panel-default">
+					<div class="panel-heading">Danh sách tỉnh thành</div>
+					<div class="panel-body">
+						<c:if test="${userInfo.role.equals('ADMIN')}">
+							<a class="btn btn-primary"
+								href="${pageContext.request.contextPath}/location/add">Thêm
+								mới</a>
 						</c:if>
-					<table id="myDatatable" class="table table-striped table-bordered table-hover"
+						<table id="myDatatable"
+							class="table table-striped table-bordered table-hover"
 							id="dataTables-example">
-						<thead>
-							<tr>
-								<th>TÊN</th>
-								<th>KIỂU</th>
-								<th style="text-align: center;">CHI TIẾT</th>
-								<th style="text-align: center;">CHỈNH SỬA</th>
-								<th style="text-align: center;">XOÁ</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="location" items="${locationlist}">
-								<tr class="tr_${location.id}">
-									<td>${location.name}</td>
-									<td>${location.type}</td>
-									<td align="center"><a
-										href="${pageContext.request.contextPath}/location/detail?locationid=${location.id}"
-										class="btn btn-info btn-sm"> <span
-											class="glyphicon glyphicon-th"></span>
-									</a></td>
-									<td align="center"><a
-										href="${pageContext.request.contextPath}/location/edit?locationid=${location.id}"
-										class="btn btn-warning btn-sm"> <span
-											class="glyphicon glyphicon-edit"></span>
-									</a></td>
-									<td align="center"><a class="btn btn-danger btn-sm"
-										onclick="showDialog('${location.id}');"><span
-											class="glyphicon glyphicon-trash"></span></a></td>
-
+							<thead>
+								<tr>
+									<th>TÊN</th>
+									<th>KIỂU</th>
+									<th style="text-align: center;">Thao tác</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								<c:forEach var="location" items="${locationlist}">
+									<tr class="tr_${location.id}">
+										<td>${location.name}</td>
+										<td>${location.type}</td>
+										<td align="center"><a
+											href="${pageContext.request.contextPath}/location/detail?locationid=${location.id}"
+											class="btn btn-info btn-sm"> <span
+												class="glyphicon glyphicon-th"></span></a> <c:if
+												test="${userInfo.role.equals('ADMIN')}">
+											|
+											<a
+													href="${pageContext.request.contextPath}/location/edit?locationid=${location.id}"
+													class="btn btn-warning btn-sm"> <span
+													class="glyphicon glyphicon-edit"></span></a> | <a
+													class="btn btn-danger btn-sm"
+													onclick="showDialog('${location.id}');"><span
+													class="glyphicon glyphicon-trash"></span></a>
+											</c:if></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 

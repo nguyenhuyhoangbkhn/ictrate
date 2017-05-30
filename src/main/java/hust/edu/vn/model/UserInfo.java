@@ -25,12 +25,11 @@ public class UserInfo {
 		this.imgprofile = imgprofile;
 	}
 
-	public UserInfo(String userName, String password, String mail, String imgprofile, String role, String telephone,
+	public UserInfo(String userName, String password, String mail, String role, String telephone,
 			String dob, String gender, String address) {
 		this.userName = userName;
 		this.password = password;
 		this.mail = mail;
-		this.imgprofile = imgprofile;
 		this.role = role;
 		this.telephone = telephone;
 		this.dob = dob;

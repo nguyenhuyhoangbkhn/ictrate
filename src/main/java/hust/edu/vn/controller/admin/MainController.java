@@ -12,9 +12,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import hust.edu.vn.dao.AccessOfficeDao;
 import hust.edu.vn.dao.CriteriaDao;
@@ -123,6 +124,24 @@ public class MainController {
 		System.out.println("test Name: " + userName);
 
 		return "userInfoPage";
+	}
+	
+	@RequestMapping("/user/edit")
+	public String editUserInfo(Model model, @RequestParam("userInfoName") String userName){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		UserInfo userInfo1 = userDao.getUserInfoByName(userName);
+		model.addAttribute("userInfo",userInfo);
+		model.addAttribute("userInfo1",userInfo1);
+		return "/user/edit";
+	}
+	
+	@RequestMapping("user/updateUserInfo")
+	public String updateUserInfo(@ModelAttribute("UserInfo") UserInfo userInfo){
+		
+		userDao.updateProfileInfo(userInfo);
+		return "redirect:/userInfo";
+		
 	}
 
 	@RequestMapping(value = "/savefiles")

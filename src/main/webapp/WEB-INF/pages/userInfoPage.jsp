@@ -69,7 +69,9 @@
 										</tr>
 									</tbody>
 								</table>
-								<a href="#" class="btn btn-info btn-sm pull-right infoEdit"> <span
+								<a
+									href="${pageContext.request.contextPath}/user/edit?userInfoName=${userInfo1.userName}"
+									class="btn btn-info btn-sm pull-right"> <span
 									class="glyphicon glyphicon-edit "></span> Chỉnh sửa
 								</a>
 							</div>

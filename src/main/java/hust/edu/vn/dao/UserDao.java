@@ -14,6 +14,8 @@ public interface UserDao {
 	
 	public void updateImgaeProfile(UserInfo userInfo);
 	
+	public void updateProfileInfo(UserInfo userInfo);
+	
 	public String checkExist(UserInfo userInfo);
 	
 	public void signUpUser(UserInfo userInfo);

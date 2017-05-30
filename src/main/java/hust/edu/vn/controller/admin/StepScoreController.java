@@ -51,9 +51,10 @@ public class StepScoreController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);
-		
-		System.out.println("id" + stepScoreDao.getStepScoreById(id));
-		return "redirect:/stepscore";
+		StepScore stepScore = stepScoreDao.getStepScoreById(id);
+		model.addAttribute("stepScore",stepScore);
+
+		return "stepscore/edit";
 	}
 
 	@RequestMapping("stepscore/add")

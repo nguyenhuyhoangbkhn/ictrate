@@ -6,6 +6,8 @@ import hust.edu.vn.model.Criteria;
 
 public interface CriteriaDao {
 	public List<Criteria> getAllCriteria();
+	
+	public List<Criteria> getCriteriaAndScore();
 
 	public Criteria getCriteriaById(int id);
 

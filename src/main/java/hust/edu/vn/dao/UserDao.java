@@ -12,4 +12,5 @@ public interface UserDao {
 	
 	public void updateUser(UserInfo userInfo);
 
+	public List<UserInfo> getUserExpect();
 }

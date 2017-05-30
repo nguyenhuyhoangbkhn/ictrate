@@ -34,6 +34,10 @@
 	<bean id="rateDao" class="hust.edu.vn.dao.impl.RateDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="resultDao" class="hust.edu.vn.dao.impl.ResultDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

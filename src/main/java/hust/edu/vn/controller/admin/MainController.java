@@ -4,26 +4,44 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+
+import hust.edu.vn.dao.AccessOfficeDao;
+import hust.edu.vn.dao.CriteriaDao;
+import hust.edu.vn.dao.OfficeDao;
+import hust.edu.vn.dao.RateDao;
+import hust.edu.vn.dao.ResultDao;
 import hust.edu.vn.dao.UserDao;
+import hust.edu.vn.model.AccessOffice;
+import hust.edu.vn.model.Criteria;
+import hust.edu.vn.model.Office;
+import hust.edu.vn.model.Rate;
 import hust.edu.vn.model.UserInfo;
 
 @Controller
 public class MainController {
-	
+
 	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 	UserDao userDao = ctx.getBean("userDao", UserDao.class);
+	
 
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String welcomePage(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
 		model.addAttribute("title", "Welcome");
 		model.addAttribute("message", "This is welcome page!");
 		return "welcomePage";
@@ -31,35 +49,46 @@ public class MainController {
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminPage(Model model) {
+		
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
 		return "adminPage";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(Model model) {
-
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
 		return "loginPage";
 	}
 
 	@RequestMapping(value = "user/signUpPage", method = RequestMethod.GET)
 	public String signUpPage(Model model) {
-
+		
 		return "user/signUpPage";
 	}
 
 	@RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
 	public String logoutSuccessfulPage(Model model) {
-		List <UserInfo> userList = userDao.getUser();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		
-		model.addAttribute("userList",userList);
 		model.addAttribute("title", "Logout");
 		return "logoutSuccessfulPage";
 	}
 
 	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
 	public String userInfo(Model model, Principal principal) {
-		List <UserInfo> userList = userDao.getUser();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		
-		model.addAttribute("userList",userList);
 		// Sau khi user login thanh cong se co principal
 		String userName = principal.getName();
 
@@ -67,42 +96,45 @@ public class MainController {
 
 		return "userInfoPage";
 	}
-	
+
 	@RequestMapping(value = "/savefiles")
 	public String uploadResources(UserInfo userInfo, Model model, Principal principal)
 			throws IllegalStateException, IOException {
-
+		
+		
+		
 		String saveDirectory = "C:/Users/Hoang/workspace/ictrate/src/main/webapp/WEB-INF/resources/img/";
 
 		List<MultipartFile> files = userInfo.getImages();
 
 		List<String> fileNames = new ArrayList<String>();
-		
+
 		if (null != files && files.size() > 0) {
 			for (MultipartFile multipartFile : files) {
-
 				String fileName = multipartFile.getOriginalFilename();
 				if (!"".equalsIgnoreCase(fileName)) {
 					// Handle file content - multipartFile.getInputStream()
 					multipartFile.transferTo(new File(saveDirectory + fileName));
 					fileNames.add(fileName);
-					
 					userInfo.setUserName(principal.getName());
 					userInfo.setImgprofile(fileName);
 					userDao.updateUser(userInfo);
-					System.out.println(fileNames);
-
 				}
 			}
 		}
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo1 = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo1);
+		
 		return "redirect:/userInfo";
 	}
-	
+
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String accessDenied(Model model, Principal principal) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 
 		if (principal != null) {
 			model.addAttribute("message",
@@ -111,6 +143,78 @@ public class MainController {
 			model.addAttribute("msg", "You do not have permission to access this page!");
 		}
 		return "403Page";
+	}
+
+	@RequestMapping(value = "/rank")
+	public String rankOffice(Model model) {
+
+		// load office
+		OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
+		List<Office> officeList = officeDao.getAllOffice();
+
+		// load criteria
+		CriteriaDao cireriaDao = ctx.getBean("criteriaDao", CriteriaDao.class);
+		List<Criteria> criterialist = cireriaDao.getCriteriaAndScore();
+
+		// result
+		for (Office office : officeList) {
+			// voi 1 van phong
+			AccessOfficeDao accessOfficeDao = ctx.getBean("accessOfficeDao", AccessOfficeDao.class);
+			ResultDao resultDao = ctx.getBean("resultDao", ResultDao.class);
+
+			List<AccessOffice> listAccessOffice = accessOfficeDao.getAccessOfficeById(String.valueOf(office.getId()));
+			Integer index = 0;
+			Double a = (double) 0;
+			for (Criteria criteria : criterialist) {
+				//tinh diem voi 1 tieu chi
+
+				RateDao rateDao = ctx.getBean("rateDao", RateDao.class);
+				Rate rate = new Rate();
+				String array1[] = criteria.getType_criteria().split("\\*/");
+
+				for (AccessOffice accessOffice : listAccessOffice) {
+					rate = rateDao.getResultByUserAndCriteria(String.valueOf(accessOffice.getId()),
+							String.valueOf(criteria.getId()));
+					if (rate.getMark() != null) {
+						if (criteria.getNote().equals("Điểm tăng dần")) {
+							a = a + (double) (Arrays.asList(array1).indexOf(rate.getMark()) * criteria.getAmong()
+									/ array1.length);
+						} else {
+							a = a + (double) ((array1.length - Arrays.asList(array1).indexOf(rate.getMark()))
+									* criteria.getAmong() / array1.length);
+						}
+						index++;
+					}
+				}
+
+				Integer idResult = resultDao.getIdByOfficeAndCriteria(String.valueOf(office.getId()),
+						String.valueOf(criteria.getId()));
+				
+				if (idResult == -1) {
+					resultDao.addResult(String.valueOf(office.getId()), String.valueOf(criteria.getId()),
+							String.valueOf(a / index));
+				} else {
+					resultDao.updateResult(idResult, String.valueOf(a / index));
+				}
+			}
+			
+			Double markOffice = resultDao.getMarkOffice(String.valueOf(office.getId()));
+			System.out.println("van phogn" + office.getId() + "diem " + markOffice );
+			officeDao.updateMarkOffice(office.getId(), String.valueOf(markOffice));
+		}
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
+		List<Office> officeList1 = officeDao.getListOfficeByMark();
+		System.out.println("list"+ officeList1);
+		model.addAttribute("officeList", officeList1);
+		
+		List<UserInfo> expectList = userDao.getUserExpect();
+		model.addAttribute("expectList", expectList);
+		return "office/rank";
+
 	}
 
 }

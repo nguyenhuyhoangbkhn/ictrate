@@ -106,4 +106,38 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	@Override
+	public List<UserInfo> getUserExpect() {
+		String sql = "SELECT * FROM USERS WHERE ROLE = 'EXPERT' AND ROWNUM<=7";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			List<UserInfo> userList = new ArrayList<UserInfo>();
+			while (true) {
+				if (rs.next()) {
+					UserInfo alocation = new UserInfo(rs.getString("userName"), rs.getString("mail"),rs.getString("imgprofile"));
+					userList.add(alocation);
+				} else {
+					break;
+				}
+			}
+			rs.close();
+			ps.close();
+			return userList;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+
 }

@@ -3,6 +3,8 @@ package hust.edu.vn.controller.admin;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,9 +29,10 @@ public class OfficeController {
 	
 	@RequestMapping("/office")
 	public String homePage(Model model) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
 		List<Office> officeList = officeDao.getAllOffice();
 		model.addAttribute("officeList", officeList);
 		return "office/index";
@@ -37,24 +40,26 @@ public class OfficeController {
 
 	@RequestMapping("office/add")
 	public ModelAndView showAddForm(Model model) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
 		return new ModelAndView("office/add", "command", new Office());
 	}
 
 	@RequestMapping("office/addOffice")
 	public String addOffice(@ModelAttribute("Office") Office office) {
-
+		
 		officeDao.addOffice(office);
 		return "redirect:/office";
 	}
 
 	@RequestMapping("office/edit")
 	public String editOfficeById(Model model, @RequestParam("officeid") int id) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
 		model.addAttribute("officeDao", officeDao.getOfficeById(id));
 		
 		return "office/edit";
@@ -85,14 +90,17 @@ public class OfficeController {
 		List<Office> officeList = officeDao.getAllOffice();
 		model.addAttribute("officeList", officeList);
 		
-		List<hust.edu.vn.model.User> userList = officeDao.getAllExpecter();
-		model.addAttribute("userList",userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
+		
 		return "office/accessOffice";
 	}
 	@RequestMapping("office/rate")
 	public String rateOffice(Model model, @RequestParam("officeID") int officeID) {
-		List<hust.edu.vn.model.User> userList = officeDao.getAllExpecter();
-		model.addAttribute("userList",userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		
 		this.idOffice = officeID;
 		System.out.println("office id" + this.idOffice);
@@ -113,8 +121,9 @@ public class OfficeController {
 		List<Office> officeList = officeDao.getAllOffice();
 		model.addAttribute("officeList", officeList);
 		
-		List<hust.edu.vn.model.User> userList = officeDao.getAllExpecter();
-		model.addAttribute("userList",userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		
 		return "office/accessOffice";
 	}

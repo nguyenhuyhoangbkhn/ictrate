@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -84,6 +86,35 @@ public class AccessOfficeDaoImpl implements AccessOfficeDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<AccessOffice> getAccessOfficeById(String idOffice) {
+		String s1 = "SELECT * FROM ACCESSOFFICE WHERE ID_OFFICE = ?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(s1);
+			List<AccessOffice> listAccessOffice = new ArrayList<AccessOffice>();
+			ps.setString(1, idOffice);
+			
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				AccessOffice accessOffice = new AccessOffice(rs.getInt("id"),rs.getString("ID_USER"),rs.getString("ID_OFFICE"),
+						rs.getString("NOTE"));
+				listAccessOffice.add(accessOffice);
+			}
+
+			ps.close();
+			return listAccessOffice;
+			
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

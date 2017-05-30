@@ -18,4 +18,8 @@ public interface OfficeDao {
 	public Office getOfficeById(int id);
 	
 	public List<User> getAllExpecter();
+	
+	public void updateMarkOffice(int id,String mark);
+	
+	public List<Office> getListOfficeByMark();
 }

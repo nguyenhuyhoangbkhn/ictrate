@@ -11,7 +11,16 @@ public class AccessOffice {
 		this.id_office = id_office;
 		this.note = note;
 	}
+	public AccessOffice(Integer id,String id_user,String id_office,String note){
+		this.id = id;
+		this.id_user = id_user;
+		this.id_office = id_office;
+		this.note = note;
+	}
 	
+	public AccessOffice(){
+		
+	}
 	public Integer getId() {
 		return id;
 	}

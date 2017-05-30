@@ -182,4 +182,59 @@ public class OfficeDaoImpl implements OfficeDao {
 		}
 	}
 
+	@Override
+	public void updateMarkOffice(int id, String mark) {
+		String sql = "UPDATE OFFICE SET MARK = ? WHERE ID=?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		@SuppressWarnings("unused")
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mark);
+			ps.setInt(2, id);
+			rs = ps.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<Office> getListOfficeByMark() {
+		String sql = "SELECT * FROM OFFICE WHERE FLAG_DELETE = 0 ORDER BY MARK";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			List<Office> officeList = new ArrayList<Office>();
+			int idIndex = 1;
+			while (true) {
+				if (rs.next()) {
+					Office anoffice = new Office(idIndex, rs.getString("name"), rs.getString("phone"),
+							rs.getString("profile"), rs.getString("location"), rs.getString("type_office"), rs.getInt("flag_delete"));
+					officeList.add(anoffice);
+					idIndex++;
+				} else {
+					break;
+				}
+			}
+			rs.close();
+			ps.close();
+			return officeList;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+
 }

@@ -7,6 +7,7 @@ import hust.edu.vn.dao.CriteriaDao;
 import hust.edu.vn.dao.LocationDao;
 import hust.edu.vn.dao.OfficeDao;
 import hust.edu.vn.dao.RateDao;
+import hust.edu.vn.dao.ResultDao;
 import hust.edu.vn.dao.StepScoreDao;
 import hust.edu.vn.dao.TypeCriteriaDao;
 import hust.edu.vn.dao.UserDao;
@@ -16,6 +17,7 @@ import hust.edu.vn.dao.impl.CriteriaDaoImpl;
 import hust.edu.vn.dao.impl.LocationDaoImpl;
 import hust.edu.vn.dao.impl.OfficeDaoImpl;
 import hust.edu.vn.dao.impl.RateDaoImpl;
+import hust.edu.vn.dao.impl.ResultDaoImpl;
 import hust.edu.vn.dao.impl.StepScoreDaoImpl;
 import hust.edu.vn.dao.impl.TypeCriteriaDaoImpl;
 import hust.edu.vn.dao.impl.UserDaoImpl;
@@ -141,5 +143,9 @@ public class ApplicationContextConfig {
  	public RateDao rateDao() {
  		return new RateDaoImpl();
  	}
+   @Bean(name = "resultDao")
+	public ResultDao resultDao() {
+		return new ResultDaoImpl();
+	}
    
 }

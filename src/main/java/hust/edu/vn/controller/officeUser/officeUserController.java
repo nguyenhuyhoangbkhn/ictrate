@@ -32,12 +32,9 @@ public class officeUserController {
 	@RequestMapping("officeuserrate")
 	public String scoreOffice(Model model) {
 		// UserInfo expert = new UserInfo();
-		@SuppressWarnings("unused")
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		List<Office> officeList = officeDao.getAllOffice();
 		model.addAttribute("officeList", officeList);
 		System.out.println("test" + officeList);
@@ -48,9 +45,9 @@ public class officeUserController {
 	@RequestMapping(value = "officeuser/scoreOffice/rate", method = RequestMethod.GET)
 	public String rateCriteriaQualitative(Model model, @RequestParam("office") int officeID) {
 		// load information office
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		Office office = new Office();
 		office = officeDao.getOfficeById(officeID);
 
@@ -75,6 +72,8 @@ public class officeUserController {
 		AccessOfficeDao accessOffice = ctx.getBean("accessOfficeDao", AccessOfficeDao.class);
 		RateDao rateDao = ctx.getBean("rateDao",RateDao.class);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		Integer a = accessOffice.getIdByNameAndOffice(auth.getName(), String.valueOf(this.idOffice));
 		
 		accessOffice.updateNote(noteOffice, a);

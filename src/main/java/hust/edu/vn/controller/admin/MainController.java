@@ -7,12 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
 import hust.edu.vn.dao.UserDao;
 import hust.edu.vn.model.UserInfo;
 
@@ -36,20 +40,40 @@ public class MainController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(Model model) {
-
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		return "loginPage";
 	}
 
 	@RequestMapping(value = "user/signUpPage", method = RequestMethod.GET)
-	public String signUpPage(Model model) {
+	public ModelAndView signUpPage(Model model) {
 
-		return "user/signUpPage";
+		return new ModelAndView("user/signUpPage","command", new UserInfo());
+	}
+	
+	@RequestMapping(value = "user/signUp", method = RequestMethod.POST)
+	public ModelAndView signUpSuccess(Model model, UserInfo userInfo){
+		
+		String check = userDao.checkExist(userInfo);
+		if(check == "true"){
+			System.out.println("ĐÃ TỒN TẠI");
+			return new ModelAndView("user/validateSignUp","command", new UserInfo());
+		}
+		if(check == "false"){
+		userDao.signUpUser(userInfo);
+		userDao.signUpRole(userInfo);
+		return new ModelAndView("user/signUpSucces", "command", new UserInfo(userInfo.getUserName(), userInfo.getPassword()));
+		}
+		return null;
 	}
 
 	@RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
 	public String logoutSuccessfulPage(Model model) {
 		List <UserInfo> userList = userDao.getUser();
-		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		model.addAttribute("userList",userList);
 		model.addAttribute("title", "Logout");
 		return "logoutSuccessfulPage";
@@ -60,6 +84,9 @@ public class MainController {
 		List <UserInfo> userList = userDao.getUser();
 		
 		model.addAttribute("userList",userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		// Sau khi user login thanh cong se co principal
 		String userName = principal.getName();
 
@@ -72,7 +99,7 @@ public class MainController {
 	public String uploadResources(UserInfo userInfo, Model model, Principal principal)
 			throws IllegalStateException, IOException {
 
-		String saveDirectory = "C:/Users/Hoang/workspace/ictrate/src/main/webapp/WEB-INF/resources/img/";
+		String saveDirectory = "C:/Users/Hung/Documents/ictrate/src/main/webapp/WEB-INF/resources/img/";
 
 		List<MultipartFile> files = userInfo.getImages();
 
@@ -89,7 +116,7 @@ public class MainController {
 					
 					userInfo.setUserName(principal.getName());
 					userInfo.setImgprofile(fileName);
-					userDao.updateUser(userInfo);
+					userDao.updateImgaeProfile(userInfo);
 					System.out.println(fileNames);
 
 				}
@@ -100,10 +127,9 @@ public class MainController {
 	
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String accessDenied(Model model, Principal principal) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
-
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		if (principal != null) {
 			model.addAttribute("message",
 					"Hi " + principal.getName() + "<br> You do not have permission to access this page!");

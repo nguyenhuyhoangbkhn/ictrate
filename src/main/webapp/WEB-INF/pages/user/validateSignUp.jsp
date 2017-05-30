@@ -45,6 +45,8 @@
 				<p class="help-block">Mật khẩu tối thiểu 4 ký tự.</p>
 				<div class="control-group">
 					<div class="input-group">
+						<span class="errorValidate">Tên tài khoản đã tồn tại, mời
+							bạn đặt tên khác</span><br>
 						<button class="btn btn-success">ĐĂNG KÝ</button>
 					</div>
 				</div>

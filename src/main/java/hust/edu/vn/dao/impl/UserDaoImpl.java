@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import hust.edu.vn.dao.UserDao;
+import hust.edu.vn.model.User;
 import hust.edu.vn.model.UserInfo;
 
 public class UserDaoImpl implements UserDao {
@@ -55,7 +57,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void updateUser(UserInfo userInfo) {
+	public void updateImgaeProfile(UserInfo userInfo) {
 		String sql = "UPDATE USERS SET IMGPROFILE=? WHERE USERNAME=?";	
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -105,5 +107,67 @@ public class UserDaoImpl implements UserDao {
 			}
 		}
 	}
+	
+	@Override
+	public void signUpUser(UserInfo userInfo) {
+		String sql = "insert into USERS (USERNAME,PASSWORD,ENABLED,MAIL,ROLE, TELEPHONE,IMGPROFILE) values (?, ?, ?, ?, ?, ?, ?)";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userInfo.getUserName());
+			ps.setString(2, userInfo.getPassword());
+			ps.setString(3, "1");
+			ps.setString(4, userInfo.getMail());
+			ps.setString(5, "USER");
+			ps.setString(6, userInfo.getTelephone());
+			ps.setString(7, userInfo.getImgprofile());
+			ps.executeUpdate();
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String checkExist(UserInfo userInfo) {
+		String sql = "SELECT * FROM USERS WHERE USERNAME ='" + userInfo.getUserName()+ "'";
+		Connection conn = null;
+		Statement ps = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.createStatement();
+			ResultSet rs = ps.executeQuery(sql);
+			if (rs.next()) {
+				return "true";
+				
+				
+			}else{
+				return "false";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("ERROR");
+		}
+		return null;
+	}
+
+	@Override
+	public void signUpRole(UserInfo userInfo) {
+		String sql = "insert into USER_ROLES (ROLE_ID,USERNAME,USER_ROLE,ID_OFFICE) values (ROLEID.nextval, ?, ?, ?)";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userInfo.getUserName());
+			ps.setString(2, "USER");
+			ps.setString(3, null);
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

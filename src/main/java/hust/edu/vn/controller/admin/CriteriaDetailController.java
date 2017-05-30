@@ -1,6 +1,8 @@
 package hust.edu.vn.controller.admin;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,9 +34,9 @@ public class CriteriaDetailController {
 
 	@RequestMapping("/criteria")
 	public String typeCriteriaIndex(Model model) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		List<Criteria> criterialist = cireriaDao.getAllCriteria();
 		model.addAttribute("criterialist", criterialist);
 		return "criteria/index";
@@ -48,9 +50,9 @@ public class CriteriaDetailController {
 
 	@RequestMapping("criteria/add")
 	public ModelAndView addCriteria(Model model) {
-		List<UserInfo> userList = userDao.getUser();
-
-		model.addAttribute("userList", userList);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo",userInfo);
 		//add type score in view
 		StepScoreDao stepScoreDao = ctx.getBean("stepScoreDao", StepScoreDao.class);
 		List <StepScore> stepScoreList = stepScoreDao.listStepScore();

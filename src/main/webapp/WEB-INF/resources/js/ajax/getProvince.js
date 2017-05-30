@@ -18,7 +18,7 @@ function searchAjax(params) {
 		success : function(data) {
 			console.log("SUCCESS: ", data);
 			if(($('#provinceSelection').val()) == 0){
-				$("#district").html('ID PARENT : <select><option value="0" label="Select" /></form:select>');
+				$("#district").html('<div class="form-group"><label for="name">Trực thuộc Quận-Huyện-Thị Xã:</label><select class="form-control"><option value="0" label="Select" /></div>');
 			}
 			else {
 				$("#district").html(data);

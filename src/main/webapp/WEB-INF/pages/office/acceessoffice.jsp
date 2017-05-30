@@ -20,7 +20,7 @@
 				<form method="post" action="access">
 					<select name="user" multiple class="form-control"
 						required="required">
-						<c:forEach var="user" items="${userList}">
+						<c:forEach var="user" items="${userList1}">
 							<option value="${user.userName}">${user.userName}</option>
 						</c:forEach>
 					</select> 

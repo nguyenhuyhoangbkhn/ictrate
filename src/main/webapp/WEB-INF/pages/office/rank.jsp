@@ -10,6 +10,8 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/datatable.js"></script>
 <!-- Initialization code of data table at the time of page load. -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/ajax/popoverOffice.js"></script>
 </head>
 <body>
 	<jsp:include page="../home/_menu.jsp" />
@@ -27,12 +29,13 @@
 						<div class="panel-body" style="margin: 0 15px;">
 							<div class="row">
 								<div class="">
-									<c:forEach var="office" items="${officeList}">
+									<c:forEach var="office" items="${officeList}" varStatus="loop">
 										<div class="row office-stt">
-											<div class="col-md-2 left-rank">${office.id }</div>
+											<div class="col-md-2 left-rank">${loop.index + 1}</div>
 											<div class="col-md-10 right-rank">
 												<div class="title-name">
-													<a href="">${office.name }</a>
+													<a
+														href="${pageContext.request.contextPath}/office/details?officeid=${office.id}">${office.name }</a>
 												</div>
 												<div>${office.profile}</div>
 											</div>

@@ -211,13 +211,13 @@ public class OfficeDaoImpl implements OfficeDao {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			List<Office> officeList = new ArrayList<Office>();
-			int idIndex = 1;
+			
 			while (true) {
 				if (rs.next()) {
-					Office anoffice = new Office(idIndex, rs.getString("name"), rs.getString("phone"),
+					Office anoffice = new Office(rs.getInt("id"), rs.getString("name"), rs.getString("phone"),
 							rs.getString("profile"), rs.getString("location"), rs.getString("type_office"), rs.getInt("flag_delete"));
 					officeList.add(anoffice);
-					idIndex++;
+					
 				} else {
 					break;
 				}

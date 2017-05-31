@@ -57,16 +57,18 @@
 	</div>
 
 	<!-- them js -->
-	<script
-		src="${pageContext.request.contextPath}/js/metisMenu/metisMenu.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/js/pdf/buttons.html5.min.js"></script>
 
-	<script
-		src="${pageContext.request.contextPath}/js/raphael/raphael.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/morrisjs/morris.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/data/morris-data.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/js/pdf/dataTables.buttons.min.js"></script>
 
-	<script src="${pageContext.request.contextPath}/js/sb-admin-2.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/js/pdf/pdfmake.min.js"></script>
+
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/js/pdf/vfs_fonts.js"></script>
+
 
 </body>
 </html>

@@ -142,7 +142,7 @@ form#command a {
 }
 
 .form-input-default {
-	min-width:150px !important;
+	min-width: 150px !important;
 }
 
 .flex {
@@ -257,4 +257,20 @@ form#command a {
 
 .userInfoPass {
 	margin: 0px;
+}
+
+.dt-buttons a.dt-button.buttons-html5 span {
+	border: 1px gray solid;
+	color: #fff;
+	background-color: #5cb85c;
+	border-color: #4cae4c;
+	margin-right: 25px;
+	line-height: 60px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.buttons-copy{
+	display:none;
 }

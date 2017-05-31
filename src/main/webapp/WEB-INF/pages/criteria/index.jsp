@@ -108,7 +108,18 @@
 
 			<script type="text/javascript"
 				src="${pageContext.request.contextPath}/js/deleteDialog/criteriaDialog.js"></script>
+			<!-- them js -->
+			<script type="text/javascript"
+				src="${pageContext.request.contextPath}/js/pdf/buttons.html5.min.js"></script>
 
+			<script type="text/javascript"
+				src="${pageContext.request.contextPath}/js/pdf/dataTables.buttons.min.js"></script>
+
+			<script type="text/javascript"
+				src="${pageContext.request.contextPath}/js/pdf/pdfmake.min.js"></script>
+
+			<script type="text/javascript"
+				src="${pageContext.request.contextPath}/js/pdf/vfs_fonts.js"></script>
 		</div>
 	</div>
 </body>

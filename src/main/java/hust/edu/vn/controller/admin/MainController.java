@@ -274,5 +274,13 @@ public class MainController {
 		return "office/details";
 
 	}
+	
+	@RequestMapping(value = "searchPage", method = RequestMethod.GET)
+	public String search(Model model, @RequestParam("searchPage") String searchText) {
+		System.out.println("search" + searchText);
+		
+		return "redirect:/";
 
+	}
+	
 }

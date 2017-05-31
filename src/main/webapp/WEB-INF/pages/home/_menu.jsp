@@ -22,17 +22,7 @@
 					<li><a href="${pageContext.request.contextPath}/userInfo">User
 							Info</a></li>
 				</c:if>
-				<!-- 
-				<c:forEach var="users" items="${userList}">
-					<c:if
-						test="${pageContext.request.userPrincipal.name == users.userName}">
-						<li><a href="${pageContext.request.contextPath}/userInfo"><img
-								class="proImgIcon"
-								src="${pageContext.request.contextPath}/img/${users.imgprofile}">
-								${pageContext.request.userPrincipal.name}</a></li>
-					</c:if>
-				</c:forEach>
-				 -->
+				
 				<c:if test="${pageContext.request.userPrincipal.name != null}">
 					<li><a href="${pageContext.request.contextPath}/userInfo"><img
 							class="proImgIcon"
@@ -51,8 +41,8 @@
 				</c:if>
 
 			</ul>
-			<form class="navbar-form navbar-right">
-				<input type="text" class="form-control" placeholder="Search...">
+			<form class="navbar-form navbar-right" action="searchPage">
+				<input type="text" class="form-control"  name = "searchPage" placeholder="Search...">
 			</form>
 		</div>
 	</div>

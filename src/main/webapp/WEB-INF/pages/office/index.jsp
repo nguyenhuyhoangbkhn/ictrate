@@ -21,7 +21,7 @@
 					<div class="panel-heading">Danh sách văn phòng</div>
 					<div class="panel-body">
 						<c:if test="${userInfo.role.equals('ADMIN')}">
-							<a class="btn btn-primary"
+							<a class="btn btn btn-success"
 								href="${pageContext.request.contextPath}/office/add">Thêm
 								Văn Phòng</a>
 						</c:if>

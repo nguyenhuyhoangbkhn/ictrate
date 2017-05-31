@@ -22,7 +22,7 @@
 					<div class="panel-body form-center-default">
 						<c:if test="${userInfo.role.equals('ADMIN')}">
 							<a href="${pageContext.request.contextPath}/criteria/add"
-								class="btn btn-primary">Thêm tiêu chí</a>
+								class="btn btn btn-success">Thêm tiêu chí</a>
 						</c:if>
 						<table id="myDatatable"
 							class="table table-striped table-bordered table-hover"

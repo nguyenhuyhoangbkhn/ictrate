@@ -21,7 +21,7 @@
 					<div class="panel-heading">Danh sách tỉnh thành</div>
 					<div class="panel-body">
 						<c:if test="${userInfo.role.equals('ADMIN')}">
-							<a class="btn btn-primary"
+							<a class="btn btn btn-success"
 								href="${pageContext.request.contextPath}/location/add">Thêm
 								mới</a>
 						</c:if>

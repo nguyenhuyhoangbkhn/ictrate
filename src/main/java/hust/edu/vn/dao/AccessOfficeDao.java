@@ -13,4 +13,5 @@ public interface AccessOfficeDao {
 	public void updateNote(String Note,Integer Id);
 	//get id access user rate office
 	public List <AccessOffice> getAccessOfficeById(String idOffice);
+	
 }

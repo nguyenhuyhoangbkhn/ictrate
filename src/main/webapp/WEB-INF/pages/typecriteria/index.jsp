@@ -26,7 +26,7 @@
 					<div class="panel-body">
 						<c:if test="${userInfo.role.equals('ADMIN')}">
 							<div class="button">
-								<a class="btn btn-primary"
+								<a class="btn btn btn-success"
 									href="${pageContext.request.contextPath}/typecriteria/add">Thêm
 									mới</a>
 							</div>

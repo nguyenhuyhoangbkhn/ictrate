@@ -18,7 +18,7 @@
 			<ul class="nav navbar-nav navbar-right menu-tool">
 				<li><a href="${pageContext.request.contextPath}/stepscore">Step
 						Score</a></li>
-				<c:if test="${pageContext.request.userPrincipal.name == null}">
+				<c:if test="${pageContext.request.userPrincipal.name != null}">
 					<li><a href="${pageContext.request.contextPath}/userInfo">User
 							Info</a></li>
 				</c:if>

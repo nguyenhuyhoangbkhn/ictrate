@@ -10,6 +10,8 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/datatable.js"></script>
 <!-- Initialization code of data table at the time of page load. -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/ajax/popoverOffice.js"></script>
 </head>
 <body>
 	<jsp:include page="../home/_menu.jsp" />
@@ -32,7 +34,8 @@
 											<div class="col-md-2 left-rank">${office.id }</div>
 											<div class="col-md-10 right-rank">
 												<div class="title-name">
-													<a href="">${office.name }</a>
+													<a
+														href="${pageContext.request.contextPath}/office/details?officeid=${office.id}">${office.name }</a>
 												</div>
 												<div>${office.profile}</div>
 											</div>

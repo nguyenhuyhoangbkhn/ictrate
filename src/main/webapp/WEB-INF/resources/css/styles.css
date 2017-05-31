@@ -142,8 +142,7 @@ form#command a {
 }
 
 .form-input-default {
-	width: 18% !important;
-	min-width:150px;
+	min-width:150px !important;
 }
 
 .flex {

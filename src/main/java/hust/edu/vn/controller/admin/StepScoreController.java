@@ -70,5 +70,15 @@ public class StepScoreController {
 		stepScoreDao.addStepScore(stepScore);
 		return "redirect:/stepscore";
 	}
+	
+	@RequestMapping(value = "/stepscore/updateStepScore", method = RequestMethod.POST)
+	public String updateStepScore(@ModelAttribute("StepScore") StepScore stepScore) {
+		System.out.println("step score"+ stepScore.getId());
+		
+		stepScoreDao.updateStepScore(stepScore);
+		return "redirect:/stepscore";
+	}
+	
+	
 
 }

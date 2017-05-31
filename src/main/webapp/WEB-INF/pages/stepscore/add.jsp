@@ -50,8 +50,7 @@
 						<div class="flex">
 							<input name="detailScore" required="required"
 								class="form-control detailStepScoreAdd form-input-default" />
-							<button class="addStepForm btn btn-private">Add Step
-								Score</button>
+							<button class="addStepForm btn btn-private">Thêm điểm</button>
 						</div>
 					</div>
 

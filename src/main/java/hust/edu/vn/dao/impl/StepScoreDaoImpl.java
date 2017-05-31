@@ -96,8 +96,24 @@ public class StepScoreDaoImpl implements StepScoreDao {
 
 	@Override
 	public void updateStepScore(StepScore stepScore) {
-		// TODO Auto-generated method stub
-
+		
+		String sql = "UPDATE STEP_SCORE SET NAME = ?, NOTE = ?,DETAIL_SCORE=?,TYPE_SCORE= ? WHERE ID=?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		@SuppressWarnings("unused")
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,stepScore.getName());
+			ps.setString(2,stepScore.getNote());
+			ps.setString(3,stepScore.getDetailScore());
+			ps.setString(4,stepScore.getTypeScore());
+			ps.setInt(5, stepScore.getId());
+			rs = ps.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

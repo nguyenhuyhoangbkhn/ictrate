@@ -3,8 +3,10 @@ package hust.edu.vn.controller.admin;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -25,6 +27,7 @@ import hust.edu.vn.dao.ResultDao;
 import org.springframework.web.servlet.ModelAndView;
 import hust.edu.vn.dao.UserDao;
 import hust.edu.vn.model.AccessOffice;
+import hust.edu.vn.model.CommentJudge;
 import hust.edu.vn.model.Criteria;
 import hust.edu.vn.model.Office;
 import hust.edu.vn.model.Rate;
@@ -35,6 +38,7 @@ public class MainController {
 
 	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 	UserDao userDao = ctx.getBean("userDao", UserDao.class);
+	OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
 
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String welcomePage(Model model) {
@@ -264,15 +268,47 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "office/details", method = RequestMethod.GET)
-	public String officeRankDetails(Model model, @RequestParam("officeid") int id) {
+	public String officeRankDetails(Model model, @RequestParam("officeid") int id, CommentJudge commentJudge) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo", userInfo);
-		OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
 		model.addAttribute("officeDao", officeDao.getOfficeById(id));
-		System.out.println(officeDao.getOfficeById(id));
-		return "office/details";
+		List<CommentJudge> cmtList = userDao.getCommentJudge(id);
+		model.addAttribute("cmtList", cmtList);
 
+		return "office/details";
+	}
+
+	@RequestMapping(value = "office/comment", method = RequestMethod.GET)
+	public ModelAndView officeCommentJudge(Model model, CommentJudge commentJudge) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo", userInfo);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		String frmtdDate = dateFormat.format(date);
+		CommentJudge commentJudge1 = new CommentJudge();
+		commentJudge1.setUsernameid(auth.getName());
+		commentJudge1.setOfficeid(commentJudge.getOfficeid());
+		commentJudge1.setContent(commentJudge.getContent());
+		commentJudge1.setTimes(frmtdDate);
+		commentJudge1.setImgprofile(userInfo.getImgprofile());
+		userDao.commentJudge(commentJudge1);
+		model.addAttribute("comment", commentJudge1);
+
+		return new ModelAndView("office/comment", "command", new CommentJudge());
+
+	}
+	
+	@RequestMapping(value = "office/deleteCmt")
+	public String deleteCmt(Model model, @RequestParam("cmtid") int id, @RequestParam("officeid") int officeid){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo userInfo = userDao.getUserByName(auth.getName());
+		model.addAttribute("userInfo", userInfo);
+		model.addAttribute("officeDao", officeDao.getOfficeById(officeid));
+		userDao.deleteCmt(id);
+		return "office/details";
+		
 	}
 	
 	@RequestMapping(value = "searchPage", method = RequestMethod.GET)

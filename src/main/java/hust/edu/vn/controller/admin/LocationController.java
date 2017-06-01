@@ -91,7 +91,7 @@ public class LocationController {
 	}
 
 	@RequestMapping("location/delete")
-	public String deleteLocationById(Model model, @RequestParam("telephone") int id) {
+	public String deleteLocationById(Model model, @RequestParam("locationid") int id) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo",userInfo);

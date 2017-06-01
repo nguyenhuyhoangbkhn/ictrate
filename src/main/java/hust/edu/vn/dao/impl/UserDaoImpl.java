@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import hust.edu.vn.dao.UserDao;
+import hust.edu.vn.model.CommentJudge;
 import hust.edu.vn.model.UserInfo;
 
 public class UserDaoImpl implements UserDao {
@@ -81,7 +84,6 @@ public class UserDaoImpl implements UserDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		UserInfo userInfo = new UserInfo();
-
 		try {
 			conn = dataSource.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -259,4 +261,82 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void commentJudge(CommentJudge commentJudge) {
+		String sql = "insert into COMMENT_JUDGE (CMTID, USERNAMEID,OFFICEID,CONTENT,TIMES, IMGPROFILE) values (CMTID.nextval, ?, ?, ?, ?, ?)";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		String frmtdDate = dateFormat.format(date);
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, commentJudge.getUsernameid());
+			ps.setInt(2, commentJudge.getOfficeid());
+			ps.setString(3, commentJudge.getContent());
+			ps.setString(4, frmtdDate);
+			ps.setString(5, commentJudge.getImgprofile());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<CommentJudge> getCommentJudge(Integer officeid) {
+		String sql = "SELECT * FROM COMMENT_JUDGE WHERE OFFICEID = ?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, officeid);
+			rs = ps.executeQuery();
+			List<CommentJudge> userList = new ArrayList<CommentJudge>();
+			while (true) {
+				if (rs.next()) {
+					CommentJudge alocation = new CommentJudge(rs.getInt("cmtid"), rs.getString("usernameid"),
+							rs.getInt("officeid"), rs.getString("content"), rs.getString("times"),
+							rs.getString("imgprofile"));
+					userList.add(alocation);
+				} else {
+					break;
+				}
+			}
+			rs.close();
+			ps.close();
+			return userList;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+
+	@Override
+	public void deleteCmt(Integer cmtid) {
+		String sql = "DELETE FROM COMMENT_JUDGE WHERE CMTID=?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			// Parameters start with 1
+			ps.setInt(1, cmtid);	
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

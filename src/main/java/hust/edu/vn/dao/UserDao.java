@@ -1,6 +1,7 @@
 package hust.edu.vn.dao;
 import java.util.List;
 
+import hust.edu.vn.model.CommentJudge;
 import hust.edu.vn.model.UserInfo;
 
 
@@ -23,4 +24,10 @@ public interface UserDao {
 	public void signUpRole(UserInfo userInfo);
 
 	public List<UserInfo> getUserExpect();
+	
+	public void commentJudge(CommentJudge commentJudge);
+	
+	public List<CommentJudge> getCommentJudge(Integer officeid);
+	
+	public void deleteCmt(Integer cmtid);
 }

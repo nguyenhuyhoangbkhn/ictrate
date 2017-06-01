@@ -9,6 +9,7 @@ import hust.edu.vn.dao.OfficeDao;
 import hust.edu.vn.dao.StepScoreDao;
 import hust.edu.vn.dao.TypeCriteriaDao;
 import hust.edu.vn.dao.UserDao;
+import hust.edu.vn.model.CommentJudge;
 import hust.edu.vn.model.Location;
 import hust.edu.vn.model.Office;
 import hust.edu.vn.model.StepScore;
@@ -29,9 +30,11 @@ public class Test {
 		//UserInfo userinfo = new UserInfo();
 		//String aa = userinfo.setUserName("dbadmin1");
 //		userinfo.setPassword("aaa");
+		List<CommentJudge> cmtList = userDao.getCommentJudge(1);
 		
+		userDao.deleteCmt(5);
 	
-		System.out.println(userDao.getUserInfoByName("dbadmin1"));
+		System.out.println(cmtList);
 
 //		if(aa == "true"){
 //			System.out.println("ĐÃ TỒN TẠI");

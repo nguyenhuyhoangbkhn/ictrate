@@ -289,3 +289,11 @@ form#command a {
 .btnCmt{
 	margin-top: 10px;
 }
+.rowCmt{
+	display:none;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+#loadMore{
+	text-align: right;
+}

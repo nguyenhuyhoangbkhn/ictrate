@@ -13,10 +13,10 @@
 		</c:if>
 		<li><a href="${pageContext.request.contextPath}/office">Cơ quan</a></li>
 		<c:if test="${userInfo.role.equals('EXPERT')}">
-		<li><a href="${pageContext.request.contextPath}/scoreOffice">Danh gia co quan</a></li>
+		<li><a href="${pageContext.request.contextPath}/scoreOffice">Đánh giá cơ quan</a></li>
 		</c:if>
 		<c:if test="${userInfo.role.equals('OFFICE')}">
-		<li><a href="${pageContext.request.contextPath}/officeuserrate">Danh gia co quan</a></li>
+		<li><a href="${pageContext.request.contextPath}/officeuserrate">Đánh giá cơ quan</a></li>
 		</c:if>
 	</ul>
 </div>

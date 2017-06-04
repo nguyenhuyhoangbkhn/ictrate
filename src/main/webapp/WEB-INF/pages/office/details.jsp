@@ -62,7 +62,7 @@
 									<div class="panel-heading">
 										<strong>${comment.usernameid} </strong> <span
 											class="text-muted">${comment.times}</span>
-										<c:if test="${pageContext.request.userPrincipal.name != null}">
+										<c:if test="${pageContext.request.userPrincipal.name == comment.usernameid}">
 											<button type="button" class="close" aria-label="Close"
 												onclick="showDialog('${comment.cmtid}');">
 												<span aria-hidden="true">&times;</span>

@@ -150,7 +150,7 @@ public class MainController {
 	public String uploadResources(UserInfo userInfo, Model model, Principal principal)
 			throws IllegalStateException, IOException {
 
-		String saveDirectory = "C:/Users/Hung/Documents/ictrate/src/main/webapp/WEB-INF/resources/img/";
+		String saveDirectory = "C:/Users/Hoang/workspace/ictrate/src/main/webapp/WEB-INF/resources/img/";
 
 		List<MultipartFile> files = userInfo.getImages();
 
@@ -267,13 +267,16 @@ public class MainController {
 
 	}
 
-	@RequestMapping(value = "office/details", method = RequestMethod.GET)
+ 	@RequestMapping(value = "office/details", method = RequestMethod.GET)
 	public String officeRankDetails(Model model, @RequestParam("officeid") int id, CommentJudge commentJudge) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserInfo userInfo = userDao.getUserByName(auth.getName());
 		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("officeDao", officeDao.getOfficeById(id));
+		
+		//get comment
 		List<CommentJudge> cmtList = userDao.getCommentJudge(id);
+		System.out.println("cmt list" + cmtList);
 		model.addAttribute("cmtList", cmtList);
 
 		return "office/details";

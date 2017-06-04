@@ -16,20 +16,13 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right menu-tool">
-				<li><a href="${pageContext.request.contextPath}/stepscore">Step
-						Score</a></li>
-				<c:if test="${pageContext.request.userPrincipal.name != null}">
-					<li><a href="${pageContext.request.contextPath}/userInfo">User
-							Info</a></li>
-				</c:if>
-				
 				<c:if test="${pageContext.request.userPrincipal.name != null}">
 					<li><a href="${pageContext.request.contextPath}/userInfo"><img
 							class="proImgIcon"
 							src="${pageContext.request.contextPath}/img/${userInfo.imgprofile}">
 							${pageContext.request.userPrincipal.name}</a></li>
 				</c:if>
-				<li><a href="#">Help</a></li>
+				
 				<c:if test="${pageContext.request.userPrincipal.name != null}">
 					<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 				</c:if>
@@ -42,7 +35,8 @@
 
 			</ul>
 			<form class="navbar-form navbar-right" action="searchPage">
-				<input type="text" class="form-control"  name = "searchPage" placeholder="Search...">
+				<input type="text" class="form-control" name="searchPage"
+					placeholder="Search...">
 			</form>
 		</div>
 	</div>

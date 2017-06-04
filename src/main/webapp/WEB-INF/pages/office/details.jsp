@@ -12,6 +12,8 @@
 	src="${pageContext.request.contextPath}/js/ajax/cmtJudge.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/deleteDialog/commentDialog.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/js/loadMore.js"></script>
 </head>
 <body>
 	<jsp:include page="../home/_menu.jsp" />
@@ -50,7 +52,7 @@
 				</div>
 				<div>
 					<c:forEach var="comment" items="${cmtList}">
-						<div class="row row_${comment.cmtid}">
+						<div class="row row_${comment.cmtid} rowCmt">
 							<div class="col-sm-2 col-md-1">
 								<div class="thumbnail">
 									<img class="img-responsive user-photo"
@@ -61,8 +63,7 @@
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<strong>${comment.usernameid} </strong> <span
-											class="text-muted">${comment.times}</span>
-										<c:if test="${pageContext.request.userPrincipal.name == comment.usernameid}">
+											class="text-muted">${comment.times}</span>										<c:if test="${pageContext.request.userPrincipal.name == comment.usernameid}">
 											<button type="button" class="close" aria-label="Close"
 												onclick="showDialog('${comment.cmtid}');">
 												<span aria-hidden="true">&times;</span>
@@ -76,6 +77,7 @@
 					</c:forEach>
 				</div>
 				<div id="cmtJudgeDiv"></div>
+				<a href="#" id="loadMore" ><h4>Load More...</h4></a>
 				<c:if test="${pageContext.request.userPrincipal.name != null}">
 					<div>
 						<div class="panel panel-default">

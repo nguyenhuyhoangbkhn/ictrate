@@ -34,7 +34,7 @@
 				</c:if>
 
 			</ul>
-			<form class="navbar-form navbar-right" action="searchPage">
+			<form class="navbar-form navbar-right" action="${pageContext.request.contextPath}/searchPage" method="get">
 				<input type="text" class="form-control" name="searchPage"
 					placeholder="Search...">
 			</form>

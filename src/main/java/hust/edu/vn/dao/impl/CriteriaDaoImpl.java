@@ -275,4 +275,35 @@ public class CriteriaDaoImpl implements CriteriaDao {
 			}
 		}
 	}
+
+	@Override
+	public List<Criteria> searchKeyWord(String keyWord) {
+		String sql = "SELECT ID,NAME, NOTE,TYPE_CRITERIA, TYPE_SCORE, FLAG_DELETE, AMONG FROM CRITERIA "
+				+ "WHERE (NAME like  '%?%' OR NOTE LIKE '%?%') AND FLAG_DELETE = 0";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Criteria> CriteriaList = new ArrayList<Criteria>();
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, keyWord);
+			ps.setString(2, keyWord);
+			rs = ps.executeQuery();		
+			while (true) {
+				if (rs.next()) {
+					Criteria criteria1 = new Criteria(rs.getInt("id"), rs.getString("name"), rs.getString("note"),
+							rs.getString("type_criteria"), rs.getString("type_score"), rs.getInt("flag_delete"),
+							rs.getFloat("among"));
+					CriteriaList.add(criteria1);
+				} else {
+					break;
+				}
+			}
+			return CriteriaList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return CriteriaList;
+	}
 }

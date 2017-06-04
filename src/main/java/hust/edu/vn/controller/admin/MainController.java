@@ -48,7 +48,7 @@ public class MainController {
 
 		OfficeDao officeDao = ctx.getBean("officeDao", OfficeDao.class);
 		List<Office> officeList1 = officeDao.getListOfficeByMark();
-		System.out.println("list" + officeList1);
+		
 		model.addAttribute("officeList", officeList1);
 
 		List<UserInfo> expectList = userDao.getUserExpect();
@@ -317,6 +317,9 @@ public class MainController {
 	@RequestMapping(value = "searchPage", method = RequestMethod.GET)
 	public String search(Model model, @RequestParam("searchPage") String searchText) {
 		System.out.println("search" + searchText);
+		CriteriaDao criteria = ctx.getBean("criteriaDao", CriteriaDao.class);
+		List<Criteria> CriteriaList  = criteria.searchKeyWord(searchText);
+		System.out.println("criteria list sẻarch" + CriteriaList);
 		
 		return "redirect:/";
 

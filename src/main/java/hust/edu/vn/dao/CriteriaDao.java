@@ -22,4 +22,7 @@ public interface CriteriaDao {
 	
 	// list dinh luong
 	public List<Criteria> criteriaQuantitative();
+	
+	//search by name and note
+	public List<Criteria> searchKeyWord(String keyWord);
 }

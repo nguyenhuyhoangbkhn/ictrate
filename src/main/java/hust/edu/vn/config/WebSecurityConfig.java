@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Các trang không yêu cầu login trang danh cho tat ca moi nguoi
 		http.authorizeRequests()
 				.antMatchers("/stepscore", "/location", "location/detail", "/typecriteria", "typecriteria/detail",
-						"/office",
+						"/office","searchPage",
 						"/", "/welcome", "/login", "/logout", "/criteria", "/userInfo")
 				.permitAll();
 

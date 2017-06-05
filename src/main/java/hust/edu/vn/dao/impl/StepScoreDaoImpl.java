@@ -148,4 +148,40 @@ public class StepScoreDaoImpl implements StepScoreDao {
 		}
 	}
 
+	@Override
+	public List<StepScore> searchKeyWord(String keyWord) {
+		String sql = "SELECT * FROM STEP_SCORE WHERE ((NAME like  '%"+keyWord+
+				"%' OR NOTE LIKE '%"+keyWord+"%') AND FLAG_DELETE = 0)";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			List<StepScore> stepScore = new ArrayList<StepScore>();
+			while (true) {
+				if (rs.next()) {
+					StepScore stepScore1 = new StepScore(rs.getInt("id"), rs.getString("name"), rs.getString("note"),
+							rs.getString("detail_score"), rs.getInt("flag_delete"), rs.getString("type_score"));
+					stepScore.add(stepScore1);
+				} else {
+					break;
+				}
+			}
+			rs.close();
+			ps.close();
+			return stepScore;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+
 }

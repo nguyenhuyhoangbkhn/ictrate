@@ -237,4 +237,40 @@ public class OfficeDaoImpl implements OfficeDao {
 		}
 	}
 
+	@Override
+	public List<Office> searchKeyWord(String keyWord) {
+		String sql = "SELECT * FROM OFFICE WHERE ((NAME like  '%"
+				+keyWord+ "%' OR PROFILE LIKE '%"+keyWord + "a%') AND FLAG_DELETE = 0)";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			List<Office> officeList = new ArrayList<Office>();
+			while (true) {
+				if (rs.next()) {
+					Office anoffice = new Office(rs.getInt("id"), rs.getString("name"), rs.getString("phone"),
+							rs.getString("profile"), rs.getString("location"), rs.getString("type_office"), rs.getInt("flag_delete"));
+					officeList.add(anoffice);
+				} else {
+					break;
+				}
+			}
+			rs.close();
+			ps.close();
+			return officeList;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+
 }

@@ -278,8 +278,8 @@ public class CriteriaDaoImpl implements CriteriaDao {
 
 	@Override
 	public List<Criteria> searchKeyWord(String keyWord) {
-		String sql = "SELECT ID,NAME, NOTE,TYPE_CRITERIA, TYPE_SCORE, FLAG_DELETE, AMONG FROM CRITERIA "
-				+ "WHERE (NAME like  '%?%' OR NOTE LIKE '%?%') AND FLAG_DELETE = 0";
+		String sql = "SELECT ID,NAME, NOTE,TYPE_CRITERIA, TYPE_SCORE, FLAG_DELETE, AMONG FROM CRITERIA WHERE ((NAME like  '%"+keyWord+
+				"%' OR NOTE LIKE '%"+ keyWord +"%') AND FLAG_DELETE = 0) ";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -287,8 +287,6 @@ public class CriteriaDaoImpl implements CriteriaDao {
 		try {
 			conn = dataSource.getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, keyWord);
-			ps.setString(2, keyWord);
 			rs = ps.executeQuery();		
 			while (true) {
 				if (rs.next()) {

@@ -24,6 +24,8 @@ import hust.edu.vn.dao.CriteriaDao;
 import hust.edu.vn.dao.OfficeDao;
 import hust.edu.vn.dao.RateDao;
 import hust.edu.vn.dao.ResultDao;
+import hust.edu.vn.dao.StepScoreDao;
+
 import org.springframework.web.servlet.ModelAndView;
 import hust.edu.vn.dao.UserDao;
 import hust.edu.vn.model.AccessOffice;
@@ -31,6 +33,7 @@ import hust.edu.vn.model.CommentJudge;
 import hust.edu.vn.model.Criteria;
 import hust.edu.vn.model.Office;
 import hust.edu.vn.model.Rate;
+import hust.edu.vn.model.StepScore;
 import hust.edu.vn.model.UserInfo;
 
 @Controller
@@ -316,12 +319,22 @@ public class MainController {
 	
 	@RequestMapping(value = "searchPage", method = RequestMethod.GET)
 	public String search(Model model, @RequestParam("searchPage") String searchText) {
-		System.out.println("search" + searchText);
+		//list criteria
 		CriteriaDao criteria = ctx.getBean("criteriaDao", CriteriaDao.class);
 		List<Criteria> CriteriaList  = criteria.searchKeyWord(searchText);
-		System.out.println("criteria list sẻarch" + CriteriaList);
+		model.addAttribute("criteriaList", CriteriaList);
 		
-		return "redirect:/";
+		//list office
+		OfficeDao office = ctx.getBean("officeDao",OfficeDao.class);
+		List<Office> officeList = office.searchKeyWord(searchText);
+		model.addAttribute("officeList",officeList);
+		
+		//list score
+		StepScoreDao stepScore = ctx.getBean("stepScoreDao",StepScoreDao.class);
+		List<StepScore> stepScoreList = stepScore.searchKeyWord(searchText);
+		model.addAttribute("stepScoreList",stepScoreList);
+		
+		return "home/search";
 
 	}
 	

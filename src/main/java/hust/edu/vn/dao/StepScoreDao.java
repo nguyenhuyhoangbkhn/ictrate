@@ -15,4 +15,6 @@ public interface StepScoreDao {
 	public void updateStepScore(StepScore stepScore);
 
 	public StepScore getStepScoreById(int id);
+	
+	public List<StepScore> searchKeyWord(String keyWord);
 }

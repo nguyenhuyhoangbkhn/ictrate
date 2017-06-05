@@ -22,4 +22,6 @@ public interface OfficeDao {
 	public void updateMarkOffice(int id,String mark);
 	
 	public List<Office> getListOfficeByMark();
+	
+	public List<Office> searchKeyWord(String keyWord);
 }

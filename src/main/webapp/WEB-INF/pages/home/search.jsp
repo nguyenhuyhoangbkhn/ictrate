@@ -22,7 +22,11 @@
 						<div class="panel-heading">Tìm kiếm văn phòng</div>
 						<div class="panel-body">
 							<c:forEach var="office" items="${officeList}">
-								<div>${office.name} ${office.profile}</div>
+								<div>
+									<a
+										href="${pageContext.request.contextPath}/office/details?officeid=${office.id}">${office.name }</a>
+									${office.profile}
+								</div>
 							</c:forEach>
 						</div>
 					</div>
@@ -33,7 +37,7 @@
 						<div class="panel-heading">Tìm kiếm tiêu chí</div>
 						<div class="panel-body">
 							<c:forEach var="criteria" items="${criteriaList}">
-								<div>${criteria.name} ${criteria.note }</div>
+								<div>${criteria.name}${criteria.note }</div>
 							</c:forEach>
 						</div>
 					</div>
@@ -44,8 +48,8 @@
 						<div class="panel-heading">Tìm kiếm trong thang điểm</div>
 						<div class="panel-body">
 							<c:forEach var="stepscore" items="${stepScoreList}">
-								<div>${stepscore.name} ${stepscore.note} ${stepscore.typeScore}
-								</div> 
+								<div>${stepscore.name}${stepscore.note}
+									${stepscore.typeScore}</div>
 							</c:forEach>
 						</div>
 					</div>

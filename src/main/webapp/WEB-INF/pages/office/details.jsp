@@ -77,7 +77,7 @@
 					</c:forEach>
 				</div>
 				<div id="cmtJudgeDiv"></div>
-				<a href="#" id="loadMore" ><h4>Load More...</h4></a>
+				<a href="#" id="loadMore" ><span>Load More...</span></a>
 				<c:if test="${pageContext.request.userPrincipal.name != null}">
 					<div>
 						<div class="panel panel-default">
